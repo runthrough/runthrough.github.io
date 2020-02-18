@@ -838,4 +838,4 @@ title: Database Systems Concepts and Design
 
 ### L14 - Metadata
 
-> This course is a Run Through of Udacity's free course [UD150 - Database Systems Concepts and Design](https://classroom.udacity.com/courses/ud150)
+> This is a [Run Through]({{ site.url }}) of Udacity's free course [UD150 - Database Systems Concepts and Design](https://classroom.udacity.com/courses/ud150)
