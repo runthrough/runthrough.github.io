@@ -6,9 +6,9 @@ highlighter: pygments
 permalink: pretty
 
 # Setup
-title: Notes
-tagline: 'Go run through it.'
-description: 'on Computer Science and Engineering.'
+title: Run Through
+tagline: 'The Notes.'
+description: 'Computer Science and Engineering concepts.'
 url: https://runthrough.github.io/
 baseurl: ''
 
