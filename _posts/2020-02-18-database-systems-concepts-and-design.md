@@ -3,6 +3,22 @@ layout: post
 title: Database Systems Concepts and Design
 ---
 
+### Lessons
+1. [Course Overview](#l01---course-overview)
+2. [Fundamentals of Databses](#l02---fundamentals-of-databses)
+3. [Methodology I : Analysis](#l03---methodology-i--analysis)
+4. [Extended Entity Relationship Model](#l04---extended-entity-relationship-model)
+5. [Methodology II: Specification](#l05---methodology-ii-specification)
+6. [EER Relational Mapping](#l06---eer-relational-mapping)
+7. [Methodology III: Design](#l07---methodology-iii-design)
+8. [Normalization](#l08---normalization)
+9. [Methodology III: Design (SQL Statements)](#l09---methodology-iii-design-sql-statements)
+10. [Relational Algebra and Calculus](#l10---relational-algebra-and-calculus)
+11. [SQL](#l11---sql)
+12. [Efficiency](#l12---efficiency)
+13. [Methodology IV: Implementation](#l13---methodology-iv-implementation)
+14. [Metadata](#l14---metadata)
+
 ### L01 - Course Overview
 
 #### [C01 - Database Application Development Methodology](https://classroom.udacity.com/courses/ud150/lessons/6078480432/concepts/92365083040923)
