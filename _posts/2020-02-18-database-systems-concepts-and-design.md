@@ -830,12 +830,69 @@ title: Database Systems Concepts and Design
 2. SELECT Email, count(*) AS NumInt FROM UserInterests GROUP BY Email HAVING NumInt > 1 ORDER BY NumInt ASC;
 
 #### [C25 - Nested Queries-In/Not In](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58324700640923)
-1. 
+1. Find Email and Interests for RegularUser's in Atlanta.
+2. SELECT Email, Interest FROM UserInterests WHERE Email IN (SELECT Email FROM RegularUser WHERE HomeTown= 'Atlanta');
+3. An alternative way would be:
+   1. SELECT U.Email, Interest FROM UserInterests I, RegularUser U WHERE I.Email=U.Email AND HomeTown='Atlanta';
+#### [C26 - Nested Queries-Some/All](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58262205040923)
+#### [C27 - Nested Queries-correlated](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58262205050923)
 
 ### L12 - Efficiency
+#### [C01 - Efficiency/Indexing/Physical Database...](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73421110430923)
+#### [C02 - Computer Architecture](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73203120320923)
+#### [C03 - Why should you care](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73688185370923)
+#### [C04 - Main Memory vs Disk](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73267425040923)
+#### [C05 - Disk](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73276021470923)
+#### [C06 - Records](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73221322050923)
+#### [C07 - Blocks](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73193321430923)
+#### [C08 - Files](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73274318130923)
+#### [C09 - Assumptions](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73231221000923)
+#### [C10 - Heap-Unsorted](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73267323480923)
+#### [C11 - Heap setup](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/79669269810923)
+#### [C12 - Heap](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73237921870923)
+#### [C13 - Sorted but](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73255422510923)
+#### [C14 - Sorted Binary](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73222024960923)
+#### [C15 - Sorted File](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73257215910923)
+#### [C16 - Primary Index -Part 1](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73304316350923)
+#### [C17 - Primary Index -Part 2](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73238125120923)
+#### [C18 - Sparse Index](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73249223880923)
+#### [C19 - Secondary Index](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73256021350923)
+#### [C20 - Multi-Level Index](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73421116680923)
+#### [C21 - Multi-Level Headshot](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73284424250923)
+#### [C22 - Multi-Level Index B-Tree](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73255728290923)
+#### [C23 - Static Hashing Part I](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73229632620923)
+#### [C24 - Static Hashing Part 2](https://classroom.udacity.com/courses/ud150/lessons/6474158572/concepts/73248951260923)
 
 ### L13 - Methodology IV: Implementation
+#### [C01 - Implementation](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69948889080923)
+#### [C02 - AMP solution stack](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69948889090923)
+#### [C03 - Implementation Data First](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69948889100923)
+#### [C04 - WAMP stack demos (headshot)](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69948889110923)
+#### [C05 - Install the WAMP Stack](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69948889120923)
+#### [C06 - Run the WAMP Stack](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69948889130923)
+#### [C07 - Demo 03](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894890923)
+#### [C08 - To Index or Not Many Things to Consider](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894900923)
+#### [C09 - To Index or Not Size of Table](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894910923)
+#### [C10 - To Index or Not Multiple Access Paths add up](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894920923)
+#### [C11 - To Index or Not Reads and or Writes](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894930923)
+#### [C12 - To Index or Not Already Indexed](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894940923)
+#### [C13 - To Index or Not Some Advice](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894950923)
+#### [C14 - Implementation Tasks](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894960923)
+#### [C15 - Run PHP Scripts for GTOnline example](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894970923)
+#### [C16 - HTML demo](https://classroom.udacity.com/courses/ud150/lessons/6373328252/concepts/69927894980923)
 
 ### L14 - Metadata
+#### [C01 - Archival Metadata Hardware used](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79650310120923)
+#### [C02 - Experiences with Metadata](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79650310130923)
+#### [C03 - The Question](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79650310140923)
+#### [C04 - Preservation Metadata OAIS Information Model](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79650310150923)
+#### [C05 - OAIS Information Model](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79650310160923)
+#### [C06 - Content Information Package](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79756503740923)
+#### [C07 - OAIS Information Model   part 02](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79611410460923)
+#### [C08 - Preservation Description Information](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79611410470923)
+#### [C09 - OAIS Information Model   part 03](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79611410480923)
+#### [C10 - Standards for Archival Metadata are not mature](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79611410490923)
+#### [C11 - Metadata Representation Standards](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79611410500923)
+#### [C12 - Several elements are necessary](https://classroom.udacity.com/courses/courses/ud150/lessons/6480038557/concepts/79650215300923)
 
 > A [Run Through]({{ site.url }}) of Udacity's free course [UD150 - Database Systems Concepts and Design](https://classroom.udacity.com/courses/ud150)
