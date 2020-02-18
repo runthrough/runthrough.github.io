@@ -765,7 +765,7 @@ title: Database Systems Concepts and Design
 
 #### [C30 - Cartesian Product-Can be Useful-CALC](https://classroom.udacity.com/courses/ud150/lessons/5856028539/concepts/58296399180923)
 
-#### [31 - Divideby-CALC](https://classroom.udacity.com/courses/ud150/lessons/5856028539/concepts/58296399190923)
+#### [C31 - Divideby-CALC](https://classroom.udacity.com/courses/ud150/lessons/5856028539/concepts/58296399190923)
 1. Find email of all users with at least all the Interests of user1.
 2. { r.Email \| r&isin;UserInterests and &forall;(s&isin;UserInterests)((s.Email&ne;'User1') **or** &exist;(t&isin;UserInterests)(r.Email=t.Email and t.Interest=s.Interest)) }
 
@@ -838,4 +838,4 @@ title: Database Systems Concepts and Design
 
 ### L14 - Metadata
 
-> This course is the notes taken from Udacity's free course [UD150 - Database Systems Concepts and Design](https://classroom.udacity.com/courses/ud150)
+> This course is a Run Through of Udacity's free course [UD150 - Database Systems Concepts and Design](https://classroom.udacity.com/courses/ud150)
