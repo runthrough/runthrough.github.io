@@ -834,7 +834,9 @@ title: Database Systems Concepts and Design
 2. SELECT Email, Interest FROM UserInterests WHERE Email IN (SELECT Email FROM RegularUser WHERE HomeTown= 'Atlanta');
 3. An alternative way would be:
    1. SELECT U.Email, Interest FROM UserInterests I, RegularUser U WHERE I.Email=U.Email AND HomeTown='Atlanta';
+
 #### [C26 - Nested Queries-Some/All](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58262205040923)
+
 #### [C27 - Nested Queries-correlated](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58262205050923)
 
 ### L12 - Efficiency
