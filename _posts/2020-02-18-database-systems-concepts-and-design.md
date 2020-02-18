@@ -11,7 +11,7 @@ title: Database Systems Concepts and Design
 2. Specification
    1. Extended Entity Relationship Model
 3. Design
-   1. Mapping EER -> Relations
+   1. Mapping EER &rarr; Relations
    2. Relational Query Language
       1. Algebra
       2. Calculus
@@ -111,9 +111,9 @@ title: Database Systems Concepts and Design
 1. If the database only consists of schema and data then schema should contain the aspects of meaning of the data, how it is used and how it is internally organised. This would mean the queries against that scheme will be able to reference how the data is internally organised. This means if we decide to change how the data is internally organised then the application would be affected.
 2. This architecture seperates out how the data is internally organised through internal schema. And data now sits on internal schema. Database is also used by many different applications with different needs to display data. Therefore differents needs are fulfilled by external schema level which seperates out aspects of how data is used by individual applications.
 3. So each schema concentrates on:
-   1. External schema -> use of data
-   2. Conceptual schema -> meaning of data
-   3. Internal Schema -> storage of data
+   1. External schema &rarr; use of data
+   2. Conceptual schema &rarr; meaning of data
+   3. Internal Schema &rarr; storage of data
 
 #### [C26 - Conceptual Schema](https://classroom.udacity.com/courses/ud150/lessons/5828989677/concepts/59769269650923)
 1. Describes all conceptually relevant, general time invariant structural aspect of reality.
@@ -189,10 +189,10 @@ title: Database Systems Concepts and Design
 #### [C03 - Overview of Methodology Data First](https://classroom.udacity.com/courses/ud150/lessons/6055728550/concepts/60902787720923)
 1. In database application development data is first whereas in general software application development process is put first.
 2. Following are the end result of each step in database application development methodology.
-   1. Analysis -> Information Flow Diagram
-   2. Sepecification -> Tasks -> ER or EER Diagram
-   3. Design -> Relational Schema (from ER Diagram) -> Abstract Code (w/SQL)
-   4. Implementation -> MySQL Relational Platform -> PHP Code (w/SQL)
+   1. Analysis &rarr; Information Flow Diagram
+   2. Sepecification &rarr; Tasks &rarr; ER or EER Diagram
+   3. Design &rarr; Relational Schema (from ER Diagram) &rarr; Abstract Code (w/SQL)
+   4. Implementation &rarr; MySQL Relational Platform &rarr; PHP Code (w/SQL)
 
 #### [C08 - Analysis - Information Flow Diagram](https://classroom.udacity.com/courses/ud150/lessons/6055728550/concepts/63714212600923)
 1. Ellipses - Tasks
@@ -554,7 +554,7 @@ title: Database Systems Concepts and Design
 
 #### [C15 - Functional Dependencies and Keys](https://classroom.udacity.com/courses/ud150/lessons/5828669713/concepts/63826311150923)
 1. How do you enforce functional dependencies?
-   1. We use keys to enforce full functional dependencies, X -> Y. For example, when since age is dependent on email and interest both, we make email and interest as composite key to determine since age uniquely
+   1. We use keys to enforce full functional dependencies, X &rarr; Y. For example, when since age is dependent on email and interest both, we make email and interest as composite key to determine since age uniquely
    2. In a relation, the values of the key are unique!
    3. That is why it enforces a function!
 
@@ -571,7 +571,7 @@ title: Database Systems Concepts and Design
 1. NF<sup>2</sup> - non first normal form.
 2. 1NF - R is in 1NF iff all domain values are atomic. Since this is what is definition of relation, all relations are born in first normal form.
 3. 2NF - R is in 2NF iff R is in 1NF and every nonkey attribute if fully dependent on the key.
-4. 3NF - R is in 3NF iff R is 2NF and every nonkey attribute is non-transitively dependent on the key. Transitively means you can determine an attribute with some transition, for example, A -> B and A -> D then A -> D which makes this transitive.
+4. 3NF - R is in 3NF iff R is 2NF and every nonkey attribute is non-transitively dependent on the key. Transitively means you can determine an attribute with some transition, for example, A &rarr; B and A &rarr; D then A &rarr; D which makes this transitive.
 5. BCNF - R is in BCNF iff every determinant is a candidate key.
 6. Determinant - a set of attributes on which some other attribute is fully functionally dependent.
 
@@ -582,10 +582,10 @@ title: Database Systems Concepts and Design
 1. Look at the video to understand how 1NF is transformed to BCNF.
 
 #### [C20 - Compute with Functional Dependencies-Armstrong's rules](https://classroom.udacity.com/courses/ud150/lessons/5828669713/concepts/63703205190923)
-1. To make sure that we don't loose information, and that we preserve the functional dependencies when we decompose relations, we need to be able to compute with meaning. The rules are called Armstrong's rules. -> means determines
-   1. Rule of reflexivity: If Y is part of X, then X -> Y. Email, Interest -> Interest. (since interest is part of email, interest)
-   2. Rule of augmentation: If X -> Y, then WX -> WY. If email -> birthyear, then email, interest -> birthyear, interest.
-   3. Rule of transitivity: If X -> Y and Y -> Z, then X -> Z. Email -> birthyear, birthyear -> salary then email -> salary.
+1. To make sure that we don't loose information, and that we preserve the functional dependencies when we decompose relations, we need to be able to compute with meaning. The rules are called Armstrong's rules. &rarr; means determines
+   1. Rule of reflexivity: If Y is part of X, then X &rarr; Y. Email, Interest &rarr; Interest. (since interest is part of email, interest)
+   2. Rule of augmentation: If X &rarr; Y, then WX &rarr; WY. If email &rarr; birthyear, then email, interest &rarr; birthyear, interest.
+   3. Rule of transitivity: If X &rarr; Y and Y &rarr; Z, then X &rarr; Z. Email &rarr; birthyear, birthyear &rarr; salary then email &rarr; salary.
 
 #### [C21 - How to guarantee lossless joins](https://classroom.udacity.com/courses/ud150/lessons/5828669713/concepts/63703205200923)
 1. How to guarantee lossless joins?
@@ -595,7 +595,7 @@ title: Database Systems Concepts and Design
 
 #### [C22 - How to guarantee preservation of FDs](https://classroom.udacity.com/courses/ud150/lessons/5828669713/concepts/63703205210923)
 1. The meaning implied by the remailing function depedencies must be the same as the meaning that was implied by the original set.
-2. For example, we used rule of transitivity to conclude that email -> salary from email -> birthyear, birthyear -> salary.
+2. For example, we used rule of transitivity to conclude that email &rarr; salary from email &rarr; birthyear, birthyear &rarr; salary.
 
 #### [C23 - Email Interest](https://classroom.udacity.com/courses/ud150/lessons/5828669713/concepts/64820388220923)
 1. Example, to understand again how to break the 1NF to BCNF losslessly.
