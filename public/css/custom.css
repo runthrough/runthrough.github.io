@@ -1,0 +1,25 @@
+@media (min-width: 48em) {
+	html {
+		font-size: 15px;
+	}
+	.sidebar {
+		width: 16rem;
+	}
+	.content {
+		max-width: none;
+	}
+	.content {
+		margin-left: 20rem;
+	}
+	.layout-reverse .content {
+		margin-right: 20rem;
+	}
+}
+@media (min-width: 58em) {
+	html {
+		font-size: 18px;
+	}
+}
+html {
+	line-height: 1.65;
+}

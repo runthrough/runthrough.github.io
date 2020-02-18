@@ -1,0 +1,26 @@
+# Dependencies
+markdown: redcarpet
+highlighter: pygments
+
+# Permalinks
+permalink: pretty
+
+# Setup
+title: Notes
+tagline: 'Go run through it.'
+description: 'on Computer Science and Engineering.'
+url: https://runthrough.github.io/
+baseurl: ''
+
+author:
+    name: 'Run Through'
+    url: http://runthrough.com
+
+paginate: 5
+
+# Custom vars
+version: 1.0.0
+look: ''
+
+github:
+    repo: https://github.com/runthrough/runthrough.github.io
