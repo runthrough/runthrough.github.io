@@ -802,7 +802,35 @@ title: Database Systems Concepts and Design
 3. Sort on multiple columns is also possible.
 
 #### [C19 - Set Operations-Union](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58288999980923)
+1. Find all the CurrentCity's and HomeTown's without duplicates.
+2. SELECT CurrentCity FROM RegularUser UNION SELECT HomeTown FROM RegularUser;
+3. You may find that the result doesn't contain any duplicates that is because the semantics of Union, Intersection and Set Difference operators is that sets are returned.
+4. In case you do want to get duplicates then use UNION ALL.
 
+#### [C20 - Set Operations-Intersect](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58288999990923)
+1. Find all the cities that are CurrentCity's for someone and HomeTown's for someone without duplicates.
+2. INTERSECT is used with syntax similar to last operation.
+3. Again if you want all the cities in the result as many times as the appear, use INTERSECT ALL.
+
+#### [C21 - Set Operations-Except](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58289000000923)
+1. Find cities which are CurrentCity but not HomeTown.
+2. EXCEPT is used.
+3. Again use EXCEPT ALL to see the duplicates.
+
+#### [C22 - Built in Functions](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58324700610923)
+1. count, sum, avg, min, max
+2. SELECT count(*) FROM RegularUser - counts the no of rows in the table.
+3. SELECT Email, max(BirthYear) FROM RegularUser WHERE Sex='F - Finds the youngest female RegularUser.
+
+#### [C23 - Group By](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58324700620923)
+1. You can also put conditon on GROUP BY keyword to return only group which satisfy the condition.
+
+#### [C24 -Having-Condition on the group](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58324700630923)
+1. HAVING is used to put condition on the group.
+2. SELECT Email, count(*) AS NumInt FROM UserInterests GROUP BY Email HAVING NumInt > 1 ORDER BY NumInt ASC;
+
+#### [C25 - Nested Queries-In/Not In](https://classroom.udacity.com/courses/ud150/lessons/5869648587/concepts/58324700640923)
+1. 
 
 ### L12 - Efficiency
 
