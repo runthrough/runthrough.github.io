@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Available Notes
+title: Runs
 ---
 
 <ol>
