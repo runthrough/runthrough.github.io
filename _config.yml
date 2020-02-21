@@ -1,6 +1,6 @@
 # Dependencies
 markdown: redcarpet
-highlighter: rouge
+highlighter: pygments
 
 # Permalinks
 permalink: pretty
@@ -16,11 +16,12 @@ author:
     name: 'Run Through'
     url: http://runthrough.com
 
-paginate: 5
+paginate: 1
 
 # Custom vars
 version: 1.0.0
 look: ''
+gist_url: https://gist.github.com/runthrough/9950382bef6c683ca1780159a286f88c.js?file=
 
 github:
     repo: https://github.com/runthrough/runthrough.github.io

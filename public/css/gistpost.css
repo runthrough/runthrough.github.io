@@ -1,0 +1,35 @@
+.gist .gist-file article {
+	padding: unset !important;
+}
+
+.gist .gist-file {
+	font-family: unset !important;
+	margin-bottom: unset !important;
+	border: unset !important;
+	border-color: unset !important;
+	border-radius: unset !important;
+}
+
+.gist .gist-meta {
+	display: none !important;
+}
+
+.gist .markdown-body {
+	font-family: unset !important;
+	font-size: unset !important;
+	line-height: unset !important;
+	word-wrap: unset !important;
+}
+
+.gist .gist-file .gist-data {
+	font-size: 1rem !important;
+	line-height: 1.65 !important;
+}
+
+.gist .gist-data {
+	overflow: unset !important;
+	word-wrap: unset !important;
+	background-color: unset !important;
+	border-bottom: unset !important;
+	border-radius: unset !important;
+}
