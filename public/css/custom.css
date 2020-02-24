@@ -41,3 +41,7 @@ html {
 .related-posts li small {
 	float: right;
 }
+
+.page-title {
+	margin-bottom: 1.65rem;
+}
