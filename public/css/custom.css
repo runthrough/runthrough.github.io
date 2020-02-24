@@ -35,6 +35,7 @@ html {
 .related-posts a {
 	font-weight: normal;
 	color: #999;
+	display: block;
 }
 
 .related-posts li small {
