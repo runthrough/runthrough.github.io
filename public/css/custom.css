@@ -27,3 +27,11 @@
 html {
 	line-height: 1.65;
 }
+
+.related-posts a {
+	font-weight: normal;
+}
+
+.related-posts li small {
+	float: right;
+}
