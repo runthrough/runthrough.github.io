@@ -50,6 +50,6 @@ html {
 	margin-bottom: 1.65rem;
 }
 
-a.pagination-item:hover {
+a.pagination-item:hover, a.pagination-item:focus {
 	text-decoration: none;
 }
