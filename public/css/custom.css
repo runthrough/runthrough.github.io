@@ -45,3 +45,7 @@ html {
 .page-title {
 	margin-bottom: 1.65rem;
 }
+
+a.pagination-item:hover {
+	text-decoration: none;
+}
