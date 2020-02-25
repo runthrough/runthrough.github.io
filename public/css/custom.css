@@ -34,12 +34,16 @@ html {
 
 .related-posts a {
 	font-weight: normal;
-	color: #999;
+	/* color: #999; */
 	display: block;
 }
 
 .related-posts li small {
 	float: right;
+}
+
+.related-posts li a:hover {
+	text-decoration: underline;
 }
 
 .page-title {
