@@ -43,7 +43,7 @@ html {
 	display: block;
 }
 
-.related-posts li small {
+.related-posts li small, .runs li small {
 	float: right;
 }
 
