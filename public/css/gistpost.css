@@ -1,11 +1,11 @@
-.gist {
+.gistpost .gist {
 	font-size: unset !important;
 	color: unset !important;
 	text-align: unset !important;
 	direction: unset !important;
 }
 
-.gist .gist-file {
+.gistpost .gist .gist-file {
 	font-family: unset !important;
 	margin-bottom: unset !important;
 	border: unset !important;
@@ -13,22 +13,22 @@
 	border-radius: unset !important;
 }
 
-.gist .gist-file article {
+.gistpost .gist .gist-file article {
 	padding: unset !important;
 }
 
-.gist .gist-meta {
+.gistpost .gist .gist-meta {
 	display: none !important;
 }
 
-.gist .markdown-body {
+.gistpost .gist .markdown-body {
 	font-family: unset !important;
 	font-size: unset !important;
 	line-height: unset !important;
 	word-wrap: unset !important;
 }
 
-.gist .gist-data {
+.gistpost .gist .gist-data {
 	overflow: unset !important;
 	word-wrap: unset !important;
 	background-color: unset !important;
@@ -36,17 +36,17 @@
 	border-radius: unset !important;
 }
 
-.gist .gist-file .gist-data {
+.gistpost .gist .gist-file .gist-data {
 	font-size: 1rem !important;
 	line-height: 1.65 !important;
 }
 
-.gist code,
-.gist pre {
+.gistpost .gist code,
+.gistpost .gist pre {
 	font-family: 'JetBrains Mono' !important;
 }
 
-.gist .markdown-body code,
-.gist .markdown-body tt {
+.gistpost .gist .markdown-body code,
+.gistpost .gist .markdown-body tt {
 	font-size: 80% !important;
 }
