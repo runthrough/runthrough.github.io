@@ -15,8 +15,8 @@
 		margin-right: 20rem;
 	}
 	.sidebar-sticky {
-		left: 0;
-		right: 0;
+		left: 0.35rem;
+		right: 0.35rem;
 	}
 }
 @media (min-width: 58em) {
