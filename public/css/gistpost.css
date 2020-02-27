@@ -50,3 +50,10 @@
 .gistpost .gist .markdown-body tt {
 	font-size: 80% !important;
 }
+
+.gistpost .gist .markdown-body .highlight pre,
+.gistpost .gist .markdown-body pre {
+	font-size: 0.8rem !important;
+	line-height: 1.65 !important;
+	padding: 16px 20px !important;
+}
