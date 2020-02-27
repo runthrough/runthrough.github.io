@@ -43,10 +43,10 @@
 
 .gist code,
 .gist pre {
-	font-family: 'JetBrains Mono';
+	font-family: 'JetBrains Mono' !important;
 }
 
 .gist .markdown-body code,
 .gist .markdown-body tt {
-	font-size: 80%;
+	font-size: 80% !important;
 }
