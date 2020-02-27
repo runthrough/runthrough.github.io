@@ -37,7 +37,7 @@ html {
 	margin-top: 1.65rem;
 }
 
-.related-posts a {
+.related-posts a, .runs a {
 	font-weight: normal;
 	/* color: #999; */
 	display: block;
@@ -45,6 +45,7 @@ html {
 
 .related-posts li small, .runs li small {
 	float: right;
+	color: #999;
 }
 
 .related-posts li a:hover {

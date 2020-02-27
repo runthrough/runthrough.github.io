@@ -56,4 +56,5 @@
 	font-size: 0.8rem !important;
 	line-height: 1.65 !important;
 	padding: 16px 20px !important;
+	white-space: pre-wrap !important;
 }
