@@ -40,3 +40,13 @@
 	font-size: 1rem !important;
 	line-height: 1.65 !important;
 }
+
+.gist code,
+.gist pre {
+	font-family: 'JetBrains Mono';
+}
+
+.gist .markdown-body code,
+.gist .markdown-body tt {
+	font-size: 80%;
+}

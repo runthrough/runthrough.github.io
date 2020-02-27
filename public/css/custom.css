@@ -1,3 +1,8 @@
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
 @media (min-width: 48em) {
 	html {
 		font-size: 15px;
