@@ -48,7 +48,7 @@
 
 .gistpost .gist .markdown-body code,
 .gistpost .gist .markdown-body tt {
-	font-size: 80% !important;
+	font-size: 0.8rem !important;
 }
 
 .gistpost .gist .markdown-body .highlight pre,
