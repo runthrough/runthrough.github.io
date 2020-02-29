@@ -59,3 +59,7 @@ html {
 a.pagination-item:hover, a.pagination-item:focus {
 	text-decoration: none;
 }
+
+.post-no {
+	float: right;
+}
