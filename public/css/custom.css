@@ -68,7 +68,7 @@ a.pagination-item:hover, a.pagination-item:focus {
 	color: #303030;
 }
 
-.post-no a:hover {
+.post-no a:hover, .post-no a:focus {
 	text-decoration: none;
 	color: #268bd2;
 }
