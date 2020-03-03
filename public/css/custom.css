@@ -69,10 +69,6 @@ a.pagination-item:hover, a.pagination-item:focus {
 	color: #268bd2;
 }
 
-.post-prev, .post-next {
-	font-size: 1.65rem;
-}
-
 /* hide sidebar */
 .sidebar {
 	display: none;
