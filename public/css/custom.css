@@ -63,3 +63,13 @@ a.pagination-item:hover, a.pagination-item:focus {
 .post-no {
 	float: right;
 }
+
+/* hide sidebar */
+.sidebar {
+	display: none;
+}
+
+.content {
+	margin-left: 10rem;
+	margin-right: 10rem;
+}
