@@ -14,13 +14,21 @@ title: Home
 				{% if paginator.previous_page %} {% if paginator.page == 2 %}
 				<a class="post-prev" href="/">&#9001;</a>
 				{% else %}
-				<a class="post-prev" href="/page{{paginator.previous_page}}">&#9001;</a>
-				{% endif %} {% endif %}
+				<a class="post-prev" href="/page{{paginator.previous_page}}"
+					>&#9001;</a
+				>
+				{% endif %} {% else %}
+				<span class="post-none">&#9001;</span>
+				{% endif %}
 				<a href="/runs">
 					{{ paginator.page }}
 				</a>
 				{% if paginator.next_page %}
-				<a class="post-next" href="/page{{paginator.next_page}}">&#9002;</a>
+				<a class="post-next" href="/page{{paginator.next_page}}"
+					>&#9002;</a
+				>
+				{% else %}
+				<span class="post-none">&#9002;</span>
 				{% endif %}
 			</div>
 		</h1>
