@@ -11,12 +11,24 @@ title: Home
 				{{ post.title }}
 			</a>
 			<div class="post-no">
-				{{ paginator.page }}
+				{% if paginator.previous_page %} {% if paginator.page == 2 %}
+				<a
+					href="/page{{paginator.previous_page}}"
+					><</a
+				>
+				{% endif %}
+				<a href="/runs">
+					{{ paginator.page }}
+				</a>
+				{% if paginator.next_page %}
+				<a
+					href="/page{{paginator.next_page}}"
+					>></a
+				>
+				{% endif %}
 			</div>
 		</h1>
-
 		<span class="post-date">{{ post.date | date_to_string }}</span>
-
 		{{ post.content }}
 	</div>
 	{% endfor %}
