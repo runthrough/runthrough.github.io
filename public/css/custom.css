@@ -23,6 +23,10 @@
 		left: 0.35rem;
 		right: 0.35rem;
 	}
+	.content {
+		margin-left: 10rem;
+		margin-right: 10rem;
+	}
 }
 @media (min-width: 58em) {
 	html {
@@ -83,9 +87,4 @@ a.pagination-item:hover, a.pagination-item:focus {
 /* hide sidebar */
 .sidebar {
 	display: none;
-}
-
-.content {
-	margin-left: 10rem;
-	margin-right: 10rem;
 }
