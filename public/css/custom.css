@@ -45,7 +45,10 @@ html {
 
 .related-posts li small, .runs li small {
 	float: right;
-	color: #999;
+}
+
+.post-date, .related-posts li small, .runs li small {
+	color: #CCC;
 }
 
 .related-posts li a:hover {
