@@ -16,6 +16,7 @@ author:
     url: http://runthrough.com
 
 paginate: 1
+paginate_path: "/page/:num"
 
 # Custom vars
 version: 1.0.0
