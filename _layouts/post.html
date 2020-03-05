@@ -24,7 +24,22 @@ layout: default
 	{{ content }}
 </div>
 
-<div class="related">
+<div class="pagination">
+	{% if page.next %}
+	<a class="pagination-item newer" href="{{page.next.url}}"
+		>Newer</a
+	>
+	{% else %}
+	<span class="pagination-item newer">Newer</span>
+	{% endif %}
+	{% if page.previous %}
+	<a class="pagination-item older" href="{{page.previous.url}}">Older</a>
+	{% else %}
+	<span class="pagination-item older">Older</span>
+	{% endif %}
+</div>
+
+<!-- <div class="related">
 	<h2>Recent Runs</h2>
 	<ul class="related-posts">
 		{% for post in site.related_posts limit:3 %}
@@ -38,4 +53,4 @@ layout: default
 		</li>
 		{% endfor %}
 	</ul>
-</div>
+</div> -->

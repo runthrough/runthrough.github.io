@@ -7,24 +7,20 @@ title: Home
 	{% for post in paginator.posts reversed %}
 	<div class="post">
 		<h1 class="post-title">
-			<a href="{{ post.url }}">
-				{{ post.title }}
-			</a>
+			{{ post.title }}
 			<div class="post-no">
-				{% if paginator.previous_page %} {% if paginator.page == 2 %}
-				<a class="post-prev" href="/">&#9001;</a>
-				{% else %}
-				<a class="post-prev" href="/{{paginator.previous_page}}"
+				{% if post.next %}
+				<a class="post-prev" href="{{post.next.url}}"
 					>&#9001;</a
 				>
-				{% endif %} {% else %}
+				{% else %}
 				<span class="post-none">&#9001;</span>
 				{% endif %}
 				<a href="/runs">
 					{{ paginator.total_pages | minus: paginator.page | plus: 1 }}
 				</a>
-				{% if paginator.next_page %}
-				<a class="post-next" href="/{{paginator.next_page}}">&#9002;</a>
+				{% if post.previous %}
+				<a class="post-next" href="{{post.previous.url}}">&#9002;</a>
 				{% else %}
 				<span class="post-none">&#9002;</span>
 				{% endif %}
@@ -32,23 +28,20 @@ title: Home
 		</h1>
 		<span class="post-date">{{ post.date | date_to_string }}</span>
 		{{ post.content }}
+		<div class="pagination">
+			{% if post.next %}
+			<a class="pagination-item newer" href="{{post.next.url}}"
+				>Newer</a
+			>
+			{% else %}
+			<span class="pagination-item newer">Newer</span>
+			{% endif %}
+			{% if post.previous %}
+			<a class="pagination-item older" href="{{post.previous.url}}">Older</a>
+			{% else %}
+			<span class="pagination-item older">Older</span>
+			{% endif %}
+		</div>
 	</div>
 	{% endfor %}
-</div>
-
-<div class="pagination">
-	{% if paginator.previous_page %} {% if paginator.page == 2 %}
-	<a class="pagination-item newer" href="/">Newer</a>
-	{% else %}
-	<a class="pagination-item newer" href="/{{paginator.previous_page}}"
-		>Newer</a
-	>
-	{% endif %}
-	{% else %}
-	<span class="pagination-item newer">Newer</span>
-	{% endif %} {% if paginator.next_page %}
-	<a class="pagination-item older" href="/{{paginator.next_page}}">Older</a>
-	{% else %}
-	<span class="pagination-item older">Older</span>
-	{% endif %}
 </div>
