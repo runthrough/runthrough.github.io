@@ -4,7 +4,7 @@ title: Home
 ---
 
 <div class="posts">
-	{% for post in paginator.posts %}
+	{% for post in paginator.posts reversed %}
 	<div class="post">
 		<h1 class="post-title">
 			<a href="{{ post.url }}">
@@ -14,19 +14,17 @@ title: Home
 				{% if paginator.previous_page %} {% if paginator.page == 2 %}
 				<a class="post-prev" href="/">&#9001;</a>
 				{% else %}
-				<a class="post-prev" href="/page/{{paginator.previous_page}}"
+				<a class="post-prev" href="/{{paginator.previous_page}}"
 					>&#9001;</a
 				>
 				{% endif %} {% else %}
 				<span class="post-none">&#9001;</span>
 				{% endif %}
 				<a href="/runs">
-					{{ paginator.page }}
+					{{ paginator.total_pages | minus: paginator.page | plus: 1 }}
 				</a>
 				{% if paginator.next_page %}
-				<a class="post-next" href="/page/{{paginator.next_page}}"
-					>&#9002;</a
-				>
+				<a class="post-next" href="/{{paginator.next_page}}">&#9002;</a>
 				{% else %}
 				<span class="post-none">&#9002;</span>
 				{% endif %}
@@ -42,15 +40,14 @@ title: Home
 	{% if paginator.previous_page %} {% if paginator.page == 2 %}
 	<a class="pagination-item newer" href="/">Newer</a>
 	{% else %}
-	<a class="pagination-item newer" href="/page/{{paginator.previous_page}}"
+	<a class="pagination-item newer" href="/{{paginator.previous_page}}"
 		>Newer</a
 	>
-	{% endif %} {% else %}
+	{% endif %}
+	{% else %}
 	<span class="pagination-item newer">Newer</span>
 	{% endif %} {% if paginator.next_page %}
-	<a class="pagination-item older" href="/page/{{paginator.next_page}}"
-		>Older</a
-	>
+	<a class="pagination-item older" href="/{{paginator.next_page}}">Older</a>
 	{% else %}
 	<span class="pagination-item older">Older</span>
 	{% endif %}
