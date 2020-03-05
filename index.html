@@ -28,20 +28,20 @@ title: Home
 		</h1>
 		<span class="post-date">{{ post.date | date_to_string }}</span>
 		{{ post.content }}
-		<div class="pagination">
-			{% if post.next %}
-			<a class="pagination-item newer" href="{{post.next.url}}"
-				>Newer</a
-			>
-			{% else %}
-			<span class="pagination-item newer">Newer</span>
-			{% endif %}
-			{% if post.previous %}
-			<a class="pagination-item older" href="{{post.previous.url}}">Older</a>
-			{% else %}
-			<span class="pagination-item older">Older</span>
-			{% endif %}
-		</div>
+	</div>
+	<div class="pagination">
+		{% if post.next %}
+		<a class="pagination-item newer" href="{{post.next.url}}"
+			>Newer</a
+		>
+		{% else %}
+		<span class="pagination-item newer">Newer</span>
+		{% endif %}
+		{% if post.previous %}
+		<a class="pagination-item older" href="{{post.previous.url}}">Older</a>
+		{% else %}
+		<span class="pagination-item older">Older</span>
+		{% endif %}
 	</div>
 	{% endfor %}
 </div>
