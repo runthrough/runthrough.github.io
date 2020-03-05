@@ -5,7 +5,7 @@ title: Runs
 
 <div class="runs">
 	<ol>
-		{% for post in site.posts %}
+		{% for post in site.posts reversed %}
 			<li>
 				<a href="{{ post.url }}">
 					{{ post.title }}
