@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Intro to DevOps
+permalink: '/:title'
 ---
 
 <div class="gistpost">

@@ -11,7 +11,8 @@ layout: default
 			{% else %}
 			<span class="post-none">&#9001;</span>
 			{% endif %}
-			<a href="/runs">#</a>
+			<!-- {% increment page_no %} -->
+			<a href="/runs">{{ page_no }}</a>
 			{% if page.previous.url %}
 			<a class="post-prev" href="{{ page.previous.url }}">&#9002;</a>
 			{% else %}

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Front End Architecture
+permalink: '/:title'
 ---
 
 <div class="gistpost">

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Introduction to Graduate Algorithms
+permalink: '/:title'
 ---
 
 <div class="gistpost">

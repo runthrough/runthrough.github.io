@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Design Patterns
+permalink: '/:title'
 ---
 
 <div class="gistpost">

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Software Design Principles
+permalink: '/:title'
 ---
 
 <div class="gistpost">
