@@ -55,6 +55,23 @@ html {
 	color: #CCC;
 }
 
+.runs {
+	margin-right: -1rem;
+	margin-left: 2rem;
+}
+
+.runs ol {
+	-moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.runs ol > li {
+	-moz-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
 .related-posts li a:hover {
 	text-decoration: underline;
 }
@@ -83,8 +100,3 @@ a.pagination-item:hover, a.pagination-item:focus {
 	text-decoration: none;
 	color: #268bd2;
 }
-
-/* hide sidebar */
-/* .sidebar {
-	display: none;
-} */

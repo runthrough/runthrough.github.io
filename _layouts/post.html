@@ -12,7 +12,7 @@ layout: default
 			<span class="post-none">&#9001;</span>
 			{% endif %}
 			<!-- {% increment page_no %} -->
-			<a href="/runs">{{ page_no }}</a>
+			<a href="{% link runs.md %}">{{ page_no }}</a>
 			{% if page.previous.url %}
 			<a class="post-prev" href="{{ page.previous.url }}">&#9002;</a>
 			{% else %}
@@ -22,6 +22,11 @@ layout: default
 	</h1>
 	<span class="post-date">{{ page.date | date_to_string }}</span>
 	{{ content }}
+	{% if page.type == 'gistpost' %}
+	<div class="gistpost">
+		<script src="{{ site.gist_url }}{{ page.date | date: '%Y-%m-%d' }}{{ page.url | replace_first: '/', '-' }}.md"></script>
+	</div>
+	{% endif %}
 </div>
 
 <div class="pagination">
