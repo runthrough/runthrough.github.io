@@ -5,6 +5,6 @@
 	{% elsif page.layout == "post"%}
 	{% assign file_name = page.date | date: '%Y-%m-%d' | append: page.url | replace_first: '/', '-' | append: '.md' %}
 	{% endif %}
-	{% gist site.gist_id file_name %}
+	<script src="https://gist.github.com/runthrough/{{site.gist_id}}.js?file={{file_name}}"></script>
 </div>
 {% endif %}
