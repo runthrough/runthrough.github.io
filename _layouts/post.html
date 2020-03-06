@@ -22,11 +22,7 @@ layout: default
 	</h1>
 	<span class="post-date">{{ page.date | date_to_string }}</span>
 	{{ content }}
-	{% if page.type == 'gistpost' %}
-	<div class="gistpost">
-		<script src="{{ site.gist_url }}{{ page.date | date: '%Y-%m-%d' }}{{ page.url | replace_first: '/', '-' }}.md"></script>
-	</div>
-	{% endif %}
+	{% include gistpost.html %}
 </div>
 
 <div class="pagination">

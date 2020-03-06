@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Runs
+type: gistpost
 ---
 
 <div class="runs">
@@ -18,7 +19,5 @@ title: Runs
 
 <div class="pagination">
 	<h3>{{ site.title }} &middot; {{ site.tagline }} | {{ site.description }}</h3>
-	<div class="gistpost">
-		<script src="{{ site.gist_url }}about.md"></script>
-	</div>
+	{% include gistpost.html %}
 </div>
