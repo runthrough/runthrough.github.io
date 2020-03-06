@@ -12,9 +12,6 @@ author:
     name: 'Run Through'
     url: http://runthrough.com
 
-paginate: 1
-paginate_path: "/:num"
-
 # Custom vars
 version: 1.0.0
 look: ''
