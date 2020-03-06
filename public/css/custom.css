@@ -27,6 +27,12 @@
 		margin-left: 10rem;
 		margin-right: 10rem;
 	}
+	.runs-no {
+		max-width: 1rem;
+	}
+	.runs-date {
+		max-width: 3rem;
+	}
 }
 @media (min-width: 58em) {
 	html {
@@ -56,20 +62,24 @@ html {
 }
 
 .runs {
-	margin-right: -1rem;
-	margin-left: 2rem;
+	font-size: 1rem;
 }
 
-.runs ol {
-	-moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
+.runs table {
+	border: none;
 }
 
-.runs ol > li {
-	-moz-transform: rotate(-180deg);
-    -webkit-transform: rotate(-180deg);
-    transform: rotate(-180deg);
+.runs td, .runs th {
+	border: none;
+	padding: 0.2rem 0.5rem;
+}
+
+.runs-no, .runs-date {
+	text-align: right;
+}
+
+.runs tbody tr:nth-child(odd) td, .runs tbody tr:nth-child(odd) th {
+	background-color: transparent;
 }
 
 .related-posts li a:hover {
@@ -86,6 +96,7 @@ a.pagination-item:hover, a.pagination-item:focus {
 
 .post-no {
 	float: right;
+	margin-right: -1rem;
 }
 
 .post-no a {
@@ -99,4 +110,9 @@ a.pagination-item:hover, a.pagination-item:focus {
 .post-no a:hover, .post-no a:focus {
 	text-decoration: none;
 	color: #268bd2;
+}
+
+.pagination .gistpost {
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
