@@ -1,0 +1,10 @@
+{% if page.type and page.type == 'gistpost' %}
+<div class="gistpost">
+	{% if page.layout == "page" %}
+	{% assign file_name = page.url | replace: '/', '' | append: '.md' %}
+	{% elsif page.layout == "post"%}
+	{% assign file_name = page.date | date: '%Y-%m-%d' | append: page.url | replace_first: '/', '-' | append: '.md' %}
+	{% endif %}
+	{% gist site.gist_id file_name %}
+</div>
+{% endif %}
