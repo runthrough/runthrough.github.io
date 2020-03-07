@@ -6,18 +6,18 @@ layout: default
 	<h1 class="post-title">
 		{{ page.title }}
 		<div class="post-no">
-			{% if page.next.url %}
+			{% if page.next %}
 				<a class="post-next" href="{{ page.next.url }}">&#9001;</a>
 			{% else %}
 				{% if site.conf.cpg %}
-					<a class="post-next" href="{{ site.posts.first.url }}">&#9001;</a>
+					<a class="post-next" href="{{ site.posts.last.url }}">&#9001;</a>
 				{% else %}
 					<span class="post-none">&#9001;</span>
 				{% endif %}
 			{% endif %}
 				<!-- {% increment page_no %} -->
 				<a href="{% link runs.md %}">{{ page_no }}</a>
-			{% if page.previous.url %}
+			{% if page.previous %}
 				<a class="post-prev" href="{{ page.previous.url }}">&#9002;</a>
 			{% else %}
 				{% if site.conf.cpg %}
@@ -40,7 +40,7 @@ layout: default
 		>
 	{% else %}
 		{% if site.conf.cpg %}
-			<a class="pagination-item older" href="{{site.posts.last.url}}">Newest</a>
+			<a class="pagination-item older" href="{{site.posts.last.url}}">Oldest</a>
 		{% else %}
 			<span class="pagination-item newer">Newer</span>
 		{% endif %}
@@ -49,7 +49,7 @@ layout: default
 		<a class="pagination-item older" href="{{page.previous.url}}">Older</a>
 	{% else %}
 		{% if site.conf.cpg %}
-			<a class="pagination-item older" href="{{site.posts.first.url}}">Oldest</a>
+			<a class="pagination-item older" href="{{site.posts.first.url}}">Newest</a>
 		{% else %}
 			<span class="pagination-item older">Older</span>
 		{% endif %}
