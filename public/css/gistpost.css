@@ -51,6 +51,10 @@
 	font-size: 0.8rem !important;
 }
 
+.gistpost .gist .markdown-body li+li {
+	margin-top: 0 !important;
+}
+
 .gistpost .gist .markdown-body .highlight pre,
 .gistpost .gist .markdown-body pre {
 	font-size: 0.8rem !important;
