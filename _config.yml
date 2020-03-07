@@ -14,10 +14,18 @@ author:
 
 # Custom vars
 version: 1.0.0
-look: ''
-gist_url: https://gist.githubusercontent.com/
-gist_username: 'runthrough'
-gist_id: 9950382bef6c683ca1780159a286f88c
+conf:
+    look: ''
+    cpg: true
 
 github:
     repo: https://github.com/runthrough/runthrough.github.io
+    username: 'runthrough'
+    gist_url: https://gist.githubusercontent.com/
+    gist_id: 9950382bef6c683ca1780159a286f88c
+
+exclude:
+    - Gemfile
+    - Gemfile.lock
+    - LICENSE.md
+    - README.md
