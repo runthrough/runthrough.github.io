@@ -33,7 +33,17 @@
 	.runs-date {
 		max-width: 3rem;
 	}
+	span.runs-date {
+		display: none;
+	}
 }
+
+@media (max-width: 48rem) {
+	td.runs-date {
+		display: none;
+	}
+}
+
 @media (min-width: 58em) {
 	html {
 		font-size: 18px;
@@ -96,7 +106,7 @@ a.pagination-item:hover, a.pagination-item:focus {
 
 .post-no {
 	float: right;
-	margin-right: -1rem;
+	margin-right: -0.5rem;
 }
 
 .post-no a {

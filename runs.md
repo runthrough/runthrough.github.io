@@ -11,7 +11,10 @@ type: gistpost
 	<tr>
 		<td class="runs-no">{{ site.posts.size | minus: post_no | plus: 1 }}.</td>
 		<td class="runs-link">
-			<a href="{{ post.url }}">{{ post.title }}</a>
+			<a href="{{ post.url }}">
+				{{ post.title }}
+			</a>
+			<span class="runs-date">{{ post.date | date_to_string }}</span>
 		</td>
 		<td class="runs-date">{{ post.date | date_to_string }}</td>
 	</tr>
