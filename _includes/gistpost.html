@@ -7,5 +7,6 @@
 	{% endif %}
 	{% assign gist_url = site.gist_username | append: '/' | append: site.gist_id %}
 	{% gist gist_url file_name %}
+	<!-- {% assign raw_url = site.gist_url | append: '/' | append: site.gist_username | append: '/' | append: site.gist_id | append: '/raw/' | append: file_name %} -->
 </div>
 {% endif %}

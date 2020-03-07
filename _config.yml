@@ -15,9 +15,9 @@ author:
 # Custom vars
 version: 1.0.0
 look: ''
+gist_url: https://gist.githubusercontent.com/
 gist_username: 'runthrough'
 gist_id: 9950382bef6c683ca1780159a286f88c
-gist_raw_id: e68307b996d40c8f0bbd69431c1f0b241ddfbd99
 
 github:
     repo: https://github.com/runthrough/runthrough.github.io
