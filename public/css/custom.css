@@ -36,6 +36,9 @@
 	span.runs-date {
 		display: none;
 	}
+	.post-no {
+		margin-right: -1rem;
+	}
 }
 
 @media (max-width: 48rem) {
@@ -106,7 +109,6 @@ a.pagination-item:hover, a.pagination-item:focus {
 
 .post-no {
 	float: right;
-	margin-right: -0.5rem;
 }
 
 .post-no a {
