@@ -51,20 +51,10 @@
 	font-size: 0.8rem !important;
 }
 
-.gistpost .gist .markdown-body li+li {
-	margin-top: 0 !important;
-}
-
 .gistpost .gist .markdown-body .highlight pre,
 .gistpost .gist .markdown-body pre {
 	font-size: 0.8rem !important;
 	line-height: 1.65 !important;
 	padding: 16px 20px !important;
 	white-space: pre-wrap !important;
-}
-
-.gistpost .gist .markdown-body h1, .gistpost .gist .markdown-body h2, .gistpost .gist .markdown-body h3, .gistpost .gist .markdown-body h4, .gistpost .gist .markdown-body h5, .gistpost .gist .markdown-body h6 {
-	margin-top: 0.9rem !important;
-	margin-bottom: 0.9rem !important;
-	line-height: unset !important;
 }
