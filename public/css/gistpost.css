@@ -64,7 +64,7 @@
 }
 
 .gistpost .gist .markdown-body h1, .gistpost .gist .markdown-body h2, .gistpost .gist .markdown-body h3, .gistpost .gist .markdown-body h4, .gistpost .gist .markdown-body h5, .gistpost .gist .markdown-body h6 {
-	margin-top: 0.8rem !important;
-	margin-bottom: 0.8rem !important;
+	margin-top: 0.9rem !important;
+	margin-bottom: 0.9rem !important;
 	line-height: unset !important;
 }
