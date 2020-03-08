@@ -45,6 +45,10 @@
 	td.runs-date {
 		display: none;
 	}
+	.pagination-item {
+		border-left: none;
+		border-right: none;
+	}
 }
 
 @media (min-width: 58em) {

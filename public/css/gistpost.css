@@ -62,3 +62,9 @@
 	padding: 16px 20px !important;
 	white-space: pre-wrap !important;
 }
+
+.gistpost .gist .markdown-body h1, .gistpost .gist .markdown-body h2, .gistpost .gist .markdown-body h3, .gistpost .gist .markdown-body h4, .gistpost .gist .markdown-body h5, .gistpost .gist .markdown-body h6 {
+	margin-top: 1rem !important;
+	margin-bottom: 1rem !important;
+	line-height: unset !important;
+}
