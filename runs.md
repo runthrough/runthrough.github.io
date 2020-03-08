@@ -6,31 +6,24 @@ type: gistpost
 
 <div class="runs">
 	<table>
-	{% for post in site.posts %}
-	<!-- {% increment post_no %} -->
-	<tr>
-		<td class="runs-no">{{ site.posts.size | minus: post_no | plus: 1 }}.</td>
-		<td class="runs-link">
-			<a href="{{ post.url }}">
-				{{ post.title }}
-			</a>
-			<span class="runs-date">{{ post.date | date_to_string }}</span>
-		</td>
-		<td class="runs-date">{{ post.date | date_to_string }}</td>
-	</tr>
-	{% endfor %}
-	</table>
-	<!-- <ol>
-		{% for post in site.posts reversed %}
-			<li>
-				<span>{{ post_no }}</span>
+		{% for post in site.posts %}
+		<!-- {% increment post_no %} -->
+		<tr>
+			{% assign table_index = site.posts.size | minus: post_no | plus: 1 %}
+			{% if table_index < 10 %}
+				{% assign table_index = table_index | prepend: '0' %}
+			{% endif %}
+			<td class="runs-no">{{ table_index }}.</td>
+			<td class="runs-link">
 				<a href="{{ post.url }}">
 					{{ post.title }}
-					<small>{{ post.date | date_to_string }}</small>
 				</a>
-			</li>
+				<span class="runs-date">{{ post.date | date_to_string }}</span>
+			</td>
+			<td class="runs-date">{{ post.date | date_to_string }}</td>
+		</tr>
 		{% endfor %}
-	</ol> -->
+	</table>
 </div>
 
 <div class="pagination">

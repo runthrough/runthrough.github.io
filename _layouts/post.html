@@ -16,6 +16,9 @@ layout: default
 				{% endif %}
 			{% endif %}
 				<!-- {% increment page_no %} -->
+				{% if page_no < 10 %}
+					{% assign page_no = page_no | prepend: '0' %}
+				{% endif %}
 				<a href="{% link runs.md %}">{{ page_no }}</a>
 			{% if page.previous %}
 				<a class="post-prev" href="{{ page.previous.url }}">&#9002;</a>
