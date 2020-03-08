@@ -24,7 +24,7 @@
 .gistpost .gist .markdown-body {
 	font-family: unset !important;
 	font-size: unset !important;
-	line-height: unset !important;
+	line-height: 1.8 !important;
 	word-wrap: unset !important;
 }
 
@@ -57,4 +57,8 @@
 	line-height: 1.65 !important;
 	padding: 16px 20px !important;
 	white-space: pre-wrap !important;
+}
+
+.gistpost .gist .markdown-body li+li {
+	margin-top: unset !important;
 }
