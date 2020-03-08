@@ -23,7 +23,7 @@ type: gistpost
 	<!-- <ol>
 		{% for post in site.posts reversed %}
 			<li>
-				<span>{{post_no}}</span>
+				<span>{{ post_no }}</span>
 				<a href="{{ post.url }}">
 					{{ post.title }}
 					<small>{{ post.date | date_to_string }}</small>
