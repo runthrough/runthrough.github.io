@@ -62,3 +62,9 @@
 .gistpost .gist .markdown-body li+li {
 	margin-top: unset !important;
 }
+
+@media (max-width: 48rem) {
+	.gistpost .gist .markdown-body ol, .gistpost .gist .markdown-body ul {
+		padding-left: 1rem !important;
+	}
+}
