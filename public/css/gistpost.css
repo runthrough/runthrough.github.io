@@ -24,7 +24,7 @@
 .gistpost .gist .markdown-body {
 	font-family: unset !important;
 	font-size: unset !important;
-	line-height: 1.75 !important;
+	line-height: unset !important;
 	word-wrap: unset !important;
 }
 
