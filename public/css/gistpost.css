@@ -44,6 +44,7 @@
 .gistpost .gist code,
 .gistpost .gist pre {
 	font-family: 'JetBrains Mono' !important;
+	white-space: pre-wrap !important;
 }
 
 .gistpost .gist .markdown-body code,
