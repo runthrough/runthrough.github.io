@@ -8,9 +8,9 @@ gist_name: about
 <div class="runs">
 	<table>
 		{% for lang in site.languages %}
-		<!-- {% increment post_no %} -->
+		<!-- {% increment language_no %} -->
 		<tr>
-			{% assign table_index = site.languages.size | minus: post_no | plus: 1 %}
+			{% assign table_index = site.languages.size | minus: language_no | plus: 1 %}
 			{% if table_index < 10 %}
 				{% assign table_index = table_index | prepend: '0' %}
 			{% endif %}

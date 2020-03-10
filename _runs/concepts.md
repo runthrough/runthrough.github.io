@@ -8,9 +8,9 @@ gist_name: about
 <div class="runs">
 	<table>
 		{% for post in site.posts %}
-		<!-- {% increment post_no %} -->
+		<!-- {% increment concept_no %} -->
 		<tr>
-			{% assign table_index = site.posts.size | minus: post_no | plus: 1 %}
+			{% assign table_index = site.posts.size | minus: concept_no | plus: 1 %}
 			{% if table_index < 10 %}
 				{% assign table_index = table_index | prepend: '0' %}
 			{% endif %}
