@@ -4,11 +4,19 @@ layout: default
 
 <div class="page">
 	<h1 class="page-title">
-		{{ page.title }}
+		{{ page.collection }} &#9002; {{ page.title }}
 		<div class="post-no">
-			<span class="post-none">&#9001;</span>
+			{% if true %}
+				<a class="post-next" href="{{ site.collections.next.url }}">&#9001;</a>
+			{% else %}
+				<span class="post-none">&#9001;</span>
+			{% endif %}
 			<a href="{{ site.posts.first.url }}">#</a>
-			<span class="post-none">&#9002;</span>
+			{% if true %}
+				<a class="post-prev" href="{{ site.collections.next.url }}">&#9002;</a>
+			{% else %}
+				<span class="post-none">&#9002;</span>
+			{% endif %}
 		</div>
 	</h1>
 	{{ content }}

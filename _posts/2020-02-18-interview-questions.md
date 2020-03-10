@@ -1,5 +1,5 @@
 ---
 layout: post
 title: Interview Questions
-type: gistpost
+type: gist_post
 ---

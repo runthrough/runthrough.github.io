@@ -8,6 +8,14 @@ description: 'Computer Science and Engineering concepts.'
 url: https://runthrough.github.io/
 baseurl: ''
 
+collections:
+    languages:
+        output: true
+        permalink: /:title
+    runs:
+        output: true
+        permalink: /:title
+
 author:
     name: 'Run Through'
     url: https://runthrough.github.com
@@ -22,7 +30,10 @@ github:
     repo: https://github.com/runthrough/runthrough.github.io
     username: 'runthrough'
     gist_url: https://gist.githubusercontent.com/
-    gist_id: 9950382bef6c683ca1780159a286f88c
+    gist_id:
+        posts: 9950382bef6c683ca1780159a286f88c
+        languages: 7944c2884eb2c8f6e467facfef731de2
+        runs: 1a69cff1c4ebce245820706be0a695c2
 
 exclude:
     - Gemfile

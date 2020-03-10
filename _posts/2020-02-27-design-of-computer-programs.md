@@ -1,5 +1,5 @@
 ---
 layout: post
 title: Design of Computer Programs
-type: gistpost
+type: gist_post
 ---

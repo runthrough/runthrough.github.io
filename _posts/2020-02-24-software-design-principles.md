@@ -1,5 +1,5 @@
 ---
 layout: post
 title: Software Design Principles
-type: gistpost
+type: gist_post
 ---

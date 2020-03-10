@@ -1,5 +1,5 @@
 ---
 layout: post
 title: Intro to DevOps
-type: gistpost
+type: gist_post
 ---
