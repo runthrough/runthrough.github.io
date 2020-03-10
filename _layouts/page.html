@@ -7,13 +7,13 @@ layout: default
 		{{ page.title }}
 		<div class="post-no">
 			{% if true %}
-				<a class="post-next" href="{{ site.collections.next.url }}">&#9001;</a>
+				<a class="post-next" href="{{ site.collections.first.url }}">&#9001;</a>
 			{% else %}
 				<span class="post-none">&#9001;</span>
 			{% endif %}
 			<a href="{{ site.posts.first.url }}">#</a>
 			{% if true %}
-				<a class="post-prev" href="{{ site.collections.next.url }}">&#9002;</a>
+				<a class="post-prev" href="{{ site.collections.first.url }}">&#9002;</a>
 			{% else %}
 				<span class="post-none">&#9002;</span>
 			{% endif %}
