@@ -2,18 +2,34 @@
 layout: default
 ---
 
+{% if page.url == "/concepts" %}
+	{% assign col_name = "posts" %}
+{% else %}
+	{% assign col_name = page.url | remove_first: "/" %}
+{% endif %}
+
+{% if col_name == "posts" %}
+	{% assign prev_col_url = "languages" | prepend: "/" %}
+	{% assign next_col_url = "languages" | prepend: "/" %}
+{% elsif col_name == "languages" %}
+	{% assign prev_col_url = "concepts" | prepend: "/" %}
+	{% assign next_col_url = "concepts" | prepend: "/" %}
+{% endif %}
+
+{% assign col = site.collections | where: "label", col_name | first %}
+
 <div class="page">
 	<h1 class="page-title">
 		{{ page.title }}
 		<div class="post-no">
 			{% if true %}
-				<a class="post-next" href="{{ site.collections.first.url }}">&#9001;</a>
+				<a class="post-next" href="{{ prev_col_url }}">&#9001;</a>
 			{% else %}
 				<span class="post-none">&#9001;</span>
 			{% endif %}
-			<a href="{{ site.posts.first.url }}">#</a>
+			<a href="{{ col.docs.last.url }}">#</a>
 			{% if true %}
-				<a class="post-prev" href="{{ site.collections.first.url }}">&#9002;</a>
+				<a class="post-prev" href="{{ next_col_url }}">&#9002;</a>
 			{% else %}
 				<span class="post-none">&#9002;</span>
 			{% endif %}

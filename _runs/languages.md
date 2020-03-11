@@ -7,7 +7,7 @@ gist_name: about
 
 <div class="runs">
 	<table>
-		{% for lang in site.languages %}
+		{% for lang in site.languages reversed %}
 		<!-- {% increment language_no %} -->
 		<tr>
 			{% assign table_index = site.languages.size | minus: language_no | plus: 1 %}
