@@ -34,9 +34,6 @@
 	.runs-date {
 		max-width: 3rem;
 	}
-	.runs-link {
-		min-width: 18rem;
-	}
 	span.runs-date {
 		display: none;
 	}
@@ -108,6 +105,10 @@ html {
 .runs tbody tr:nth-child(odd) td,
 .runs tbody tr:nth-child(odd) th {
 	background-color: transparent;
+}
+
+.runs-link {
+	min-width: 18rem;
 }
 
 .related-posts li a:hover {
