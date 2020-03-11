@@ -1,0 +1,13 @@
+{% if col.label == "concepts" %}
+	<!-- {% increment concept_page_no %} -->
+	{% if concept_page_no < 10 %}
+		{% assign concept_page_no = concept_page_no | prepend: '0' %}
+	{% endif %}
+	<a href="{{ col_list }}">{{ concept_page_no }}</a>
+{% elsif col.label == "languages" %}
+	<!-- {% increment language_page_no %} -->
+	{% if language_page_no < 10 %}
+		{% assign language_page_no = language_page_no | prepend: '0' %}
+	{% endif %}
+	<a href="{{ col_list }}">{{ language_page_no }}</a>
+{% endif %}

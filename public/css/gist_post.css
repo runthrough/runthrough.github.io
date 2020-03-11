@@ -1,0 +1,72 @@
+.gist_post .gist {
+	font-size: unset !important;
+	color: unset !important;
+	text-align: unset !important;
+	direction: unset !important;
+}
+
+.gist_post .gist .gist-file {
+	font-family: unset !important;
+	margin-bottom: unset !important;
+	border: unset !important;
+	border-color: unset !important;
+	border-radius: unset !important;
+}
+
+.gist_post .gist .gist-file article {
+	padding: unset !important;
+}
+
+.gist_post .gist .gist-meta {
+	display: none !important;
+}
+
+.gist_post .gist .markdown-body {
+	font-family: unset !important;
+	font-size: unset !important;
+	line-height: 1.8 !important;
+	word-wrap: unset !important;
+}
+
+.gist_post .gist .gist-data {
+	overflow: unset !important;
+	word-wrap: unset !important;
+	background-color: unset !important;
+	border-bottom: unset !important;
+	border-radius: unset !important;
+}
+
+.gist_post .gist .gist-file .gist-data {
+	font-size: 1rem !important;
+	line-height: 1.65 !important;
+}
+
+.gist_post .gist code,
+.gist_post .gist pre {
+	font-family: 'JetBrains Mono' !important;
+	white-space: pre-wrap !important;
+}
+
+.gist_post .gist .markdown-body code,
+.gist_post .gist .markdown-body tt {
+	font-size: 0.8rem !important;
+}
+
+.gist_post .gist .markdown-body .highlight pre,
+.gist_post .gist .markdown-body pre {
+	font-size: 0.8rem !important;
+	line-height: 1.65 !important;
+	padding: 16px 20px !important;
+	white-space: pre-wrap !important;
+}
+
+.gist_post .gist .markdown-body li + li {
+	margin-top: unset !important;
+}
+
+@media (max-width: 48rem) {
+	.gist_post .gist .markdown-body ol,
+	.gist_post .gist .markdown-body ul {
+		padding-left: 1rem !important;
+	}
+}
