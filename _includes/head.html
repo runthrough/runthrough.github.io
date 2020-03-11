@@ -1,6 +1,6 @@
 <head>
 	{% if page.title == "Home" %}
-	<meta http-equiv="refresh" content="0;url={{ site.posts.first.url }}" />
+	<meta http-equiv="refresh" content="0;url={{ site[site.conf.default_collection].last.url }}" />
 	<title>
 		{{ site.title }} &middot; {{ site.tagline }}
 	</title>
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="/public/css/poole.css" />
 	<link rel="stylesheet" href="/public/css/syntax.css" />
 	<link rel="stylesheet" href="/public/css/hyde.css" />
-	<link rel="stylesheet" href="/public/css/gistpost.css" />
+	<link rel="stylesheet" href="/public/css/gist_post.css" />
 	<link rel="stylesheet" href="/public/css/custom.css" />
 	<link
 		rel="stylesheet"

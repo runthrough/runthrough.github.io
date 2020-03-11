@@ -2,66 +2,45 @@
 layout: default
 ---
 
-{% assign col = site.collections | where: "label", page.collection | first %}
-{% if col.label == "posts" %}
-	{% assign col_list = "concepts" | prepend: "/" %}
-{% else %}
-	{% assign col_list = col.label | prepend: "/" %}
-{% endif %}
+{% assign col = site.collections | where: "label", page.collection | first %} {%
+assign col_list = col.label | prepend: "/" %}
 
 <div class="post">
 	<h1 class="post-title">
 		{{ page.title }}
 		<div class="post-no">
 			{% if page.next %}
-				<a class="post-next" href="{{ page.next.url }}">&#9001;</a>
+			<a class="post-next" href="{{ page.next.url }}">&#9001;</a>
+			{% else %} {% if site.conf.circular_pagination %}
+			<a class="post-next" href="{{ col.docs.first.url }}">&#9001;</a>
 			{% else %}
-				{% if site.conf.cpg %}
-					<a class="post-next" href="{{ col.docs.first.url }}">&#9001;</a>
-				{% else %}
-					<span class="post-none">&#9001;</span>
-				{% endif %}
-			{% endif %}
-				<!-- {% increment page_no %} -->
-				{% if page_no < 10 %}
-					{% assign page_no = page_no | prepend: '0' %}
-				{% endif %}
-				<a href="{{ col_list }}">{{ page_no }}</a>
-			{% if page.previous %}
-				<a class="post-prev" href="{{ page.previous.url }}">&#9002;</a>
+			<span class="post-none">&#9001;</span>
+			{% endif %} {% endif %} {% include post_no.html %} {% if
+			page.previous %}
+			<a class="post-prev" href="{{ page.previous.url }}">&#9002;</a>
+			{% else %} {% if site.conf.circular_pagination %}
+			<a class="post-prev" href="{{ col.docs.last.url }}">&#9002;</a>
 			{% else %}
-				{% if site.conf.cpg %}
-					<a class="post-prev" href="{{ col.docs.last.url }}">&#9002;</a>
-				{% else %}
-					<span class="post-none">&#9002;</span>
-				{% endif %}
-			{% endif %}
+			<span class="post-none">&#9002;</span>
+			{% endif %} {% endif %}
 		</div>
 	</h1>
 	<span class="post-date">{{ page.date | date_to_string }}</span>
-	{{ content }}
-	{% include gistpost.html %}
+	{{ content }} {% include gist_post.html %}
 </div>
 
 <div class="pagination">
 	{% if page.next %}
-		<a class="pagination-item newer" href="{{ page.next.url }}"
-			>Newer</a
-		>
+	<a class="pagination-item newer" href="{{ page.next.url }}">Newer</a>
+	{% else %} {% if site.conf.circular_pagination %}
+	<a class="pagination-item older" href="{{ col.docs.first.url }}">Oldest</a>
 	{% else %}
-		{% if site.conf.cpg %}
-			<a class="pagination-item older" href="{{ col.docs.first.url }}">Oldest</a>
-		{% else %}
-			<span class="pagination-item newer">Newer</span>
-		{% endif %}
-	{% endif %}
-	{% if page.previous %}
-		<a class="pagination-item older" href="{{ page.previous.url }}">Older</a>
+	<span class="pagination-item newer">Newer</span>
+	{% endif %} {% endif %} {% if page.previous %}
+	<a class="pagination-item older" href="{{ page.previous.url }}">Older</a>
+	{% else %} {% if site.conf.circular_pagination %}
+	<a class="pagination-item older" href="{{ col.docs.last.url }}">Newest</a>
 	{% else %}
-		{% if site.conf.cpg %}
-			<a class="pagination-item older" href="{{ col.docs.last.url }}">Newest</a>
-		{% else %}
-			<span class="pagination-item older">Older</span>
-		{% endif %}
-	{% endif %}
+	<span class="pagination-item older">Older</span>
+	{% endif %} {% endif %}
 </div>

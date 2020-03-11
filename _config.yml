@@ -9,6 +9,9 @@ url: https://runthrough.github.io/
 baseurl: ''
 
 collections:
+    concepts:
+        output: true
+        permalink: /:title
     languages:
         output: true
         permalink: /:title
@@ -24,14 +27,15 @@ author:
 version: 1.0.0
 conf:
     look: ''
-    cpg: true
+    circular_pagination: true
+    default_collection: 'concepts'
 
 github:
     repo: https://github.com/runthrough/runthrough.github.io
     username: 'runthrough'
     gist_url: https://gist.githubusercontent.com/
     gist_id:
-        posts: 9950382bef6c683ca1780159a286f88c
+        concepts: 9950382bef6c683ca1780159a286f88c
         languages: 7944c2884eb2c8f6e467facfef731de2
         runs: 1a69cff1c4ebce245820706be0a695c2
 

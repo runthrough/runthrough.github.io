@@ -1,6 +1,7 @@
-@font-face{
-    font-family: 'JetBrains Mono';
-    src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/web/woff2/JetBrainsMono-Regular.woff2')
+		format('woff2');
 }
 
 @media (min-width: 48em) {
@@ -64,18 +65,22 @@ html {
 	margin-top: 1.65rem;
 }
 
-.related-posts a, .runs a {
+.related-posts a,
+.runs a {
 	font-weight: normal;
 	/* color: #999; */
 	display: block;
 }
 
-.related-posts li small, .runs li small {
+.related-posts li small,
+.runs li small {
 	float: right;
 }
 
-.post-date, .related-posts li small, .runs li small {
-	color: #CCC;
+.post-date,
+.related-posts li small,
+.runs li small {
+	color: #ccc;
 }
 
 .runs {
@@ -86,16 +91,19 @@ html {
 	border: none;
 }
 
-.runs td, .runs th {
+.runs td,
+.runs th {
 	border: none;
 	padding: 0.1rem 0.5rem;
 }
 
-.runs-no, .runs-date {
+.runs-no,
+.runs-date {
 	text-align: right;
 }
 
-.runs tbody tr:nth-child(odd) td, .runs tbody tr:nth-child(odd) th {
+.runs tbody tr:nth-child(odd) td,
+.runs tbody tr:nth-child(odd) th {
 	background-color: transparent;
 }
 
@@ -107,7 +115,8 @@ html {
 	margin-bottom: 1.65rem;
 }
 
-a.pagination-item:hover, a.pagination-item:focus {
+a.pagination-item:hover,
+a.pagination-item:focus {
 	text-decoration: none;
 }
 
@@ -120,15 +129,16 @@ a.pagination-item:hover, a.pagination-item:focus {
 }
 
 .post-none {
-	color: #CCC
+	color: #ccc;
 }
 
-.post-no a:hover, .post-no a:focus {
+.post-no a:hover,
+.post-no a:focus {
 	text-decoration: none;
 	color: #268bd2;
 }
 
-.pagination .gistpost {
+.pagination .gist_post {
 	margin-left: 1rem;
 	margin-right: 1rem;
 }

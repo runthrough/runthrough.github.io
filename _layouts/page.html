@@ -2,13 +2,9 @@
 layout: default
 ---
 
-{% if page.url == "/concepts" %}
-	{% assign col_name = "posts" %}
-{% else %}
-	{% assign col_name = page.url | remove_first: "/" %}
-{% endif %}
+{% assign col_name = page.url | remove_first: "/" %}
 
-{% if col_name == "posts" %}
+{% if col_name == "concepts" %}
 	{% assign prev_col_url = "languages" | prepend: "/" %}
 	{% assign next_col_url = "languages" | prepend: "/" %}
 {% elsif col_name == "languages" %}
