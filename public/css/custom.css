@@ -34,6 +34,9 @@
 	.runs-date {
 		max-width: 3rem;
 	}
+	.runs-link {
+		min-width: 18rem;
+	}
 	span.runs-date {
 		display: none;
 	}
