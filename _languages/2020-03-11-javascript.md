@@ -1,5 +1,5 @@
 ---
 layout: post
-title: Java
+title: JavaScript
 type: gist_post
 ---
