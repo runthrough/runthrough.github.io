@@ -4,6 +4,16 @@
 		format('woff2');
 }
 
+@media (min-width: 38em) {
+	html {
+		font-size: 16px;
+	}
+	.container {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
 @media (min-width: 48em) {
 	html {
 		font-size: 15px;
@@ -42,21 +52,25 @@
 	}
 }
 
-@media (max-width: 48rem) {
+@media (min-width: 58em) {
+	html {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 48em) {
 	td.runs-date {
 		display: none;
 	}
+}
+
+@media (max-width: 30em) {
 	.pagination-item {
 		border-left: none;
 		border-right: none;
 	}
 }
 
-@media (min-width: 58em) {
-	html {
-		font-size: 18px;
-	}
-}
 html {
 	line-height: 1.65;
 }
