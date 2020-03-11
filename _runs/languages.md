@@ -5,23 +5,25 @@ type: gist_post
 gist_name: about
 ---
 
+{% assign current_run = page.url | remove_first: "/" %}
+
 <div class="runs">
 	<table>
-		{% for lang in site.languages reversed %}
+		{% for through in site[current_run] reversed %}
 		<!-- {% increment language_no %} -->
 		<tr>
-			{% assign table_index = site.languages.size | minus: language_no | plus: 1 %}
+			{% assign table_index = site[current_run].size | minus: language_no | plus: 1 %}
 			{% if table_index < 10 %}
 				{% assign table_index = table_index | prepend: '0' %}
 			{% endif %}
 			<td class="runs-no">{{ table_index }}.</td>
 			<td class="runs-link">
-				<a href="{{ lang.url }}">
-					{{ lang.title }}
+				<a href="{{ through.url }}">
+					{{ through.title }}
 				</a>
-				<span class="runs-date">{{ lang.date | date_to_string }}</span>
+				<span class="runs-date">{{ through.date | date_to_string }}</span>
 			</td>
-			<td class="runs-date">{{ lang.date | date_to_string }}</td>
+			<td class="runs-date">{{ through.date | date_to_string }}</td>
 		</tr>
 		{% endfor %}
 	</table>

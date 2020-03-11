@@ -10,4 +10,10 @@
 		{% assign language_page_no = language_page_no | prepend: '0' %}
 	{% endif %}
 	<a href="{{ col_list }}">{{ language_page_no }}</a>
+{% elsif col.label == "statistics" %}
+	<!-- {% increment stat_page_no %} -->
+	{% if stat_page_no < 10 %}
+		{% assign stat_page_no = stat_page_no | prepend: '0' %}
+	{% endif %}
+	<a href="{{ col_list }}">{{ stat_page_no }}</a>
 {% endif %}

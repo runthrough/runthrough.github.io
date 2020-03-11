@@ -15,6 +15,9 @@ collections:
     languages:
         output: true
         permalink: /:title
+    statistics:
+        output: true
+        permalink: /:title
     runs:
         output: true
         permalink: /:title
@@ -37,6 +40,7 @@ github:
     gist_id:
         concepts: 9950382bef6c683ca1780159a286f88c
         languages: 7944c2884eb2c8f6e467facfef731de2
+        statistics: 5caa6172beb8828ef496f478dbaef0c8
         runs: 1a69cff1c4ebce245820706be0a695c2
 
 exclude:

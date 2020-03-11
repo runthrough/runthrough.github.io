@@ -3,13 +3,17 @@ layout: default
 ---
 
 {% assign col_name = page.url | remove_first: "/" %}
+{% assign cols = "concepts, languages, statistics"| split: ", " %}
 
-{% if col_name == "concepts" %}
-	{% assign prev_col_url = "languages" | prepend: "/" %}
-	{% assign next_col_url = "languages" | prepend: "/" %}
-{% elsif col_name == "languages" %}
-	{% assign prev_col_url = "concepts" | prepend: "/" %}
-	{% assign next_col_url = "concepts" | prepend: "/" %}
+{% if col_name == cols[0] %}
+	{% assign prev_col_url = cols[2] | prepend: "/" %}
+	{% assign next_col_url = cols[1] | prepend: "/" %}
+{% elsif col_name == cols[1] %}
+	{% assign prev_col_url = cols[0] | prepend: "/" %}
+	{% assign next_col_url = cols[2] | prepend: "/" %}
+{% elsif col_name == cols[2] %}
+	{% assign prev_col_url = cols[1] | prepend: "/" %}
+	{% assign next_col_url = cols[0] | prepend: "/" %}
 {% endif %}
 
 {% assign col = site.collections | where: "label", col_name | first %}
