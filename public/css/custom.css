@@ -12,6 +12,12 @@
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
+	.content {
+		padding-bottom: 0;
+	}
+	.pagination {
+		margin-bottom: 7rem;
+	}
 }
 
 @media (min-width: 48em) {
@@ -91,12 +97,6 @@ html {
 	float: right;
 }
 
-.post-date,
-.related-posts li small,
-.runs li small {
-	color: #ccc;
-}
-
 .runs {
 	font-size: 1rem;
 }
@@ -146,17 +146,19 @@ a.pagination-item:focus {
 	color: #303030;
 }
 
-.post-none {
-	color: #ccc;
-}
-
 .post-no a:hover,
 .post-no a:focus {
 	text-decoration: none;
 	color: #268bd2;
 }
 
-.pagination .gist_post {
-	margin-left: 1rem;
-	margin-right: 1rem;
+.post-date,
+.related-posts li small,
+.runs li small, .post-none, .about .gist_post {
+	color: #ccc;
+}
+
+.about {
+	text-align: center;
+	margin: 4rem 1rem 0;
 }
