@@ -1,6 +1,9 @@
 <head>
 	{% if page.title == "Home" %}
-	<meta http-equiv="refresh" content="0;url={{ site[site.conf.default_collection].last.url }}" />
+	<meta
+		http-equiv="refresh"
+		content="0;url={{ site[site.conf.default_collection].last.url }}"
+	/>
 	<title>
 		{{ site.title }} &middot; {{ site.tagline }}
 	</title>
@@ -44,5 +47,15 @@
 		title="RSS"
 		href="/atom.xml"
 	/>
+
+	<!-- Open post links in new tab -->
+	<script>
+		window.onload = function() {
+			var a = document.querySelectorAll('.gist_post a');
+			for (var i = 0; i < a.length; i++) {
+				a[i].setAttribute('target', '_blank');
+			}
+		};
+	</script>
 	{% endif %}
 </head>
