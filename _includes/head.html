@@ -1,9 +1,12 @@
 <head>
 	{% if page.title == "Home" %}
-	<meta
+	<script>
+		window.location.href = window.localStorage.getItem('recent-path') || "{{ site[site.conf.default_collection].last.url }}"
+	</script>
+	<!-- <meta
 		http-equiv="refresh"
 		content="0;url={{ site[site.conf.default_collection].last.url }}"
-	/>
+	/> -->
 	<title>
 		{{ site.title }} &middot; {{ site.tagline }}
 	</title>
@@ -54,6 +57,9 @@
 			var a = document.querySelectorAll('.gist_post a');
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
+			}
+			if (!["concepts", "languages", "statistics"].includes(window.location.pathname.replace(/\//gi, ""))) {
+				window.localStorage.setItem('recent-path', window.location.pathname);
 			}
 		};
 	</script>
