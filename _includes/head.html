@@ -60,11 +60,13 @@
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
 			}
-			if (
-				window.location.pathname ==
-				window.localStorage.getItem(RECENT_PATH) || RESTORE_SCROLL_ALL
-			) {
-				window.scroll(0, window.localStorage.getItem(PATH_SCROLL_Y).split('|')[1]);
+			if (window.localStorage.getItem(RECENT_PATH) && window.localStorage.getItem(PATH_SCROLL_Y)) {
+				if (
+					window.location.pathname ==
+					window.localStorage.getItem(RECENT_PATH) || RESTORE_SCROLL_ALL
+				) {
+					window.scroll(0, window.localStorage.getItem(PATH_SCROLL_Y).split('|')[1]);
+				}
 			}
 			if (
 				!"{{ site.runs | map: 'url' }}".includes(
