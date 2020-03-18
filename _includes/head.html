@@ -4,7 +4,7 @@
 		{{ site.title }} &middot; {{ site.tagline }}
 	</title>
 	<script>
-		window.location.href = window.localStorage.getItem('recent-path') || "{{ site[site.conf.default_collection].last.url }}"
+		window.location.href = window.localStorage.getItem('recent-path') || "{{ site[site.conf.default_collection].last.url }}";
 	</script>
 	{% else %}
 	<link href="http://gmpg.org/xfn/11" rel="profile" />
@@ -48,6 +48,7 @@
 	/>
 
 	<!-- Open post links in new tab -->
+	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script>
 		window.onload = function() {
 			var a = document.querySelectorAll('.gist_post a');
@@ -56,7 +57,25 @@
 			}
 			if (!["concepts", "languages", "statistics"].includes(window.location.pathname.replace(/\//gi, ""))) {
 				window.localStorage.setItem('recent-path', window.location.pathname);
+				window.onscroll = function() {
+					window.localStorage.setItem('scroll-y', window.scrollY)
+				}
 			}
+			if (window.location.pathname === window.localStorage.getItem('recent-path')) {
+				window.scroll(0 , window.localStorage.getItem('scroll-y'));
+			}
+			const followClassUrl = (className) => {
+				window.location.href = document.getElementsByClassName(className)[0].getAttribute('href')
+			}
+			hotkeys('left', () => {
+				followClassUrl('post-next')
+			})
+			hotkeys('right', () => {
+				followClassUrl('post-prev')
+			})
+			hotkeys('enter', () => {
+				followClassUrl('post-current')
+			})
 		};
 	</script>
 	{% endif %}
