@@ -55,14 +55,22 @@
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
 			}
+			if (window.location.pathname == window.localStorage.getItem('recent-path')) {
+				window.scroll(0 , window.localStorage.getItem('scroll-y'));
+			}
 			if (!["concepts", "languages", "statistics"].includes(window.location.pathname.replace(/\//gi, ""))) {
 				window.localStorage.setItem('recent-path', window.location.pathname);
+				let scrollTimer = setTimeout(() => {
+						window.localStorage.setItem('scroll-y', window.scrollY)
+					}, 300)
 				window.onscroll = function() {
-					window.localStorage.setItem('scroll-y', window.scrollY)
+					if (scrollTimer) {
+						clearTimeout(scrollTimer)
+					}
+					scrollTimer = setTimeout(() => {
+						window.localStorage.setItem('scroll-y', window.scrollY)
+					}, 300)
 				}
-			}
-			if (window.location.pathname === window.localStorage.getItem('recent-path')) {
-				window.scroll(0 , window.localStorage.getItem('scroll-y'));
 			}
 			const followClassUrl = (className) => {
 				window.location.href = document.getElementsByClassName(className)[0].getAttribute('href')
