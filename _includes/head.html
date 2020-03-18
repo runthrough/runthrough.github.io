@@ -81,7 +81,7 @@
 					return setTimeout(() => {
 						window.localStorage.setItem(
 							PATH_SCROLL_Y,
-							`${window.location.pathname}|${window.scrollY}`
+							`${window.location.pathname}|${window.scrollY > 0 ? window.scrollY - 1 : window.scrollY }`
 						);
 					}, 300);
 				};
