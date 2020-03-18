@@ -4,7 +4,9 @@
 		{{ site.title }} &middot; {{ site.tagline }}
 	</title>
 	<script>
-		window.location.href = window.localStorage.getItem('recent-path') || "{{ site[site.conf.default_collection].last.url }}";
+		window.location.href =
+			window.localStorage.getItem('recent-path') ||
+			'{{ site[site.conf.default_collection].last.url }}';
 	</script>
 	{% else %}
 	<link href="http://gmpg.org/xfn/11" rel="profile" />
@@ -51,39 +53,58 @@
 	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script>
 		window.onload = function() {
+			const RECENT_PATH = 'recent-path';
+			const PATH_SCROLL_Y = `${window.location.pathname}-scroll-y`;
+			const RESTORE_SCROLL_ALL = true;
 			var a = document.querySelectorAll('.gist_post a');
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
 			}
-			if (window.location.pathname == window.localStorage.getItem('recent-path')) {
-				window.scroll(0 , window.localStorage.getItem('scroll-y'));
+			if (
+				window.location.pathname ==
+				window.localStorage.getItem(RECENT_PATH) || RESTORE_SCROLL_ALL
+			) {
+				window.scroll(0, window.localStorage.getItem(PATH_SCROLL_Y).split('|')[1]);
 			}
-			if (!["concepts", "languages", "statistics"].includes(window.location.pathname.replace(/\//gi, ""))) {
-				window.localStorage.setItem('recent-path', window.location.pathname);
-				let scrollTimer = setTimeout(() => {
-						window.localStorage.setItem('scroll-y', window.scrollY)
-					}, 300)
+			if (
+				!"{{ site.runs | map: 'url' }}".includes(
+					window.location.pathname.replace(/\//gi, '')
+				)
+			) {
+				window.localStorage.setItem(
+					RECENT_PATH,
+					window.location.pathname
+				);
+				const getScrollTimer = () => {
+					return setTimeout(() => {
+						window.localStorage.setItem(
+							PATH_SCROLL_Y,
+							`${window.location.pathname}|${window.scrollY}`
+						);
+					}, 300);
+				};
+				let scrollTimer = getScrollTimer();
 				window.onscroll = function() {
 					if (scrollTimer) {
-						clearTimeout(scrollTimer)
+						clearTimeout(scrollTimer);
 					}
-					scrollTimer = setTimeout(() => {
-						window.localStorage.setItem('scroll-y', window.scrollY)
-					}, 300)
-				}
+					scrollTimer = getScrollTimer();
+				};
 			}
-			const followClassUrl = (className) => {
-				window.location.href = document.getElementsByClassName(className)[0].getAttribute('href')
-			}
+			const followClassUrl = className => {
+				window.location.href = document
+					.getElementsByClassName(className)[0]
+					.getAttribute('href');
+			};
 			hotkeys('left', () => {
-				followClassUrl('post-next')
-			})
+				followClassUrl('post-next');
+			});
 			hotkeys('right', () => {
-				followClassUrl('post-prev')
-			})
+				followClassUrl('post-prev');
+			});
 			hotkeys('enter', () => {
-				followClassUrl('post-current')
-			})
+				followClassUrl('post-current');
+			});
 		};
 	</script>
 	{% endif %}
