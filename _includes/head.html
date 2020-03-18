@@ -49,6 +49,21 @@
 		href="/atom.xml"
 	/>
 
+	{% if site.conf.use_highlight %}
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/{{ site.conf.highlight_style }}.min.css"
+	/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', event => {
+			document.querySelectorAll('pre').forEach(block => {
+				hljs.highlightBlock(block);
+			});
+		});
+	</script>
+	{%endif%}
+
 	<!-- Open post links in new tab -->
 	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script>
@@ -60,12 +75,19 @@
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
 			}
-			if (window.localStorage.getItem(RECENT_PATH) && window.localStorage.getItem(PATH_SCROLL_Y)) {
+			if (
+				window.localStorage.getItem(RECENT_PATH) &&
+				window.localStorage.getItem(PATH_SCROLL_Y)
+			) {
 				if (
 					window.location.pathname ==
-					window.localStorage.getItem(RECENT_PATH) || RESTORE_SCROLL_ALL
+						window.localStorage.getItem(RECENT_PATH) ||
+					RESTORE_SCROLL_ALL
 				) {
-					window.scroll(0, window.localStorage.getItem(PATH_SCROLL_Y).split('|')[1]);
+					window.scroll(
+						0,
+						window.localStorage.getItem(PATH_SCROLL_Y).split('|')[1]
+					);
 				}
 			}
 			if (
@@ -81,7 +103,11 @@
 					return setTimeout(() => {
 						window.localStorage.setItem(
 							PATH_SCROLL_Y,
-							`${window.location.pathname}|${window.scrollY > 0 ? window.scrollY - 1 : window.scrollY }`
+							`${window.location.pathname}|${
+								window.scrollY > 0
+									? window.scrollY - 1
+									: window.scrollY
+							}`
 						);
 					}, 300);
 				};
