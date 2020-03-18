@@ -68,44 +68,56 @@
 	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script>
 		window.onload = function() {
+			const currentPathName = window.location.pathname;
 			const RECENT_PATH = 'recent-path';
-			const PATH_SCROLL_Y = `${window.location.pathname}-scroll-y`;
+			const PATH_SCROLL_Y = `${currentPathName}-scroll-y`;
 			const RESTORE_SCROLL_ALL = true;
+			const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
+			const getLocalStorage = (key) => window.localStorage.getItem(key)
 			var a = document.querySelectorAll('.gist_post a');
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
 			}
 			if (
-				window.localStorage.getItem(RECENT_PATH) &&
-				window.localStorage.getItem(PATH_SCROLL_Y)
+				getLocalStorage(RECENT_PATH) &&
+				getLocalStorage(PATH_SCROLL_Y)
 			) {
 				if (
-					window.location.pathname ==
-						window.localStorage.getItem(RECENT_PATH) ||
+					currentPathName ==
+						getLocalStorage(RECENT_PATH) ||
 					RESTORE_SCROLL_ALL
 				) {
 					window.scroll(
 						0,
-						window.localStorage.getItem(PATH_SCROLL_Y).split('|')[1]
+						getLocalStorage(PATH_SCROLL_Y).split('|')[1]
 					);
 				}
 			}
 			if (
 				!"{{ site.runs | map: 'url' }}".includes(
-					window.location.pathname.replace(/\//gi, '')
+					currentPathName.replace(/\//gi, '')
 				)
 			) {
-				window.localStorage.setItem(
+				setLocalStorage(
 					RECENT_PATH,
-					window.location.pathname
+					currentPathName
 				);
 				const getScrollTimer = () => {
 					return setTimeout(() => {
-						window.localStorage.setItem(
+						let newScrollY = window.scrollY;
+						if (getLocalStorage(PATH_SCROLL_Y)) {
+							newScrollY =
+								newScrollY > 0 &&
+								newScrollY -
+									getLocalStorage(PATH_SCROLL_Y)
+										.split('|')[1] ==
+									1
+									? newScrollY - 1
+									: newScrollY;
+						}
+						setLocalStorage(
 							PATH_SCROLL_Y,
-							`${window.location.pathname}|${
-								window.scrollY
-							}`
+							`${currentPathName}|${newScrollY}`
 						);
 					}, 300);
 				};
