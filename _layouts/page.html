@@ -2,21 +2,26 @@
 layout: default
 ---
 
-{% assign col_name = page.url | remove_first: "/" %}
-{% assign cols = "concepts, languages, statistics"| split: ", " %}
-
-{% if col_name == cols[0] %}
-	{% assign prev_col_url = cols[2] | prepend: "/" %}
-	{% assign next_col_url = cols[1] | prepend: "/" %}
-{% elsif col_name == cols[1] %}
-	{% assign prev_col_url = cols[0] | prepend: "/" %}
-	{% assign next_col_url = cols[2] | prepend: "/" %}
-{% elsif col_name == cols[2] %}
-	{% assign prev_col_url = cols[1] | prepend: "/" %}
-	{% assign next_col_url = cols[0] | prepend: "/" %}
-{% endif %}
-
+{% assign col_name = page.url | remove_first: '/' %}
+{% assign cols = site.runs | map: 'url' %}
 {% assign col = site.collections | where: "label", col_name | first %}
+{% for i in (1..site.runs.size) %}
+{% assign i_1 = i | minus: 1 %}
+{% if page.url == cols[i_1] %}
+	{% if i == 1 %}
+		{% assign prev_col_i = site.runs.size | minus: 1 %}
+		{% assign next_col_i = i_1 | plus: 1 %}
+	{% elsif i == site.runs.size %}
+		{% assign prev_col_i = i_1 | minus: 1 %}
+		{% assign next_col_i = 0 %}
+	{% else %}
+		{% assign prev_col_i = i_1 | minus: 1 %}
+		{% assign next_col_i = i_1 | plus: 1 %}
+	{% endif %}
+	{% assign prev_col_url = cols[prev_col_i] %}
+	{% assign next_col_url = cols[next_col_i] %}
+{% endif %}
+{% endfor %}
 
 <div class="page">
 	<h1 class="page-title">

@@ -16,4 +16,16 @@
 		{% assign stat_page_no = stat_page_no | prepend: '0' %}
 	{% endif %}
 	<a class="post-current" href="{{ col_list }}">{{ stat_page_no }}</a>
+{% elsif col.label == "practice" %}
+	<!-- {% increment problem_page_no %} -->
+	{% if problem_page_no < 10 %}
+		{% assign problem_page_no = problem_page_no | prepend: '0' %}
+	{% endif %}
+	<a class="post-current" href="{{ col_list }}">{{ problem_page_no }}</a>
+{% elsif col.label == "de" %}
+	<!-- {% increment de_page_no %} -->
+	{% if de_page_no < 10 %}
+		{% assign de_page_no = de_page_no | prepend: '0' %}
+	{% endif %}
+	<a class="post-current" href="{{ col_list }}">{{ de_page_no }}</a>
 {% endif %}

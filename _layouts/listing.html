@@ -3,20 +3,12 @@ layout: page
 ---
 
 {% assign current_run = page.url | remove_first: "/" %}
+{% assign through_no = 0 %}
 
 <div class="runs">
 	<table>
 		{% for through in site[current_run] reversed %}
-		{% if page.url == "/concepts" %}
-			<!-- {% increment concept_no %} -->
-			{% assign through_no = concept_no %}
-		{% elsif page.url == "/languages" %}
-			<!-- {% increment language_no %} -->
-			{% assign through_no = language_no %}
-		{% elsif page.url == "/statistics" %}
-			<!-- {% increment stat_no %} -->
-			{% assign through_no = stat_no %}
-		{% endif %}
+		{% assign through_no = through_no | plus: 1 %}
 		<tr>
 			{% assign table_index = site[current_run].size | minus: through_no | plus: 1 %}
 			{% if table_index < 10 %}
