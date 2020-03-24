@@ -72,9 +72,13 @@
 			const RECENT_PATH = 'recent-path';
 			const PATH_SCROLL_Y = `${currentPathName}-scroll-y`;
 			const RESTORE_SCROLL_ALL = true;
-			const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
-			const getLocalStorage = (key) => window.localStorage.getItem(key)
+			const setLocalStorage = (key, value) =>
+				window.localStorage.setItem(key, value);
+			const getLocalStorage = key => window.localStorage.getItem(key);
 			var a = document.querySelectorAll('.gist_post a');
+			var onListingPage = "{{ site.runs | map: 'url' }}".includes(
+				currentPathName.replace(/\//gi, '')
+			);
 			for (var i = 0; i < a.length; i++) {
 				a[i].setAttribute('target', '_blank');
 			}
@@ -83,8 +87,7 @@
 				getLocalStorage(PATH_SCROLL_Y)
 			) {
 				if (
-					currentPathName ==
-						getLocalStorage(RECENT_PATH) ||
+					currentPathName == getLocalStorage(RECENT_PATH) ||
 					RESTORE_SCROLL_ALL
 				) {
 					window.scroll(
@@ -93,15 +96,8 @@
 					);
 				}
 			}
-			if (
-				!"{{ site.runs | map: 'url' }}".includes(
-					currentPathName.replace(/\//gi, '')
-				)
-			) {
-				setLocalStorage(
-					RECENT_PATH,
-					currentPathName
-				);
+			if (!onListingPage) {
+				setLocalStorage(RECENT_PATH, currentPathName);
 				const getScrollTimer = () => {
 					return setTimeout(() => {
 						let newScrollY = window.scrollY;
@@ -109,8 +105,9 @@
 							newScrollY =
 								newScrollY > 0 &&
 								newScrollY -
-									getLocalStorage(PATH_SCROLL_Y)
-										.split('|')[1] ==
+									getLocalStorage(PATH_SCROLL_Y).split(
+										'|'
+									)[1] ==
 									1
 									? newScrollY - 1
 									: newScrollY;
@@ -142,6 +139,11 @@
 			});
 			hotkeys('enter', () => {
 				followClassUrl('post-current');
+			});
+			hotkeys('backspace', () => {
+				if (onListingPage) {
+					window.location.href = getLocalStorage(RECENT_PATH);
+				}
 			});
 		};
 	</script>
