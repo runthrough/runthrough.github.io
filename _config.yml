@@ -24,6 +24,9 @@ collections:
     de:
         output: true
         permalink: /:title
+    devops:
+        output: true
+        permalink: /:title
     runs:
         output: true
         permalink: /:title
@@ -51,6 +54,7 @@ github:
         statistics: 5caa6172beb8828ef496f478dbaef0c8
         practice: a4a996b58c08535eeca8746872e878d3
         de: cb7128606f8f321b139c704166b03821
+        devops: abdb481438b958217e67a596a3332881
         runs: 1a69cff1c4ebce245820706be0a695c2
 
 exclude:

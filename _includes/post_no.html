@@ -28,4 +28,10 @@
 		{% assign de_page_no = de_page_no | prepend: '0' %}
 	{% endif %}
 	<a class="post-current" href="{{ col_list }}">{{ de_page_no }}</a>
+{% elsif col.label == "devops" %}
+	<!-- {% increment devops_page_no %} -->
+	{% if devops_page_no < 10 %}
+		{% assign devops_page_no = devops_page_no | prepend: '0' %}
+	{% endif %}
+	<a class="post-current" href="{{ col_list }}">{{ devops_page_no }}</a>
 {% endif %}
