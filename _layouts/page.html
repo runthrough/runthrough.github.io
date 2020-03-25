@@ -32,7 +32,11 @@ layout: default
 			{% else %}
 				<span class="post-none">&#9001;</span>
 			{% endif %}
-			<a class="post-current" href="{{ col.docs.last.url }}">#</a>
+			<!-- {% increment col_no %} -->
+			{% if col_no < 10 %}
+				{% assign col_no = col_no | prepend: '0' %}
+			{% endif %}
+			<a class="post-current" href="{{ col.docs.last.url }}">{{col_no}}</a>
 			{% if true %}
 				<a class="post-prev" href="{{ next_col_url }}">&#9002;</a>
 			{% else %}
