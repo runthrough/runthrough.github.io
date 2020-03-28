@@ -55,8 +55,8 @@
 .gist_post .gist .markdown-body .highlight pre,
 .gist_post .gist .markdown-body pre {
 	font-size: 0.8rem !important;
-	line-height: 1.65 !important;
-	padding: 16px 20px !important;
+	line-height: 2 !important;
+	padding: 10px 20px !important;
 	white-space: pre-wrap !important;
 }
 
