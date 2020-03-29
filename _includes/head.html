@@ -76,7 +76,7 @@
 			const setLocalStorage = (key, value) =>
 				window.localStorage.setItem(key, value);
 			const getLocalStorage = key => window.localStorage.getItem(key);
-			let isFullScreen =
+			let wasFullScreen =
 				'true' == (getLocalStorage(FULL_SCREEN) || 'false');
 			var a = document.querySelectorAll('.gist_post a');
 			var onListingPage = "{{ site.runs | map: 'url' }}".includes(
@@ -134,6 +134,27 @@
 					.getElementsByClassName(className)[0]
 					.getAttribute('href');
 			};
+			const enterFullScreen = () => {
+				if (!document.fullscreenElement) {
+					document.documentElement
+						.requestFullscreen({
+							navigationUI: 'hide'
+						})
+						.then(logFullScreen)
+						.catch(error => {
+							console.log('Error in going full screen', error);
+						});
+				}
+			};
+			const logFullScreen = document.onfullscreenchange = () => {
+				setLocalStorage(
+					FULL_SCREEN,
+					document.fullscreenElement ? true : false
+				);
+			};
+			if (wasFullScreen) {
+				enterFullScreen();
+			}
 			hotkeys('left', () => {
 				followClassUrl('post-next');
 			});
@@ -148,36 +169,8 @@
 					window.location.href = getLocalStorage(RECENT_PATH);
 				}
 			});
-			const toggleFullScreen = () => {
-				if (!document.fullscreenElement) {
-					document.documentElement
-						.requestFullscreen({
-							navigationUI: 'hide'
-						})
-						.then(logFullScreen)
-						.catch(error => {
-							console.log('Error in going full screen', error);
-						});
-				} else {
-					document
-						.exitFullscreen()
-						.then(logFullScreen)
-						.catch(error => {
-							console.log('Error in exiting full screen', error);
-						});
-				}
-			};
-			const logFullScreen = () => {
-				setLocalStorage(
-					FULL_SCREEN,
-					document.fullscreenElement ? true : false
-				);
-			};
-			if (isFullScreen) {
-				toggleFullScreen();
-			}
-			hotkeys('alt + f', () => {
-				toggleFullScreen();
+			hotkeys('alt + enter', () => {
+				enterFullScreen();
 			});
 		};
 	</script>
