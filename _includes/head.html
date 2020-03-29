@@ -145,6 +145,17 @@
 					window.location.href = getLocalStorage(RECENT_PATH);
 				}
 			});
+			hotkeys('alt + f', () => {
+				if (!document.fullscreenElement) {
+					document.documentElement.requestFullscreen({
+						navigationUI: 'hide'
+					}).catch(error => {
+						console.log('error ')
+					});
+				} else {
+					document.exitFullscreen()
+				}
+			});
 		};
 	</script>
 	{% endif %}
