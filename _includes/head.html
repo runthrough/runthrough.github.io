@@ -71,10 +71,13 @@
 			const currentPathName = window.location.pathname;
 			const RECENT_PATH = 'recent-path';
 			const PATH_SCROLL_Y = `${currentPathName}-scroll-y`;
+			const FULL_SCREEN = 'full-screen';
 			const RESTORE_SCROLL_ALL = true;
 			const setLocalStorage = (key, value) =>
 				window.localStorage.setItem(key, value);
 			const getLocalStorage = key => window.localStorage.getItem(key);
+			let isFullScreen =
+				'true' == (getLocalStorage(FULL_SCREEN) || 'false');
 			var a = document.querySelectorAll('.gist_post a');
 			var onListingPage = "{{ site.runs | map: 'url' }}".includes(
 				currentPathName.replace(/\//gi, '')
@@ -145,16 +148,36 @@
 					window.location.href = getLocalStorage(RECENT_PATH);
 				}
 			});
-			hotkeys('alt + f', () => {
+			const toggleFullScreen = () => {
 				if (!document.fullscreenElement) {
-					document.documentElement.requestFullscreen({
-						navigationUI: 'hide'
-					}).catch(error => {
-						console.log('error ')
-					});
+					document.documentElement
+						.requestFullscreen({
+							navigationUI: 'hide'
+						})
+						.then(logFullScreen)
+						.catch(error => {
+							console.log('Error in going full screen', error);
+						});
 				} else {
-					document.exitFullscreen()
+					document
+						.exitFullscreen()
+						.then(logFullScreen)
+						.catch(error => {
+							console.log('Error in exiting full screen', error);
+						});
 				}
+			};
+			const logFullScreen = () => {
+				setLocalStorage(
+					FULL_SCREEN,
+					document.fullscreenElement ? true : false
+				);
+			};
+			if (isFullScreen) {
+				toggleFullScreen();
+			}
+			hotkeys('alt + f', () => {
+				toggleFullScreen();
 			});
 		};
 	</script>
