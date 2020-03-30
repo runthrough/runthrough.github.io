@@ -4,13 +4,19 @@
 		format('woff2');
 }
 
-@media (min-width: 38em) {
-	html {
-		font-size: 16px;
-	}
+@media (min-width: 30em) {
 	.container {
 		padding-left: 2rem;
 		padding-right: 2rem;
+	}
+	:fullscreen .content {
+		padding-top: 8.37rem;
+	}
+}
+
+@media (min-width: 38em) {
+	html {
+		font-size: 16px;
 	}
 	.content {
 		padding-bottom: 0;
