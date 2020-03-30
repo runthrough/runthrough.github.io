@@ -134,22 +134,38 @@
 					.getElementsByClassName(className)[0]
 					.getAttribute('href');
 			};
+			const evt = [
+				{
+					requestMethod: 'webkitRequestFullscreen',
+					onChangeMethod: 'onwebkitfullscreenchange',
+					element: 'webkitFullscreenElement'
+				},
+				{
+					requestMethod: 'mozRequestFullScreen',
+					onChangeMethod: 'onmozfullscreenchange',
+					element: 'mozRequestFullScreenElement'
+				},
+				{
+					requestMethod: 'msRequestFullscreen',
+					onChangeMethod: 'onmsfullscreenchange',
+					element: 'msRequestFullscreenElement'
+				}
+			].filter(evt => {
+				return document.documentElement[evt.requestMethod];
+			})[0] || {
+				requestMethod: 'requestFullscreen',
+				onChangeMethod: 'onfullscreenchange',
+				element: 'fullscreenElement'
+			};
 			const enterFullScreen = () => {
-				if (!document.fullscreenElement) {
-					document.documentElement
-						.requestFullscreen({
-							navigationUI: 'hide'
-						})
-						.then(logFullScreen)
-						.catch(error => {
-							console.log('Error in going full screen', error);
-						});
+				if (!document[evt.element]) {
+					document.documentElement[evt.requestMethod]();
 				}
 			};
-			const logFullScreen = document.onfullscreenchange = () => {
+			document[evt.onChangeMethod] = () => {
 				setLocalStorage(
 					FULL_SCREEN,
-					document.fullscreenElement ? true : false
+					document[evt.element] ? true : false
 				);
 			};
 			if (wasFullScreen) {

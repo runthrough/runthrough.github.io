@@ -9,6 +9,15 @@
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
+	:-webkit-full-screen .content {
+		padding-top: 8.37rem;
+	}
+	:-moz-full-screen .content {
+		padding-top: 8.37rem;
+	}
+	:-ms-fullscreen .content {
+		padding-top: 8.37rem;
+	}
 	:fullscreen .content {
 		padding-top: 8.37rem;
 	}
@@ -160,7 +169,9 @@ a.pagination-item:focus {
 
 .post-date,
 .related-posts li small,
-.runs li small, .post-none, .about .gist_post {
+.runs li small,
+.post-none,
+.about .gist_post {
 	color: #ccc;
 }
 
