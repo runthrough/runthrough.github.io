@@ -8,9 +8,12 @@ const gistAdjust = () => {
 			var postArticleTag = gistClassElement.querySelector('article');
 			if (postArticleTag)
 				postArticleTag.childNodes.forEach((node) => {
-					var anchorLink = node.querySelector('a.anchor');
-					if (anchorLink)
-						anchorLink.parentNode.removeChild(anchorLink);
+					var anchorLinks = node.querySelectorAll('a.anchor');
+					console.log(anchorLinks);
+					if (anchorLinks.length)
+						anchorLinks.forEach((anchorLink) => {
+							anchorLink.parentNode.removeChild(anchorLink);
+						});
 					gistClassElement.parentNode.appendChild(node);
 				});
 			var postScriptTag = gistClassElement.parentNode.querySelector(
