@@ -9,11 +9,13 @@ const gistAdjust = () => {
 			if (postArticleTag)
 				postArticleTag.childNodes.forEach((node) => {
 					var anchorLinks = node.querySelectorAll('a.anchor');
-					console.log(anchorLinks);
 					if (anchorLinks.length)
 						anchorLinks.forEach((anchorLink) => {
 							anchorLink.parentNode.removeChild(anchorLink);
 						});
+					node.querySelectorAll('a').forEach((link) => {
+						link.setAttribute('target', '_blank');
+					})
 					gistClassElement.parentNode.appendChild(node);
 				});
 			var postScriptTag = gistClassElement.parentNode.querySelector(
@@ -58,13 +60,9 @@ const customMethod = (listingUrls) => {
 	const RECENT_PATH = 'recent-path';
 	const PATH_SCROLL_Y = `${currentPathName}-scroll-y`;
 	const RESTORE_SCROLL_ALL = true;
-	var a = document.querySelectorAll('.gist_post a');
 	var onListingPage = listingUrls.includes(
 		currentPathName.replace(/\//gi, '')
 	);
-	for (var i = 0; i < a.length; i++) {
-		a[i].setAttribute('target', '_blank');
-	}
 	if (getLocalStorage(RECENT_PATH) && getLocalStorage(PATH_SCROLL_Y)) {
 		if (
 			currentPathName == getLocalStorage(RECENT_PATH) ||
