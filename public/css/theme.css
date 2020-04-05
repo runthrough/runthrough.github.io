@@ -1,0 +1,73 @@
+body.light-theme {
+	--bg-color: #ffffff;
+	--text-color: #515151;
+	--heading-color: #303030;
+	--light-text-color: #cccccc;
+	--link-color: #268bd2;
+	--code-bg-color: #f6f8fa;
+}
+
+body.dark-theme {
+	--bg-color: #2d2d2d;
+	--text-color: #e7e8eb;
+	--heading-color: #cfd2d6;
+	--light-text-color: #6a737d;
+	--link-color: #f48024;
+	--code-bg-color: #3d3d3d;
+}
+
+body {
+	color: var(--text-color);
+	background-color: var(--bg-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+	color: var(--heading-color);
+}
+
+a {
+	color: var(--link-color);
+}
+
+a.pagination-item:hover {
+	background-color: var(--text-color);
+}
+
+.page-title,
+.post-title,
+.post-title a {
+	color: var(--heading-color);
+}
+
+.post-no a {
+	color: var(--heading-color);
+}
+
+.post-no a:hover,
+.post-no a:focus {
+	color: var(--link-color);
+}
+
+.post-date,
+.related-posts li small,
+.runs li small,
+.post-none,
+.about .gist_post {
+	color: var(--light-text-color);
+}
+
+.gist_post .markdown-body code,
+.gist_post .markdown-body tt {
+	background-color: var(--code-bg-color);
+}
+
+.gist_post .markdown-body .highlight pre,
+.gist_post .markdown-body pre {
+	background-color: var(--code-bg-color);
+}

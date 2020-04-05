@@ -157,22 +157,9 @@ a.pagination-item:focus {
 	float: right;
 }
 
-.post-no a {
-	color: #303030;
-}
-
 .post-no a:hover,
 .post-no a:focus {
 	text-decoration: none;
-	color: #268bd2;
-}
-
-.post-date,
-.related-posts li small,
-.runs li small,
-.post-none,
-.about .gist_post {
-	color: #ccc;
 }
 
 .about {
