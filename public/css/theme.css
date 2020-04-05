@@ -5,6 +5,7 @@ body.light-theme {
 	--light-text-color: #cccccc;
 	--link-color: #268bd2;
 	--code-bg-color: #f6f8fa;
+	--button-highlight-color: #eeeeee;
 }
 
 body.dark-theme {
@@ -14,6 +15,7 @@ body.dark-theme {
 	--light-text-color: #6a737d;
 	--link-color: #f48024;
 	--code-bg-color: #3d3d3d;
+	--button-highlight-color: #eeeeee;
 }
 
 body {
@@ -36,7 +38,7 @@ a {
 }
 
 a.pagination-item:hover {
-	background-color: var(--text-color);
+	background-color: var(--button-highlight-color);
 }
 
 .page-title,

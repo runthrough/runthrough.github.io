@@ -43,7 +43,9 @@ conf:
     circular_pagination: true
     default_collection: 'concepts'
     use_highlight: true
-    highlight_style: 'agate' # railscasts, agate, github-gist
+    highlight_style: # railscasts, agate, github-gist
+        light: 'github-gist'
+        dark: 'agate'
 
 github:
     repo: https://github.com/runthrough/runthrough.github.io
