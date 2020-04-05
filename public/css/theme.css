@@ -60,16 +60,14 @@ a.pagination-item:hover {
 .related-posts li small,
 .runs li small,
 .post-none,
-.about .gist_post {
+.about {
 	color: var(--light-text-color);
 }
 
-.gist_post .markdown-body code,
-.gist_post .markdown-body tt {
+code, tt {
 	background-color: var(--code-bg-color);
 }
 
-.gist_post .markdown-body .highlight pre,
-.gist_post .markdown-body pre {
+.highlight pre, pre {
 	background-color: var(--code-bg-color);
 }

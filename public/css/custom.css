@@ -93,7 +93,7 @@
 }
 
 html {
-	line-height: 1.65;
+	line-height: 1.9;
 }
 
 .related-posts {
@@ -118,6 +118,7 @@ html {
 
 .runs table {
 	border: none;
+	line-height: 1.65;
 }
 
 .runs td,

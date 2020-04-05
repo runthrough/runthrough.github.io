@@ -3,26 +3,46 @@ const getLocalStorage = (key) => window.localStorage.getItem(key);
 
 const gistAdjust = () => {
 	document.addEventListener('DOMContentLoaded', (event) => {
-		var postScriptTag = document.querySelector('.post > script');
-		if (postScriptTag) postScriptTag.parentNode.removeChild(postScriptTag);
-		var postLinkTag = document.querySelector('.post > link');
-		if (postLinkTag) postLinkTag.parentNode.removeChild(postLinkTag);
 		var gistClassElement = document.querySelector('.gist');
-		gistClassElement.removeAttribute('id');
-		gistClassElement.classList.add('gist_post');
-		gistClassElement.classList.remove('gist');
+		if (gistClassElement) {
+			var postArticleTag = gistClassElement.querySelector('article');
+			if (postArticleTag)
+				postArticleTag.childNodes.forEach((node) => {
+					var anchorLink = node.querySelector('a.anchor');
+					if (anchorLink)
+						anchorLink.parentNode.removeChild(anchorLink);
+					gistClassElement.parentNode.appendChild(node);
+				});
+			var postScriptTag = gistClassElement.parentNode.querySelector(
+				'script'
+			);
+			if (postScriptTag)
+				postScriptTag.parentNode.removeChild(postScriptTag);
+			var postLinkTag = gistClassElement.parentNode.querySelector('link');
+			if (postLinkTag) postLinkTag.parentNode.removeChild(postLinkTag);
+			gistClassElement.parentNode.removeChild(gistClassElement);
+		}
 	});
 };
 
+const liquidToObject = (liq) => {
+	var obj = {};
+	liq.replace(/\{/gi, '')
+		.replace(/}/gi, '')
+		.replace(/\"/gi, '')
+		.split(', ')
+		.forEach((l) => {
+			obj[l.split('=>')[0]] = l.split('=>')[1];
+		});
+	return obj;
+};
+
 const loadHighlightTheme = (themes_data) => {
-	var themes = {}
-	themes_data.replace(/\{/gi, '').replace(/}/gi, '').replace(/\"/gi, '').split(', ').forEach(theme => {
-		themes[theme.split('=>')[0]] = theme.split('=>')[1]
-	})
+	var themes = liquidToObject(themes_data);
 	document.addEventListener('DOMContentLoaded', (event) => {
-		var themeCSS = document.createElement('link')
+		var themeCSS = document.createElement('link');
 		themeCSS.rel = 'stylesheet';
-		themeCSS.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/${themes['light']}.min.css`
+		themeCSS.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/${themes['light']}.min.css`;
 		document.getElementsByTagName('HEAD')[0].appendChild(themeCSS);
 		document.querySelectorAll('pre').forEach((block) => {
 			hljs.highlightBlock(block);

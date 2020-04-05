@@ -26,41 +26,25 @@
 } */
 
 @media (max-width: 48rem) {
-	.gist_post .markdown-body ol,
-	.gist_post .markdown-body ul {
+	ol, ul {
 		padding-left: 1rem;
 	}
 }
 
-.gist_post code,
-.gist_post pre {
+code, pre {
 	font-family: 'JetBrains Mono';
 	white-space: pre-wrap;
 }
 
-.gist_post .markdown-body code,
-.gist_post .markdown-body tt {
+code, tt {
 	font-size: 0.8rem;
 	background-color: #f6f8fa;
 	padding: 0;
 }
 
-.gist_post .markdown-body .highlight pre,
-.gist_post .markdown-body pre {
+.highlight pre, pre {
 	font-size: 0.8rem;
 	line-height: 2;
 	padding: 10px 20px;
 	white-space: pre-wrap;
-}
-
-.gist_post .markdown-body {
-	line-height: 1.9;
-}
-
-.gist_post .gist-meta {
-	display: none;
-}
-
-a.anchor {
-	display: none;
 }
