@@ -1,5 +1,18 @@
 const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
 const getLocalStorage = (key) => window.localStorage.getItem(key);
+var themeCSS = {};
+
+const liquidToObject = (liq) => {
+	var obj = {};
+	liq.replace(/\{/gi, '')
+		.replace(/}/gi, '')
+		.replace(/\"/gi, '')
+		.split(', ')
+		.forEach((l) => {
+			obj[l.split('=>')[0]] = l.split('=>')[1];
+		});
+	return obj;
+};
 
 const gistAdjust = () => {
 	document.addEventListener('DOMContentLoaded', (event) => {
@@ -15,7 +28,7 @@ const gistAdjust = () => {
 						});
 					node.querySelectorAll('a').forEach((link) => {
 						link.setAttribute('target', '_blank');
-					})
+					});
 					gistClassElement.parentNode.appendChild(node);
 				});
 			var postScriptTag = gistClassElement.parentNode.querySelector(
@@ -30,32 +43,30 @@ const gistAdjust = () => {
 	});
 };
 
-const liquidToObject = (liq) => {
-	var obj = {};
-	liq.replace(/\{/gi, '')
-		.replace(/}/gi, '')
-		.replace(/\"/gi, '')
-		.split(', ')
-		.forEach((l) => {
-			obj[l.split('=>')[0]] = l.split('=>')[1];
-		});
-	return obj;
-};
-
 const loadHighlightTheme = (themes_data) => {
-	var themes = liquidToObject(themes_data);
-	document.addEventListener('DOMContentLoaded', (event) => {
-		var themeCSS = document.createElement('link');
-		themeCSS.rel = 'stylesheet';
-		themeCSS.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/${themes['light']}.min.css`;
-		document.getElementsByTagName('HEAD')[0].appendChild(themeCSS);
-		document.querySelectorAll('pre').forEach((block) => {
-			hljs.highlightBlock(block);
-		});
+	var highlightThemes = liquidToObject(themes_data);
+	Object.keys(highlightThemes).forEach((key) => {
+		themeCSS[key] = document.createElement('link');
+		themeCSS[key].rel = 'stylesheet';
+		themeCSS[
+			key
+		].href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/${highlightThemes[key]}.min.css`;
+		themeCSS[key].disabled = true;
+		document.getElementsByTagName('head')[0].appendChild(themeCSS[key]);
+	});
+	themeCSS['light'].disabled = false;
+	document.querySelectorAll('pre').forEach((block) => {
+		hljs.highlightBlock(block);
 	});
 };
 
-const customMethod = (listingUrls) => {
+const toggleTheme = () => {
+	document.body.classList.toggle('dark-theme');
+	themeCSS['dark'].disabled = !document.body.classList.contains('dark-theme');
+	themeCSS['light'].disabled = document.body.classList.contains('dark-theme');
+};
+
+const restoreState = (listingUrls) => {
 	const currentPathName = window.location.pathname;
 	const RECENT_PATH = 'recent-path';
 	const PATH_SCROLL_Y = `${currentPathName}-scroll-y`;
@@ -157,7 +168,11 @@ const addKeyboardShortcuts = () => {
 			window.location.href = getLocalStorage(RECENT_PATH);
 		}
 	});
-	hotkeys('alt + enter', () => {
+	hotkeys('alt + enter', (event) => {
+		event.preventDefault();
 		enterFullScreen();
+	});
+	hotkeys('alt + l', (event) => {
+		toggleTheme();
 	});
 };

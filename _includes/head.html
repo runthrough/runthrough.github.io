@@ -55,7 +55,7 @@
 	<script type="text/javascript" src="/public/js/custom.js"></script>
 	<script>
 		window.onload = function () {
-			customMethod("{{ site.runs | map: 'url' }}");
+			restoreState("{{ site.runs | map: 'url' }}");
 			addKeyboardShortcuts();
 		};
 		gistAdjust();
@@ -65,7 +65,9 @@
 	{% if site.conf.use_highlight %}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
 	<script>
-		loadHighlightTheme('{{ site.conf.highlight_style }}');
+		document.addEventListener('DOMContentLoaded', (event) => {
+			loadHighlightTheme('{{ site.conf.highlight_style }}');
+		});
 	</script>
 	{%endif%} {% endif %}
 </head>
