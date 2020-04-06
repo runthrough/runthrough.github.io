@@ -64,6 +64,10 @@ a.pagination-item:hover {
 	color: var(--light-text-color);
 }
 
+code {
+	color: var(--text-color);
+}
+
 code, tt {
 	background-color: var(--code-bg-color);
 }
