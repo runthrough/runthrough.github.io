@@ -15,7 +15,6 @@ const liquidToObject = (liq) => {
 };
 
 const gistAdjust = () => {
-
 	var gistClassElement = document.querySelector('.gist');
 	if (gistClassElement) {
 		var postArticleTag = gistClassElement.querySelector('article');
@@ -26,16 +25,10 @@ const gistAdjust = () => {
 					anchorLinks.forEach((anchorLink) => {
 						anchorLink.parentNode.removeChild(anchorLink);
 					});
-				node.querySelectorAll('a').forEach((link) => {
-					link.setAttribute('target', '_blank');
-				});
 				gistClassElement.parentNode.appendChild(node);
 			});
-		var postScriptTag = gistClassElement.parentNode.querySelector(
-			'script'
-		);
-		if (postScriptTag)
-			postScriptTag.parentNode.removeChild(postScriptTag);
+		var postScriptTag = gistClassElement.parentNode.querySelector('script');
+		if (postScriptTag) postScriptTag.parentNode.removeChild(postScriptTag);
 		var postLinkTag = gistClassElement.parentNode.querySelector('link');
 		if (postLinkTag) postLinkTag.parentNode.removeChild(postLinkTag);
 		gistClassElement.parentNode.removeChild(gistClassElement);
@@ -61,17 +54,20 @@ const loadHighlightTheme = (themes_data) => {
 
 const loadTheme = (theme) => {
 	if (document.body.classList.contains('dark-theme')) {
-		if (theme === 'light') toggleTheme()
+		if (theme === 'light') toggleTheme();
 	} else {
-		if (theme === 'dark') toggleTheme()
+		if (theme === 'dark') toggleTheme();
 	}
-}
+};
 
 const toggleTheme = () => {
 	document.body.classList.toggle('dark-theme');
 	themeCSS['dark'].disabled = !document.body.classList.contains('dark-theme');
 	themeCSS['light'].disabled = document.body.classList.contains('dark-theme');
-	setLocalStorage('theme', (document.body.classList.contains('dark-theme') ? 'dark' : 'light'));
+	setLocalStorage(
+		'theme',
+		document.body.classList.contains('dark-theme') ? 'dark' : 'light'
+	);
 };
 
 const restoreState = (listingUrls) => {
@@ -185,3 +181,32 @@ const addKeyboardShortcuts = () => {
 		toggleTheme();
 	});
 };
+
+const attachOnlicks = () => {
+	document.querySelectorAll('a').forEach((link) => {
+		if (link.getAttribute('href').startsWith('/')) {
+			link.onclick = function () {
+				// fetchHTML();
+				return true;
+			};
+		} else {
+			link.setAttribute('target', '_blank');
+		}
+	});
+};
+
+const fetchHTML = () =>
+	fetch(link.getAttribute('href'))
+		.then((data) => data.text())
+		.then((html) => {
+			var contentDoc = new DOMParser()
+				.parseFromString(html, 'text/html')
+				.querySelector('.content');
+			var prevContent = document.querySelector('.content');
+			if (prevContent) {
+				prevContent.parentNode.appendChild(contentDoc);
+				prevContent.parentNode.removeChild(prevContent);
+			}
+			attachOnlicks();
+			window.history.pushState('', '', link.getAttribute('href'));
+		});
