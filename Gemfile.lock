@@ -212,6 +212,7 @@ GEM
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (3.1.1)
+    rake (12.3.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -231,6 +232,9 @@ GEM
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thread_safe (0.3.6)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     typhoeus (1.3.1)
       ethon (>= 0.9.0)
     tzinfo (1.2.6)
@@ -243,6 +247,8 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  rake
+  turbolinks
 
 BUNDLED WITH
    2.1.4

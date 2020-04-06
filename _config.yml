@@ -60,9 +60,12 @@ github:
         devops: abdb481438b958217e67a596a3332881
         runs: 1a69cff1c4ebce245820706be0a695c2
 
+plugins:
+
 exclude:
     - Gemfile
     - Gemfile.lock
     - LICENSE.md
     - README.md
     - Rakefile
+    - vendor

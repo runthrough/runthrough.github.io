@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
-ruby RUBY_VERSION
+gem "rake"
+gem "turbolinks"
+gem "github-pages", group: :jekyll_plugins
 
-gem "rake", "~> 12"
-gem "jekyll"
-gem 'github-pages', group: :jekyll_plugins
+group :jekyll_plugins do
+end
