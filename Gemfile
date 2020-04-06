@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem "rake"
+gem "rake", "~> 12"
 gem "turbolinks"
 gem "github-pages", group: :jekyll_plugins
 
