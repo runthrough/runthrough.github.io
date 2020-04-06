@@ -64,3 +64,4 @@ exclude:
     - Gemfile.lock
     - LICENSE.md
     - README.md
+    - Rakefile
