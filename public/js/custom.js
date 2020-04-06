@@ -121,9 +121,10 @@ const addKeyboardShortcuts = () => {
 	const FULL_SCREEN = 'full-screen';
 	let wasFullScreen = 'true' == (getLocalStorage(FULL_SCREEN) || 'false');
 	const followClassUrl = (className) => {
-		window.location.href = document
-			.getElementsByClassName(className)[0]
-			.getAttribute('href');
+		// window.location.href = document
+		// 	.getElementsByClassName(className)[0]
+		// 	.getAttribute('href');
+		document.getElementsByClassName(className)[0].onclick();
 	};
 	const evt = [
 		{
@@ -186,27 +187,44 @@ const attachOnlicks = () => {
 	document.querySelectorAll('a').forEach((link) => {
 		if (link.getAttribute('href').startsWith('/')) {
 			link.onclick = function () {
-				// fetchHTML();
-				return true;
+				fetch(link.getAttribute('href'))
+					.then((data) => data.text())
+					.then((html) => {
+						var contentDoc = new DOMParser()
+							.parseFromString(html, 'text/html')
+							.querySelector('.content');
+						var about = document.querySelector('.about');
+						if (about) {
+							about.parentNode.removeChild(about);
+						}
+						var post = document.querySelector('.post');
+						if (post) {
+							post.parentNode.removeChild(post);
+						}
+						var pagination = document.querySelector('.pagination');
+						if (pagination) {
+							pagination.parentNode.removeChild(pagination);
+						}
+						postscribe(
+							document.querySelector('.content'),
+							contentDoc.innerHTML,
+							{
+								done: () => {
+									gistAdjust();
+									attachOnlicks();
+								},
+							}
+						);
+						window.history.pushState(
+							'',
+							'',
+							link.getAttribute('href')
+						);
+					});
+				return false;
 			};
 		} else {
 			link.setAttribute('target', '_blank');
 		}
 	});
 };
-
-const fetchHTML = () =>
-	fetch(link.getAttribute('href'))
-		.then((data) => data.text())
-		.then((html) => {
-			var contentDoc = new DOMParser()
-				.parseFromString(html, 'text/html')
-				.querySelector('.content');
-			var prevContent = document.querySelector('.content');
-			if (prevContent) {
-				prevContent.parentNode.appendChild(contentDoc);
-				prevContent.parentNode.removeChild(prevContent);
-			}
-			attachOnlicks();
-			window.history.pushState('', '', link.getAttribute('href'));
-		});
