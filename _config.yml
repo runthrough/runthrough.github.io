@@ -42,7 +42,6 @@ conf:
     look: ''
     circular_pagination: true
     default_collection: 'concepts'
-    use_highlight: true
     highlight_style: # railscasts, agate, github-gist
         light: 'github-gist'
         dark: 'agate'

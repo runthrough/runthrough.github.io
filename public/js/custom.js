@@ -15,32 +15,31 @@ const liquidToObject = (liq) => {
 };
 
 const gistAdjust = () => {
-	document.addEventListener('DOMContentLoaded', (event) => {
-		var gistClassElement = document.querySelector('.gist');
-		if (gistClassElement) {
-			var postArticleTag = gistClassElement.querySelector('article');
-			if (postArticleTag)
-				postArticleTag.childNodes.forEach((node) => {
-					var anchorLinks = node.querySelectorAll('a.anchor');
-					if (anchorLinks.length)
-						anchorLinks.forEach((anchorLink) => {
-							anchorLink.parentNode.removeChild(anchorLink);
-						});
-					node.querySelectorAll('a').forEach((link) => {
-						link.setAttribute('target', '_blank');
+
+	var gistClassElement = document.querySelector('.gist');
+	if (gistClassElement) {
+		var postArticleTag = gistClassElement.querySelector('article');
+		if (postArticleTag)
+			postArticleTag.childNodes.forEach((node) => {
+				var anchorLinks = node.querySelectorAll('a.anchor');
+				if (anchorLinks.length)
+					anchorLinks.forEach((anchorLink) => {
+						anchorLink.parentNode.removeChild(anchorLink);
 					});
-					gistClassElement.parentNode.appendChild(node);
+				node.querySelectorAll('a').forEach((link) => {
+					link.setAttribute('target', '_blank');
 				});
-			var postScriptTag = gistClassElement.parentNode.querySelector(
-				'script'
-			);
-			if (postScriptTag)
-				postScriptTag.parentNode.removeChild(postScriptTag);
-			var postLinkTag = gistClassElement.parentNode.querySelector('link');
-			if (postLinkTag) postLinkTag.parentNode.removeChild(postLinkTag);
-			gistClassElement.parentNode.removeChild(gistClassElement);
-		}
-	});
+				gistClassElement.parentNode.appendChild(node);
+			});
+		var postScriptTag = gistClassElement.parentNode.querySelector(
+			'script'
+		);
+		if (postScriptTag)
+			postScriptTag.parentNode.removeChild(postScriptTag);
+		var postLinkTag = gistClassElement.parentNode.querySelector('link');
+		if (postLinkTag) postLinkTag.parentNode.removeChild(postLinkTag);
+		gistClassElement.parentNode.removeChild(gistClassElement);
+	}
 };
 
 const loadHighlightTheme = (themes_data) => {
@@ -60,10 +59,19 @@ const loadHighlightTheme = (themes_data) => {
 	});
 };
 
+const loadTheme = (theme) => {
+	if (document.body.classList.contains('dark-theme')) {
+		if (theme === 'light') toggleTheme()
+	} else {
+		if (theme === 'dark') toggleTheme()
+	}
+}
+
 const toggleTheme = () => {
 	document.body.classList.toggle('dark-theme');
 	themeCSS['dark'].disabled = !document.body.classList.contains('dark-theme');
 	themeCSS['light'].disabled = document.body.classList.contains('dark-theme');
+	setLocalStorage('theme', (document.body.classList.contains('dark-theme') ? 'dark' : 'light'));
 };
 
 const restoreState = (listingUrls) => {
@@ -110,6 +118,7 @@ const restoreState = (listingUrls) => {
 			scrollTimer = getScrollTimer();
 		};
 	}
+	loadTheme(getLocalStorage('theme') || 'light');
 };
 
 const addKeyboardShortcuts = () => {

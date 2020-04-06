@@ -51,6 +51,7 @@
 	/>
 
 	<!-- Open post links in new tab -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
 	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script type="text/javascript" src="/public/js/custom.js"></script>
 	<script>
@@ -58,16 +59,11 @@
 			restoreState("{{ site.runs | map: 'url' }}");
 			addKeyboardShortcuts();
 		};
-		gistAdjust();
-	</script>
-
-	<!-- Use highlight js -->
-	{% if site.conf.use_highlight %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
-	<script>
 		document.addEventListener('DOMContentLoaded', (event) => {
+			gistAdjust();
 			loadHighlightTheme('{{ site.conf.highlight_style }}');
 		});
 	</script>
-	{%endif%} {% endif %}
+
+	{% endif %}
 </head>
