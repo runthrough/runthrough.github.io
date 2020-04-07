@@ -181,7 +181,7 @@ const defineKeyboardShortcuts = () => {
 		followClassUrl('post-current');
 	});
 	hotkeys('backspace', () => {
-		if (onListingPage()) loadURL(getLocalStorage(RECENT_PATH));
+		window.history.back()
 	});
 	hotkeys('alt + enter', (event) => {
 		event.preventDefault();
@@ -204,9 +204,12 @@ const attachOnlicks = () => {
 			link.setAttribute('target', '_blank');
 		}
 	});
+	window.onpopstate = (event) => {
+		loadURL(event.state.pathname, true);
+	};
 };
 
-const loadURL = (url) => {
+const loadURL = (url, fromPop = false) => {
 	fetch(url)
 		.then((data) => data.text())
 		.then((html) => {
@@ -225,7 +228,13 @@ const loadURL = (url) => {
 						gistAdjust();
 						highlightBlock();
 						attachOnlicks();
-						window.history.pushState('', '', url);
+						if (!fromPop) window.history.pushState(
+							{
+								pathname: url,
+							},
+							'',
+							url
+						);
 						restoreState();
 						changingScript = false;
 					},
