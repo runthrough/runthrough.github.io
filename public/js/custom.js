@@ -1,6 +1,5 @@
 const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
 const getLocalStorage = (key) => window.localStorage.getItem(key);
-var themeCSS = {};
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -35,6 +34,7 @@ const gistAdjust = () => {
 	}
 };
 
+let themeCSS = {};
 const loadHighlightTheme = (themes_data) => {
 	var highlightThemes = liquidToObject(themes_data);
 	Object.keys(highlightThemes).forEach((key) => {
@@ -156,10 +156,14 @@ const addKeyboardShortcuts = () => {
 	const enterFullScreen = () => {
 		if (!document[evt.element]) {
 			document.documentElement[evt.requestMethod]();
+			showCursor();
 		}
 	};
 	document[evt.onChangeMethod] = () => {
 		setLocalStorage(FULL_SCREEN, document[evt.element] ? true : false);
+		if (!document[evt.element]) {
+			showCursor(false);
+		}
 	};
 	if (wasFullScreen) {
 		enterFullScreen();
@@ -223,4 +227,35 @@ const attachOnlicks = () => {
 			link.setAttribute('target', '_blank');
 		}
 	});
+};
+
+let cursorTimeout;
+const hideCursor = () => {
+	return setTimeout(() => {
+		if (!document.body.classList.contains('no-cursor')) {
+			document.body.classList.add('no-cursor');
+			detectCursorMovement();
+		}
+	}, 3000);
+};
+
+const detectCursorMovement = () => {
+	if (cursorTimeout) document.body.onmousemove = () => {
+		clearTimeout(cursorTimeout);
+		showCursor();
+	};
+};
+
+const showCursor = (chain = true) => {
+	if (document.body.classList.contains('no-cursor')) {
+		document.body.classList.remove('no-cursor');
+	}
+	if (chain) {
+		cursorTimeout = hideCursor();
+	} else {
+		if (cursorTimeout) {
+			clearTimeout(cursorTimeout);
+			document.body.onmousemove = null
+		}
+	}
 };

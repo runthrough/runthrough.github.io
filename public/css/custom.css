@@ -167,3 +167,11 @@ a.pagination-item:focus {
 	text-align: center;
 	margin: 4rem 1rem 0;
 }
+
+.no-cursor {
+	cursor: none;
+}
+
+.highlight {
+	margin-top: 1rem;
+}
