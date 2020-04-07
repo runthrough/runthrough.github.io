@@ -47,6 +47,10 @@ const loadHighlightTheme = (themes_data) => {
 		document.getElementsByTagName('head')[0].appendChild(themeCSS[key]);
 	});
 	themeCSS['light'].disabled = false;
+	highlightBlock();
+};
+
+const highlightBlock = () => {
 	document.querySelectorAll('pre').forEach((block) => {
 		hljs.highlightBlock(block);
 	});
@@ -193,32 +197,24 @@ const attachOnlicks = () => {
 						var contentDoc = new DOMParser()
 							.parseFromString(html, 'text/html')
 							.querySelector('.content');
-						var about = document.querySelector('.about');
-						if (about) {
-							about.parentNode.removeChild(about);
-						}
-						var post = document.querySelector('.post');
-						if (post) {
-							post.parentNode.removeChild(post);
-						}
-						var pagination = document.querySelector('.pagination');
-						if (pagination) {
-							pagination.parentNode.removeChild(pagination);
-						}
+						var innerContent = document.querySelector('.content');
+						if (innerContent) innerContent.innerHTML = '';
 						postscribe(
 							document.querySelector('.content'),
 							contentDoc.innerHTML,
 							{
+								autoFix: false,
 								done: () => {
 									gistAdjust();
+									highlightBlock();
 									attachOnlicks();
+									window.history.pushState(
+										'',
+										'',
+										link.getAttribute('href')
+									);
 								},
 							}
-						);
-						window.history.pushState(
-							'',
-							'',
-							link.getAttribute('href')
 						);
 					});
 				return false;
