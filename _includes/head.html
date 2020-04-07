@@ -58,6 +58,7 @@
 	<script>
 		window.onload = function () {
 			restoreState("{{ site.runs | map: 'url' }}");
+			setScrollIndicator();
 			defineKeyboardShortcuts();
 		};
 		document.addEventListener('DOMContentLoaded', (event) => {

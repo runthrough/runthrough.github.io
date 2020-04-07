@@ -68,10 +68,20 @@ code {
 	color: var(--text-color);
 }
 
-code, tt {
+code,
+tt {
 	background-color: var(--code-bg-color);
 }
 
-.highlight pre, pre {
+.highlight pre,
+pre {
 	background-color: var(--code-bg-color);
+}
+
+.progress-container {
+	background: var(--light-text-color);
+}
+
+.progress-bar {
+	background: var(--link-color);
 }

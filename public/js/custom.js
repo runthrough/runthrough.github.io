@@ -1,5 +1,6 @@
 const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
 const getLocalStorage = (key) => window.localStorage.getItem(key);
+const CURSOR_HIDE_TIME = 1000;
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -116,11 +117,32 @@ const restoreState = (runURLs) => {
 					clearTimeout(scrollTimer);
 				}
 				scrollTimer = getScrollTimer();
+				setScrollIndicator();
 			}
 		};
 	}
 	loadTheme(getLocalStorage('theme') || 'light');
 };
+
+const setScrollIndicator = () => {
+	var winScroll =
+		document.body.scrollTop || document.documentElement.scrollTop;
+	var height =
+		document.documentElement.scrollHeight -
+		document.documentElement.clientHeight;
+	var scrolled = winScroll == 0 ? 0 : (winScroll / height) * 100;
+	handleZeroScroll(scrolled < 0.1 || scrolled > 99.9)
+	document.getElementsByClassName('progress-bar')[0].style.width =
+		scrolled + '%';
+};
+
+const handleZeroScroll = (zero) => {
+	if (zero) {
+		document.getElementsByClassName('progress-container')[0].style.visibility = 'hidden';
+	} else {
+		document.getElementsByClassName('progress-container')[0].style.visibility = 'visible';
+	}
+}
 
 const onListingPage = () =>
 	listingURLs.includes(window.location.pathname.replace(/\//gi, ''));
@@ -181,7 +203,7 @@ const defineKeyboardShortcuts = () => {
 		followClassUrl('post-current');
 	});
 	hotkeys('backspace', () => {
-		window.history.back()
+		window.history.back();
 	});
 	hotkeys('alt + enter', (event) => {
 		event.preventDefault();
@@ -228,14 +250,16 @@ const loadURL = (url, fromPop = false) => {
 						gistAdjust();
 						highlightBlock();
 						attachOnlicks();
-						if (!fromPop) window.history.pushState(
-							{
-								pathname: url,
-							},
-							'',
-							url
-						);
+						if (!fromPop)
+							window.history.pushState(
+								{
+									pathname: url,
+								},
+								'',
+								url
+							);
 						restoreState();
+						setScrollIndicator();
 						changingScript = false;
 					},
 				}
@@ -250,7 +274,7 @@ const hideCursor = () => {
 			document.body.classList.add('no-cursor');
 			detectCursorMovement();
 		}
-	}, 3000);
+	}, CURSOR_HIDE_TIME);
 };
 
 const detectCursorMovement = () => {
