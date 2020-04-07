@@ -58,7 +58,7 @@
 	<script>
 		window.onload = function () {
 			restoreState("{{ site.runs | map: 'url' }}");
-			addKeyboardShortcuts();
+			defineKeyboardShortcuts();
 		};
 		document.addEventListener('DOMContentLoaded', (event) => {
 			gistAdjust();

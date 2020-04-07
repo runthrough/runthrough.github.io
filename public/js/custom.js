@@ -74,14 +74,13 @@ const toggleTheme = () => {
 	);
 };
 
-const restoreState = (listingUrls) => {
+let listingURLs;
+const RECENT_PATH = 'recent-path';
+const restoreState = (runURLs) => {
+	if (runURLs) listingURLs = runURLs;
 	const currentPathName = window.location.pathname;
-	const RECENT_PATH = 'recent-path';
 	const PATH_SCROLL_Y = `${currentPathName}-scroll-y`;
 	const RESTORE_SCROLL_ALL = true;
-	var onListingPage = listingUrls.includes(
-		currentPathName.replace(/\//gi, '')
-	);
 	if (getLocalStorage(RECENT_PATH) && getLocalStorage(PATH_SCROLL_Y)) {
 		if (
 			currentPathName == getLocalStorage(RECENT_PATH) ||
@@ -90,7 +89,7 @@ const restoreState = (listingUrls) => {
 			window.scroll(0, getLocalStorage(PATH_SCROLL_Y).split('|')[1]);
 		}
 	}
-	if (!onListingPage) {
+	if (!onListingPage()) {
 		setLocalStorage(RECENT_PATH, currentPathName);
 		const getScrollTimer = () => {
 			return setTimeout(() => {
@@ -112,23 +111,27 @@ const restoreState = (listingUrls) => {
 		};
 		let scrollTimer = getScrollTimer();
 		window.onscroll = function () {
-			if (scrollTimer) {
-				clearTimeout(scrollTimer);
+			if (!changingScript) {
+				if (scrollTimer) {
+					clearTimeout(scrollTimer);
+				}
+				scrollTimer = getScrollTimer();
 			}
-			scrollTimer = getScrollTimer();
 		};
 	}
 	loadTheme(getLocalStorage('theme') || 'light');
 };
 
-const addKeyboardShortcuts = () => {
+const onListingPage = () =>
+	listingURLs.includes(window.location.pathname.replace(/\//gi, ''));
+
+const defineKeyboardShortcuts = () => {
 	const FULL_SCREEN = 'full-screen';
 	let wasFullScreen = 'true' == (getLocalStorage(FULL_SCREEN) || 'false');
 	const followClassUrl = (className) => {
-		// window.location.href = document
-		// 	.getElementsByClassName(className)[0]
-		// 	.getAttribute('href');
-		document.getElementsByClassName(className)[0].onclick();
+		loadURL(
+			document.getElementsByClassName(className)[0].getAttribute('href')
+		);
 	};
 	const evt = [
 		{
@@ -178,9 +181,7 @@ const addKeyboardShortcuts = () => {
 		followClassUrl('post-current');
 	});
 	hotkeys('backspace', () => {
-		if (onListingPage) {
-			window.location.href = getLocalStorage(RECENT_PATH);
-		}
+		if (onListingPage()) loadURL(getLocalStorage(RECENT_PATH));
 	});
 	hotkeys('alt + enter', (event) => {
 		event.preventDefault();
@@ -191,42 +192,46 @@ const addKeyboardShortcuts = () => {
 	});
 };
 
+let changingScript = false;
 const attachOnlicks = () => {
 	document.querySelectorAll('a').forEach((link) => {
 		if (link.getAttribute('href').startsWith('/')) {
 			link.onclick = function () {
-				fetch(link.getAttribute('href'))
-					.then((data) => data.text())
-					.then((html) => {
-						var contentDoc = new DOMParser()
-							.parseFromString(html, 'text/html')
-							.querySelector('.content');
-						var innerContent = document.querySelector('.content');
-						if (innerContent) innerContent.innerHTML = '';
-						postscribe(
-							document.querySelector('.content'),
-							contentDoc.innerHTML,
-							{
-								autoFix: false,
-								done: () => {
-									gistAdjust();
-									highlightBlock();
-									attachOnlicks();
-									window.history.pushState(
-										'',
-										'',
-										link.getAttribute('href')
-									);
-								},
-							}
-						);
-					});
+				loadURL(link.getAttribute('href'));
 				return false;
 			};
 		} else {
 			link.setAttribute('target', '_blank');
 		}
 	});
+};
+
+const loadURL = (url) => {
+	fetch(url)
+		.then((data) => data.text())
+		.then((html) => {
+			var contentDoc = new DOMParser()
+				.parseFromString(html, 'text/html')
+				.querySelector('.content');
+			changingScript = true;
+			var innerContent = document.querySelector('.content');
+			if (innerContent) innerContent.innerHTML = '';
+			postscribe(
+				document.querySelector('.content'),
+				contentDoc.innerHTML,
+				{
+					autoFix: false,
+					done: () => {
+						gistAdjust();
+						highlightBlock();
+						attachOnlicks();
+						window.history.pushState('', '', url);
+						restoreState();
+						changingScript = false;
+					},
+				}
+			);
+		});
 };
 
 let cursorTimeout;
@@ -240,10 +245,11 @@ const hideCursor = () => {
 };
 
 const detectCursorMovement = () => {
-	if (cursorTimeout) document.body.onmousemove = () => {
-		clearTimeout(cursorTimeout);
-		showCursor();
-	};
+	if (cursorTimeout)
+		document.body.onmousemove = () => {
+			clearTimeout(cursorTimeout);
+			showCursor();
+		};
 };
 
 const showCursor = (chain = true) => {
@@ -255,7 +261,7 @@ const showCursor = (chain = true) => {
 	} else {
 		if (cursorTimeout) {
 			clearTimeout(cursorTimeout);
-			document.body.onmousemove = null
+			document.body.onmousemove = null;
 		}
 	}
 };
