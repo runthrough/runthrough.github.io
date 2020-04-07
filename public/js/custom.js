@@ -2,6 +2,7 @@ const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
 const getLocalStorage = (key) => window.localStorage.getItem(key);
 const CURSOR_HIDE_TIME = 1000;
 const SCROLL_WAIT_TIME = 300;
+const MOUSEMOVE_THRESHOLD = 5;
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -284,9 +285,11 @@ const hideCursor = () => {
 
 const detectCursorMovement = () => {
 	if (cursorTimeout)
-		document.body.onmousemove = () => {
-			clearTimeout(cursorTimeout);
-			showCursor();
+		document.body.onmousemove = (event) => {
+			if (Math.abs(event.movementX) > MOUSEMOVE_THRESHOLD || Math.abs(event.movementY) > MOUSEMOVE_THRESHOLD) {
+				clearTimeout(cursorTimeout);
+				showCursor();
+			}
 		};
 };
 
