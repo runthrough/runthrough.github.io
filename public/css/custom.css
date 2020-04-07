@@ -184,16 +184,20 @@ a.pagination-item:focus {
 	margin-top: 1rem;
 }
 
-.progress-container {
+.progress-view {
 	position: fixed;
 	top: 0;
+	height: 1rem;
 	width: 100%;
-	height: 0.2rem;
 	z-index: 2;
+}
+
+.progress-container {
+	height: 0.2rem;
+	width: 100%;
 }
 
 .progress-bar {
 	height: 0.2rem;
 	width: 0%;
-	z-index: 2;
 }

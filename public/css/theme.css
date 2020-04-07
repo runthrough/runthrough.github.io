@@ -78,6 +78,10 @@ pre {
 	background-color: var(--code-bg-color);
 }
 
+.progress-view {
+	background: var(--bg-color);
+}
+
 .progress-container {
 	background: var(--light-text-color);
 }

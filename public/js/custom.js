@@ -1,6 +1,7 @@
 const setLocalStorage = (key, value) => window.localStorage.setItem(key, value);
 const getLocalStorage = (key) => window.localStorage.getItem(key);
 const CURSOR_HIDE_TIME = 1000;
+const SCROLL_WAIT_TIME = 300;
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -108,7 +109,7 @@ const restoreState = (runURLs) => {
 					PATH_SCROLL_Y,
 					`${currentPathName}|${newScrollY}`
 				);
-			}, 300);
+			}, SCROLL_WAIT_TIME);
 		};
 		let scrollTimer = getScrollTimer();
 		window.onscroll = function () {
@@ -131,18 +132,22 @@ const setScrollIndicator = () => {
 		document.documentElement.scrollHeight -
 		document.documentElement.clientHeight;
 	var scrolled = winScroll == 0 ? 0 : (winScroll / height) * 100;
-	handleZeroScroll(scrolled < 0.1 || scrolled > 99.9)
+	handleZeroScroll(scrolled < 0.1 || scrolled > 99.9);
 	document.getElementsByClassName('progress-bar')[0].style.width =
 		scrolled + '%';
 };
 
 const handleZeroScroll = (zero) => {
 	if (zero) {
-		document.getElementsByClassName('progress-container')[0].style.visibility = 'hidden';
+		document.getElementsByClassName(
+			'progress-container'
+		)[0].style.visibility = 'hidden';
 	} else {
-		document.getElementsByClassName('progress-container')[0].style.visibility = 'visible';
+		document.getElementsByClassName(
+			'progress-container'
+		)[0].style.visibility = 'visible';
 	}
-}
+};
 
 const onListingPage = () =>
 	listingURLs.includes(window.location.pathname.replace(/\//gi, ''));
