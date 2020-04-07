@@ -59,6 +59,16 @@ const highlightBlock = () => {
 	});
 };
 
+const getSunTheme = () => {
+	let date = new Date();
+	let times = SunCalc.getTimes(date, 20.6, 78.9);
+	if (date.getTime() > times.sunrise.getTime() && date.getTime() < times.sunset.getTime()) {
+		return 'light'
+	} else {
+		return 'dark'
+	}
+};
+
 const loadTheme = (theme) => {
 	if (document.body.classList.contains('dark-theme')) {
 		if (theme === 'light') toggleTheme();
@@ -123,7 +133,7 @@ const restoreState = (runURLs) => {
 			}
 		};
 	}
-	loadTheme(getLocalStorage('theme') || 'light');
+	loadTheme(getLocalStorage('theme') || getSunTheme());
 };
 
 const setScrollIndicator = () => {
@@ -233,18 +243,18 @@ const attachOnlicks = () => {
 		}
 	});
 	window.onpopstate = (event) => {
-		loadURL(event.state.pathname, true);
+		loadURL(event.target.document.location.pathname, true);
 	};
 };
 
 const loadURL = (url, fromPop = false) => {
+	changingScript = true;
 	fetch(url)
 		.then((data) => data.text())
 		.then((html) => {
 			var contentDoc = new DOMParser()
 				.parseFromString(html, 'text/html')
 				.querySelector('.content');
-			changingScript = true;
 			var innerContent = document.querySelector('.content');
 			if (innerContent) innerContent.innerHTML = '';
 			postscribe(
@@ -256,14 +266,7 @@ const loadURL = (url, fromPop = false) => {
 						gistAdjust();
 						highlightBlock();
 						attachOnlicks();
-						if (!fromPop)
-							window.history.pushState(
-								{
-									pathname: url,
-								},
-								'',
-								url
-							);
+						if (!fromPop) window.history.pushState('', '', url);
 						restoreState();
 						setScrollIndicator();
 						changingScript = false;
@@ -286,7 +289,10 @@ const hideCursor = () => {
 const detectCursorMovement = () => {
 	if (cursorTimeout)
 		document.body.onmousemove = (event) => {
-			if (Math.abs(event.movementX) > MOUSEMOVE_THRESHOLD || Math.abs(event.movementY) > MOUSEMOVE_THRESHOLD) {
+			if (
+				Math.abs(event.movementX) > MOUSEMOVE_THRESHOLD ||
+				Math.abs(event.movementY) > MOUSEMOVE_THRESHOLD
+			) {
 				clearTimeout(cursorTimeout);
 				showCursor();
 			}
