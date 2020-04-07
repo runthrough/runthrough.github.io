@@ -154,7 +154,7 @@ const restoreState = (runURLs) => {
 
 const setScrollIndicator = (preScrollPercent) => {
 	let scrolled = preScrollPercent;
-	if (!preScrollPercent) {
+	if (preScrollPercent === undefined) {
 		let winScroll =
 			document.body.scrollTop || document.documentElement.scrollTop;
 		let height =
@@ -249,7 +249,6 @@ const defineKeyboardShortcuts = () => {
 	});
 };
 
-let changingScript = false;
 const attachOnlicks = () => {
 	document.querySelectorAll('a').forEach((link) => {
 		if (link.getAttribute('href').startsWith('/')) {
@@ -266,34 +265,38 @@ const attachOnlicks = () => {
 	};
 };
 
+let changingScript = false;
 const loadURL = (url, fromPop = false) => {
-	changingScript = true;
-	handleZeroScroll(false);
-	fetch(url)
-		.then((data) => data.text())
-		.then((html) => {
-			var contentDoc = new DOMParser()
-				.parseFromString(html, 'text/html')
-				.querySelector('.content');
-			var innerContent = document.querySelector('.content');
-			if (innerContent) innerContent.innerHTML = '';
-			postscribe(
-				document.querySelector('.content'),
-				contentDoc.innerHTML,
-				{
-					autoFix: false,
-					done: () => {
-						gistAdjust();
-						highlightBlock();
-						attachOnlicks();
-						if (!fromPop) window.history.pushState('', '', url);
-						restoreState();
-						setScrollIndicator();
-						changingScript = false;
-					},
-				}
-			);
-		});
+	if (!changingScript) {
+		changingScript = true;
+		setScrollIndicator(0);
+		handleZeroScroll(false);
+		fetch(url)
+			.then((data) => data.text())
+			.then((html) => {
+				var contentDoc = new DOMParser()
+					.parseFromString(html, 'text/html')
+					.querySelector('.content');
+				var innerContent = document.querySelector('.content');
+				if (innerContent) innerContent.innerHTML = '';
+				postscribe(
+					document.querySelector('.content'),
+					contentDoc.innerHTML,
+					{
+						autoFix: false,
+						done: () => {
+							gistAdjust();
+							highlightBlock();
+							attachOnlicks();
+							if (!fromPop) window.history.pushState('', '', url);
+							restoreState();
+							setScrollIndicator();
+							changingScript = false;
+						},
+					}
+				);
+			});
+	}
 };
 
 let cursorTimeout;
