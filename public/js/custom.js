@@ -60,13 +60,24 @@ const highlightBlock = () => {
 };
 
 const getSunTheme = () => {
-	let date = new Date();
-	let times = SunCalc.getTimes(date, 20.6, 78.9);
-	if (date.getTime() > times.sunrise.getTime() && date.getTime() < times.sunset.getTime()) {
-		return 'light'
-	} else {
-		return 'dark'
-	}
+	fetch('http://ip-api.com/json/?fields=status,lat,lon')
+		.then((response) => {
+			return response.json();
+		})
+		.then((json) => {
+			let thm = 'light';
+			if (json.status === 'success') {
+				let date = new Date();
+				let times = SunCalc.getTimes(date, json.lat, json.lon);
+				if (
+					date.getTime() < times.sunrise.getTime() ||
+					date.getTime() > times.sunset.getTime()
+				) {
+					thm = 'dark';
+				}
+			}
+			loadTheme(thm);
+		});
 };
 
 const loadTheme = (theme) => {
@@ -133,16 +144,24 @@ const restoreState = (runURLs) => {
 			}
 		};
 	}
-	loadTheme(getLocalStorage('theme') || getSunTheme());
+	const storedTheme = getLocalStorage('theme');
+	if (storedTheme) {
+		loadTheme(storedTheme);
+	} else {
+		getSunTheme();
+	}
 };
 
-const setScrollIndicator = () => {
-	var winScroll =
-		document.body.scrollTop || document.documentElement.scrollTop;
-	var height =
-		document.documentElement.scrollHeight -
-		document.documentElement.clientHeight;
-	var scrolled = winScroll == 0 ? 0 : (winScroll / height) * 100;
+const setScrollIndicator = (preScrollPercent) => {
+	let scrolled = preScrollPercent;
+	if (!preScrollPercent) {
+		let winScroll =
+			document.body.scrollTop || document.documentElement.scrollTop;
+		let height =
+			document.documentElement.scrollHeight -
+			document.documentElement.clientHeight;
+		scrolled = winScroll == 0 ? 0 : (winScroll / height) * 100;
+	}
 	handleZeroScroll(scrolled < 0.1 || scrolled > 99.9);
 	document.getElementsByClassName('progress-bar')[0].style.width =
 		scrolled + '%';
@@ -249,6 +268,7 @@ const attachOnlicks = () => {
 
 const loadURL = (url, fromPop = false) => {
 	changingScript = true;
+	handleZeroScroll(false);
 	fetch(url)
 		.then((data) => data.text())
 		.then((html) => {
