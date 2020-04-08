@@ -58,6 +58,7 @@
 	<script type="text/javascript" src="/public/js/custom.js"></script>
 	<script>
 		window.onload = function () {
+			loadThemes('{{ site.conf.theme }}')
 			restoreState("{{ site.runs | map: 'url' }}");
 			setScrollIndicator();
 			defineKeyboardShortcuts();

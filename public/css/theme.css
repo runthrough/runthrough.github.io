@@ -1,24 +1,68 @@
-body {
+/* Light */
+.light {
 	--bg-color: #ffffff;
 	--text-color: #515151;
 	--heading-color: #303030;
 	--light-text-color: #cccccc;
-	--link-color: #268bd2;
 	--code-bg-color: #f6f8fa;
 	--button-highlight-color: #eeeeee;
 }
 
-body.dark-theme {
+/* Dark */
+.dark {
 	--bg-color: #2d2d2d;
 	--text-color: #e7e8eb;
 	--heading-color: #cfd2d6;
 	--light-text-color: #6a737d;
-	--link-color: #f48024;
 	--code-bg-color: #3d3d3d;
 	--button-highlight-color: #eeeeee;
 }
 
-body {
+/* Red */
+.theme-base-08 {
+	--link-color: #ac4142;
+}
+
+/* Orange */
+.theme-base-09 {
+	--link-color: #d28445;
+}
+
+/* Yellow */
+.theme-base-0a {
+	--link-color: #f4bf75;
+}
+
+/* Green */
+.theme-base-0b {
+	--link-color: #90a959;
+}
+
+/* Cyan */
+.theme-base-0c {
+	--link-color: #75b5aa;
+}
+
+/* Blue */
+.theme-base-0d {
+	--link-color: #6a9fb5;
+}
+
+/* Magenta */
+.theme-base-0e {
+	--link-color: #aa759f;
+}
+
+/* Brown */
+.theme-base-0f {
+	--link-color: #8f5536;
+}
+
+/* blue - #268bd2, orange - #f48024 */
+
+body,
+.progress-view,
+.bottom-gutter {
 	color: var(--text-color);
 	background-color: var(--bg-color);
 }
@@ -29,11 +73,15 @@ h3,
 h4,
 h5,
 h6,
-strong {
+strong,
+.page-title,
+.post-title,
+.post-title a {
 	color: var(--heading-color);
 }
 
-a {
+a,
+.related-posts li a:hover {
 	color: var(--link-color);
 }
 
@@ -41,19 +89,14 @@ a.pagination-item:hover {
 	background-color: var(--button-highlight-color);
 }
 
-.page-title,
-.post-title,
-.post-title a {
-	color: var(--heading-color);
-}
-
+/* important because overriding from hyde .content a */
 .post-no a {
-	color: var(--heading-color);
+	color: var(--heading-color) !important;
 }
 
 .post-no a:hover,
 .post-no a:focus {
-	color: var(--link-color);
+	color: var(--link-color) !important;
 }
 
 .post-date,
@@ -69,27 +112,24 @@ code {
 }
 
 code,
-tt {
+tt,
+pre,
+.highlight pre {
 	background-color: var(--code-bg-color);
-}
-
-.highlight pre,
-pre {
-	background-color: var(--code-bg-color);
-}
-
-.progress-view {
-	background: var(--bg-color);
 }
 
 .progress-container {
-	background: var(--light-text-color);
+	background-color: var(--light-text-color);
 }
 
 .progress-bar {
-	background: var(--link-color);
+	background-color: var(--link-color);
 }
 
-.bottom-gutter {
-	background: var(--bg-color);
+::-moz-selection {
+	background-color: var(--link-color);
+}
+
+::selection {
+	background-color: var(--link-color);
 }

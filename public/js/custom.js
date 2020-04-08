@@ -3,10 +3,6 @@ const getLocalStorage = (key) => window.localStorage.getItem(key);
 const CURSOR_HIDE_TIME = 1000;
 const SCROLL_WAIT_TIME = 300;
 const MOUSEMOVE_THRESHOLD = 5;
-const THEME = {
-	dark: 'dark',
-	light: 'light',
-};
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -42,8 +38,8 @@ const gistAdjust = () => {
 };
 
 let themeCSS = {};
-const loadHighlightTheme = (themes_data) => {
-	var highlightThemes = liquidToObject(themes_data);
+const loadHighlightTheme = (highlight_styles) => {
+	var highlightThemes = liquidToObject(highlight_styles);
 	Object.keys(highlightThemes).forEach((key) => {
 		themeCSS[key] = document.createElement('link');
 		themeCSS[key].rel = 'stylesheet';
@@ -53,7 +49,6 @@ const loadHighlightTheme = (themes_data) => {
 		themeCSS[key].disabled = true;
 		document.getElementsByTagName('head')[0].appendChild(themeCSS[key]);
 	});
-	themeCSS['light'].disabled = false;
 	highlightBlock();
 };
 
@@ -62,6 +57,11 @@ const highlightBlock = () => {
 		hljs.highlightBlock(block);
 	});
 };
+
+let themes = {}
+const loadThemes = (theme_data) => {
+	themes = liquidToObject(theme_data);
+}
 
 const applySunTheme = () => {
 	fetch('https://ipapi.co/json')
@@ -89,29 +89,29 @@ const applySunTheme = () => {
 };
 
 const applyTheme = (theme) => {
-	const bodyClassList = document.body.classList;
-	if (theme === THEME.light) {
-		if (bodyClassList.contains(`${THEME.dark}-theme`))
-			bodyClassList.toggle(`${THEME.dark}-theme`);
-		themeCSS['dark'].disabled = true;
-		themeCSS['light'].disabled = false;
-	} else if (theme === THEME.dark) {
-		if (!bodyClassList.contains(`${THEME.dark}-theme`))
-			bodyClassList.toggle(`${THEME.dark}-theme`);
-		themeCSS['dark'].disabled = false;
-		themeCSS['light'].disabled = true;
+	if (Object.keys(themes).includes(theme)) {
+		const bodyClassList = document.body.classList;
+		const compTheme = theme === 'light' ? 'dark' : 'light';
+		if (bodyClassList.contains(compTheme)) {
+			bodyClassList.remove(compTheme);
+			bodyClassList.remove(themes[compTheme]);
+		}
+		bodyClassList.add(theme);
+		bodyClassList.add(themes[theme]);
+		themeCSS['dark'].disabled = theme === 'light';
+		themeCSS['light'].disabled = theme === 'dark';
+		setLocalStorage('theme', theme);
 	}
-	if (Object.keys(THEME).includes(theme)) setLocalStorage('theme', theme);
 };
 
 const setDefaultTheme = (toggle) => {
 	const storedTheme = getLocalStorage('theme');
 	if (toggle) {
-		if (Object.keys(THEME).includes(storedTheme)) {
-			applyTheme(storedTheme === THEME.light ? THEME.dark : THEME.light);
+		if (Object.keys(themes).includes(storedTheme)) {
+			applyTheme(storedTheme === 'light' ? 'dark' : 'light');
 		}
 	} else {
-		if (Object.keys(THEME).includes(storedTheme)) {
+		if (Object.keys(themes).includes(storedTheme)) {
 			applyTheme(storedTheme);
 		} else {
 			applySunTheme();

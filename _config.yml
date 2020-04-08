@@ -40,7 +40,9 @@ author:
 # Custom vars
 version: 1.0.0
 conf:
-    look: ''
+    theme:
+        light: 'theme-base-0d'
+        dark: 'theme-base-09'
     circular_pagination: true
     default_collection: 'concepts'
     highlight_style: # railscasts, agate, github-gist
