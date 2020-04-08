@@ -60,15 +60,15 @@ const highlightBlock = () => {
 };
 
 const getSunTheme = () => {
-	fetch('http://ip-api.com/json/?fields=status,lat,lon')
+	fetch('https://ipapi.co/json')
 		.then((response) => {
 			return response.json();
 		})
 		.then((json) => {
 			let thm = 'light';
-			if (json.status === 'success') {
+			if (json.latitude && json.longitude) {
 				let date = new Date();
-				let times = SunCalc.getTimes(date, json.lat, json.lon);
+				let times = SunCalc.getTimes(date, json.latitude, json.longitude);
 				if (
 					date.getTime() < times.sunrise.getTime() ||
 					date.getTime() > times.sunset.getTime()

@@ -168,6 +168,14 @@ a.pagination-item:focus {
 	margin: 4rem 1rem 0;
 }
 
+code {
+	border-radius: 0;
+}
+
+.highlight {
+	margin-top: 1rem;
+}
+
 .no-cursor {
 	cursor: none;
 }
@@ -178,10 +186,6 @@ a.pagination-item:focus {
 
 .no-scrollbar::-webkit-scrollbar {
 	display: none;
-}
-
-.highlight {
-	margin-top: 1rem;
 }
 
 .progress-view {
