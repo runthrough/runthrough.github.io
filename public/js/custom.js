@@ -7,6 +7,7 @@ const SCROLL_STEP_LINES = 12;
 const PIXELS_PER_LINE_HEIGHT = 20;
 const LINE_HEIGHT = 1.9;
 const SCROLL_BEHAVIOR = 'smooth';
+const CONTENT_DOCS = {};
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -320,7 +321,7 @@ const defineKeyboardShortcuts = () => {
 	});
 	hotkeys('r', (event) => {
 		event.preventDefault();
-		loadURL(window.location.pathname, true);
+		loadURL(window.location.pathname, true, true);
 	});
 };
 
@@ -341,35 +342,44 @@ const attachOnlicks = () => {
 };
 
 let changingScript = false;
-const loadURL = (url, fromPop = false) => {
+const loadURL = (url, fromPop = false, isRefresh = false) => {
 	if (!changingScript) {
 		changingScript = true;
 		showLoadingIndicator(true);
-		fetch(url)
-			.then((data) => data.text())
-			.then((html) => {
-				var contentDoc = new DOMParser()
-					.parseFromString(html, 'text/html')
-					.querySelector('.content');
-				var innerContent = document.querySelector('.content');
-				if (innerContent) innerContent.innerHTML = '';
-				postscribe(
-					document.querySelector('.content'),
-					contentDoc.innerHTML,
-					{
-						autoFix: false,
-						done: () => {
-							gistAdjust();
-							highlightBlock();
-							attachOnlicks();
-							if (!fromPop) window.history.pushState('', '', url);
-							restoreState();
-							showLoadingIndicator(false);
-							changingScript = false;
-						},
-					}
-				);
-			});
+		const handleContentDoc = () => {
+			var contentDoc = CONTENT_DOCS[url];
+			var innerContent = document.querySelector('.content');
+			if (innerContent) innerContent.innerHTML = '';
+			postscribe(
+				document.querySelector('.content'),
+				contentDoc.innerHTML,
+				{
+					autoFix: false,
+					done: () => {
+						gistAdjust();
+						highlightBlock();
+						attachOnlicks();
+						if (!fromPop) window.history.pushState('', '', url);
+						restoreState();
+						showLoadingIndicator(false);
+						changingScript = false;
+					},
+				}
+			);
+		};
+		if (Object.keys(CONTENT_DOCS).includes(url) && !isRefresh) {
+			handleContentDoc();
+		} else {
+			fetch(url)
+				.then((data) => data.text())
+				.then((html) => {
+					var fetchedContentDoc = new DOMParser()
+						.parseFromString(html, 'text/html')
+						.querySelector('.content');
+					CONTENT_DOCS[url] = fetchedContentDoc;
+					handleContentDoc();
+				});
+		}
 	}
 };
 
