@@ -8,6 +8,11 @@ const PIXELS_PER_LINE_HEIGHT = 20;
 const LINE_HEIGHT = 1.9;
 const SCROLL_BEHAVIOR = 'smooth';
 const CONTENT_DOCS = {};
+const DATE_UPDATE_INTERVAL = 60000;
+
+const attachZero = (number) => {
+	return number < 0 ? '00' : number <= 9 ? `0${number}` : number;
+};
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -173,19 +178,24 @@ const restoreState = (runURLs) => {
 	setDefaultTheme();
 };
 
+const getScrollPercent = () => {
+	let winScroll =
+		document.body.scrollTop || document.documentElement.scrollTop;
+	let height =
+		document.documentElement.scrollHeight -
+		document.documentElement.clientHeight;
+	return winScroll == 0 ? 0 : (winScroll / height) * 100;
+};
+
 const setScrollIndicator = (preScrollPercent) => {
 	let scrolled = preScrollPercent;
 	if (preScrollPercent === undefined) {
-		let winScroll =
-			document.body.scrollTop || document.documentElement.scrollTop;
-		let height =
-			document.documentElement.scrollHeight -
-			document.documentElement.clientHeight;
-		scrolled = winScroll == 0 ? 0 : (winScroll / height) * 100;
+		scrolled = getScrollPercent();
 	}
 	hideProgressContainer(scrolled < 0.1 || scrolled > 99.9);
 	document.getElementsByClassName('progress-bar')[0].style.width =
 		scrolled + '%';
+	refreshBottomGutterDetails();
 };
 
 const hideProgressContainer = (zero) => {
@@ -323,6 +333,10 @@ const defineKeyboardShortcuts = () => {
 		event.preventDefault();
 		loadURL(window.location.pathname, true, true);
 	});
+	hotkeys('alt + /', (event) => {
+		event.preventDefault();
+		cycleDetails();
+	});
 };
 
 const attachOnlicks = () => {
@@ -418,4 +432,57 @@ const showCursor = (chain = true) => {
 			document.body.onmousemove = null;
 		}
 	}
+};
+
+let detailsInterval;
+let detailGenerators = [];
+const refreshBottomGutterDetails = (stop = false) => {
+	if (detailsInterval) clearInterval(detailsInterval);
+	if (!stop && detailGenerators.length > 0) {
+		const detailsConstructor = () => {
+			let details = '';
+			detailGenerators.forEach((detailGenerator) => {
+				details += ` | ${detailGenerator()}`;
+			});
+			document.querySelector(
+				'.gutter-details'
+			).innerHTML = `${details.slice(4)}`;
+		};
+		detailsInterval = setInterval(() => {
+			detailsConstructor();
+		}, DATE_UPDATE_INTERVAL);
+		detailsConstructor();
+	} else {
+		document.querySelector('.gutter-details').innerHTML = '';
+	}
+};
+
+const cycleDetails = () => {
+	const detailers = [
+		() => {
+			return `${new Date().toString().slice(15, 21)}`;
+		},
+		() => {
+			return `${attachZero(Math.round(getScrollPercent()))}%`;
+		},
+		() => {
+			const postNumberElement = document.querySelector('.post-current');
+			return `${attachZero(
+				parseInt(
+					listingURLs
+						.split('/')
+						.indexOf(postNumberElement.pathname.slice(1))
+				)
+			)}.${postNumberElement.innerHTML}`;
+		},
+		() => {
+			return `${new Date().toString().slice(0, 11)}`;
+		},
+	];
+	if (detailGenerators.length != detailers.length) {
+		detailGenerators.push(detailers[detailGenerators.length]);
+	} else {
+		detailGenerators = [];
+	}
+	refreshBottomGutterDetails();
 };

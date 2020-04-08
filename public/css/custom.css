@@ -231,3 +231,10 @@ code {
 	width: 100%;
 	z-index: 2;
 }
+
+.gutter-details {
+	position: relative;
+	float: right;
+	font-size: 0.65rem;
+	margin-right: 0.3rem;
+}

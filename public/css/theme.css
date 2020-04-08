@@ -103,7 +103,8 @@ a.pagination-item:hover {
 .related-posts li small,
 .runs li small,
 .post-none,
-.about {
+.about,
+.gutter-details {
 	color: var(--light-text-color);
 }
 
@@ -127,9 +128,11 @@ pre,
 }
 
 ::-moz-selection {
+	color: var(--bg-color);
 	background-color: var(--link-color);
 }
 
 ::selection {
+	color: var(--bg-color);
 	background-color: var(--link-color);
 }
