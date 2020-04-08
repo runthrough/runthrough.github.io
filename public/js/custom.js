@@ -3,6 +3,10 @@ const getLocalStorage = (key) => window.localStorage.getItem(key);
 const CURSOR_HIDE_TIME = 1000;
 const SCROLL_WAIT_TIME = 300;
 const MOUSEMOVE_THRESHOLD = 5;
+const SCROLL_STEP_LINES = 12;
+const PIXELS_PER_LINE_HEIGHT = 20;
+const LINE_HEIGHT = 1.9;
+const SCROLL_BEHAVIOR = 'smooth';
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -58,10 +62,10 @@ const highlightBlock = () => {
 	});
 };
 
-let themes = {}
+let themes = {};
 const loadThemes = (theme_data) => {
 	themes = liquidToObject(theme_data);
-}
+};
 
 const applySunTheme = () => {
 	fetch('https://ipapi.co/json')
@@ -262,16 +266,20 @@ const defineKeyboardShortcuts = () => {
 	if (wasFullScreen) {
 		enterFullScreen();
 	}
-	hotkeys('left', () => {
+	hotkeys('left, h, a', (event) => {
+		event.preventDefault();
 		followClassUrl('post-next');
 	});
-	hotkeys('right', () => {
+	hotkeys('right, l, f', (event) => {
+		event.preventDefault();
 		followClassUrl('post-prev');
 	});
-	hotkeys('enter', () => {
+	hotkeys('enter, q', (event) => {
+		event.preventDefault();
 		followClassUrl('post-current');
 	});
-	hotkeys('backspace', () => {
+	hotkeys('backspace, z', (event) => {
+		event.preventDefault();
 		window.history.back();
 	});
 	hotkeys('alt + enter', (event) => {
@@ -279,7 +287,40 @@ const defineKeyboardShortcuts = () => {
 		enterFullScreen();
 	});
 	hotkeys('alt + l', (event) => {
+		event.preventDefault();
 		setDefaultTheme(true);
+	});
+	hotkeys('j, d', (event) => {
+		event.preventDefault();
+		window.scrollBy({
+			left: 0,
+			top: SCROLL_STEP_LINES * LINE_HEIGHT * PIXELS_PER_LINE_HEIGHT,
+			behavior: SCROLL_BEHAVIOR,
+		});
+	});
+	hotkeys('k, s', (event) => {
+		event.preventDefault();
+		window.scrollBy({
+			left: 0,
+			top: -(SCROLL_STEP_LINES * LINE_HEIGHT * PIXELS_PER_LINE_HEIGHT),
+			behavior: SCROLL_BEHAVIOR,
+		});
+	});
+	hotkeys('u, e', (event) => {
+		event.preventDefault();
+		window.scroll({ left: 0, top: 0, behavior: SCROLL_BEHAVIOR });
+	});
+	hotkeys('i, w', (event) => {
+		event.preventDefault();
+		window.scroll({
+			left: 0,
+			top: document.documentElement.scrollHeight,
+			behavior: SCROLL_BEHAVIOR,
+		});
+	});
+	hotkeys('r', (event) => {
+		event.preventDefault();
+		loadURL(window.location.pathname, true);
 	});
 };
 
