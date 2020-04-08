@@ -3,6 +3,10 @@ const getLocalStorage = (key) => window.localStorage.getItem(key);
 const CURSOR_HIDE_TIME = 1000;
 const SCROLL_WAIT_TIME = 300;
 const MOUSEMOVE_THRESHOLD = 5;
+const THEME = {
+	dark: 'dark',
+	light: 'light',
+};
 
 const liquidToObject = (liq) => {
 	var obj = {};
@@ -59,7 +63,7 @@ const highlightBlock = () => {
 	});
 };
 
-const getSunTheme = () => {
+const applySunTheme = () => {
 	fetch('https://ipapi.co/json')
 		.then((response) => {
 			return response.json();
@@ -68,7 +72,11 @@ const getSunTheme = () => {
 			let thm = 'light';
 			if (json.latitude && json.longitude) {
 				let date = new Date();
-				let times = SunCalc.getTimes(date, json.latitude, json.longitude);
+				let times = SunCalc.getTimes(
+					date,
+					json.latitude,
+					json.longitude
+				);
 				if (
 					date.getTime() < times.sunrise.getTime() ||
 					date.getTime() > times.sunset.getTime()
@@ -76,26 +84,39 @@ const getSunTheme = () => {
 					thm = 'dark';
 				}
 			}
-			loadTheme(thm);
+			applyTheme(thm);
 		});
 };
 
-const loadTheme = (theme) => {
-	if (document.body.classList.contains('dark-theme')) {
-		if (theme === 'light') toggleTheme();
-	} else {
-		if (theme === 'dark') toggleTheme();
+const applyTheme = (theme) => {
+	const bodyClassList = document.body.classList;
+	if (theme === THEME.light) {
+		if (bodyClassList.contains(`${THEME.dark}-theme`))
+			bodyClassList.toggle(`${THEME.dark}-theme`);
+		themeCSS['dark'].disabled = true;
+		themeCSS['light'].disabled = false;
+	} else if (theme === THEME.dark) {
+		if (!bodyClassList.contains(`${THEME.dark}-theme`))
+			bodyClassList.toggle(`${THEME.dark}-theme`);
+		themeCSS['dark'].disabled = false;
+		themeCSS['light'].disabled = true;
 	}
+	if (Object.keys(THEME).includes(theme)) setLocalStorage('theme', theme);
 };
 
-const toggleTheme = () => {
-	document.body.classList.toggle('dark-theme');
-	themeCSS['dark'].disabled = !document.body.classList.contains('dark-theme');
-	themeCSS['light'].disabled = document.body.classList.contains('dark-theme');
-	setLocalStorage(
-		'theme',
-		document.body.classList.contains('dark-theme') ? 'dark' : 'light'
-	);
+const setDefaultTheme = (toggle) => {
+	const storedTheme = getLocalStorage('theme');
+	if (toggle) {
+		if (Object.keys(THEME).includes(storedTheme)) {
+			applyTheme(storedTheme === THEME.light ? THEME.dark : THEME.light);
+		}
+	} else {
+		if (Object.keys(THEME).includes(storedTheme)) {
+			applyTheme(storedTheme);
+		} else {
+			applySunTheme();
+		}
+	}
 };
 
 let listingURLs;
@@ -144,12 +165,7 @@ const restoreState = (runURLs) => {
 			}
 		};
 	}
-	const storedTheme = getLocalStorage('theme');
-	if (storedTheme) {
-		loadTheme(storedTheme);
-	} else {
-		getSunTheme();
-	}
+	setDefaultTheme();
 };
 
 const setScrollIndicator = (preScrollPercent) => {
@@ -162,20 +178,38 @@ const setScrollIndicator = (preScrollPercent) => {
 			document.documentElement.clientHeight;
 		scrolled = winScroll == 0 ? 0 : (winScroll / height) * 100;
 	}
-	handleZeroScroll(scrolled < 0.1 || scrolled > 99.9);
+	hideProgressContainer(scrolled < 0.1 || scrolled > 99.9);
 	document.getElementsByClassName('progress-bar')[0].style.width =
 		scrolled + '%';
 };
 
-const handleZeroScroll = (zero) => {
+const hideProgressContainer = (zero) => {
+	const progressContainerElement = document.getElementsByClassName(
+		'progress-container'
+	)[0];
 	if (zero) {
-		document.getElementsByClassName(
-			'progress-container'
-		)[0].style.visibility = 'hidden';
+		progressContainerElement.style.visibility = 'hidden';
 	} else {
-		document.getElementsByClassName(
-			'progress-container'
-		)[0].style.visibility = 'visible';
+		progressContainerElement.style.visibility = 'visible';
+	}
+};
+
+const showLoadingIndicator = (start) => {
+	const progressBarElement = document.getElementsByClassName(
+		'progress-bar'
+	)[0];
+	const PROGRESS_CLASS = 'show-progress';
+	if (start) {
+		setScrollIndicator(0);
+		hideProgressContainer(!start);
+		if (!progressBarElement.classList.contains(PROGRESS_CLASS))
+			document
+				.getElementsByClassName('progress-bar')[0]
+				.classList.add(PROGRESS_CLASS);
+	} else {
+		setScrollIndicator();
+		if (progressBarElement.classList.contains(PROGRESS_CLASS))
+			progressBarElement.classList.remove(PROGRESS_CLASS);
 	}
 };
 
@@ -245,7 +279,7 @@ const defineKeyboardShortcuts = () => {
 		enterFullScreen();
 	});
 	hotkeys('alt + l', (event) => {
-		toggleTheme();
+		setDefaultTheme(true);
 	});
 };
 
@@ -269,8 +303,7 @@ let changingScript = false;
 const loadURL = (url, fromPop = false) => {
 	if (!changingScript) {
 		changingScript = true;
-		setScrollIndicator(0);
-		handleZeroScroll(false);
+		showLoadingIndicator(true);
 		fetch(url)
 			.then((data) => data.text())
 			.then((html) => {
@@ -290,7 +323,7 @@ const loadURL = (url, fromPop = false) => {
 							attachOnlicks();
 							if (!fromPop) window.history.pushState('', '', url);
 							restoreState();
-							setScrollIndicator();
+							showLoadingIndicator(false);
 							changingScript = false;
 						},
 					}

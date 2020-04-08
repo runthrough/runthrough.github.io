@@ -89,3 +89,7 @@ pre {
 .progress-bar {
 	background: var(--link-color);
 }
+
+.bottom-gutter {
+	background: var(--bg-color);
+}
