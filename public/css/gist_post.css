@@ -25,6 +25,12 @@
 	border-radius: unset !important;
 } */
 
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('/public/font/JetBrainsMono-Regular.woff2')
+		format('woff2');
+}
+
 h2, h3, h4, h5, h6 {
 	line-height: 1.9;
 	margin-top: 0.5rem;
@@ -45,7 +51,7 @@ ul, ol, dl {
 }
 
 code, pre {
-	font-family: 'JetBrains Mono';
+	font-family: 'JetBrains Mono', 'SF Mono', Consolas, 'Ubuntu Mono', monospace;
 	white-space: pre-wrap;
 }
 

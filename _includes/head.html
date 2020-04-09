@@ -56,25 +56,21 @@
 	<!-- Open post links in new tab -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 	<script type="text/javascript" src="/public/js/suncalc.min.js"></script>
 	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script type="text/javascript" src="/public/js/custom.js"></script>
 	<script>
 		if ('serviceWorker' in navigator) {
 			if (navigator.serviceWorker.controller) {
-				// console.log(
-				// 	'An active service worker found, no need to register'
-				// );
+				// console.log('An active service worker found, no need to register');
 			} else {
 				navigator.serviceWorker
 					.register('/serviceworker.js', {
 						scope: './',
 					})
 					.then(function (reg) {
-						// console.log(
-						// 	'Service worker has been registered for scope: ' +
-						// 		reg.scope
-						// );
+						// console.log('Service worker has been registered for scope: ' + reg.scope);
 					});
 			}
 		}
@@ -82,7 +78,7 @@
 			loadThemes('{{ site.conf.theme }}');
 			restoreState("{{ site.runs | map: 'url' }}");
 			setScrollIndicator();
-			defineKeyboardShortcuts();
+			defineKeyboardShortcutsAndSwipeGestures();
 		};
 		document.addEventListener('DOMContentLoaded', (event) => {
 			gistAdjust();

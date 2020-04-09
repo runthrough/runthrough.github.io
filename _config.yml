@@ -8,6 +8,7 @@ description: 'Computer Science and Engineering concepts.'
 url: https://runthrough.github.io/
 baseurl: ''
 repository: runthrough/runthrough.github.io
+lang: 'en'
 
 collections_dir: cols
 collections:

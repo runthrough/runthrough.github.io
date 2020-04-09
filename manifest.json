@@ -2,7 +2,7 @@
 ---
 
 {
-	"lang": "en",
+	"lang": "{{ site.lang }}",
 	"name": "{{ site.title }}",
 	"short_name": "{{ site.tagline }}",
 	"icons": [

@@ -234,7 +234,7 @@ const onListingPage = () =>
 		.concat(['/404'])
 		.includes(window.location.pathname.replace(/\//gi, ''));
 
-const defineKeyboardShortcuts = () => {
+const defineKeyboardShortcutsAndSwipeGestures = () => {
 	const FULL_SCREEN = 'full-screen';
 	let wasFullScreen = 'true' == (getLocalStorage(FULL_SCREEN) || 'false');
 	const followClassUrl = (className) => {
@@ -280,66 +280,111 @@ const defineKeyboardShortcuts = () => {
 	if (wasFullScreen) {
 		enterFullScreen();
 	}
-	hotkeys('left, h, a', (event) => {
-		event.preventDefault();
-		followClassUrl('post-next');
-	});
-	hotkeys('right, l, f', (event) => {
-		event.preventDefault();
-		followClassUrl('post-prev');
-	});
-	hotkeys('enter, q', (event) => {
-		event.preventDefault();
-		followClassUrl('post-current');
-	});
-	hotkeys('backspace, z', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture(
+		'left, h, a',
+		(event) => {
+			followClassUrl('post-next');
+		},
+		{
+			gesture: 'Swipe',
+			options: {
+				event: 'swipeleft',
+				direction: Hammer.DIRECTION_HORIZONTAL,
+			},
+		}
+	);
+	defineKeyAndGesture(
+		'right, l, f',
+		(event) => {
+			followClassUrl('post-prev');
+		},
+		{
+			gesture: 'Swipe',
+			options: {
+				event: 'swiperight',
+				direction: Hammer.DIRECTION_HORIZONTAL,
+			},
+		}
+	);
+	defineKeyAndGesture(
+		'enter, q',
+		(event) => {
+			followClassUrl('post-current');
+		},
+		{
+			gesture: 'Tap',
+			options: {
+				event: 'doubletap',
+				taps: 2,
+			},
+		}
+	);
+	defineKeyAndGesture('backspace, z', (event) => {
 		window.history.back();
 	});
-	hotkeys('alt + enter', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture('alt + enter', (event) => {
 		enterFullScreen();
 	});
-	hotkeys('alt + l', (event) => {
-		event.preventDefault();
-		setDefaultTheme(true);
-	});
-	hotkeys('j, d, down', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture(
+		'alt + l',
+		(event) => {
+			setDefaultTheme(true);
+		},
+		{
+			gesture: 'Press',
+			options: {
+				event: 'press',
+				time: 1000,
+			},
+		}
+	);
+	defineKeyAndGesture('j, d, down', (event) => {
 		window.scrollBy({
 			left: 0,
 			top: SCROLL_STEP_LINES * LINE_HEIGHT * PIXELS_PER_LINE_HEIGHT,
 			behavior: SCROLL_BEHAVIOR,
 		});
 	});
-	hotkeys('k, s, up', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture('k, s, up', (event) => {
 		window.scrollBy({
 			left: 0,
 			top: -(SCROLL_STEP_LINES * LINE_HEIGHT * PIXELS_PER_LINE_HEIGHT),
 			behavior: SCROLL_BEHAVIOR,
 		});
 	});
-	hotkeys('u, e', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture('u, e', (event) => {
 		window.scroll({ left: 0, top: 0, behavior: SCROLL_BEHAVIOR });
 	});
-	hotkeys('i, w', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture('i, w', (event) => {
 		window.scroll({
 			left: 0,
 			top: document.documentElement.scrollHeight,
 			behavior: SCROLL_BEHAVIOR,
 		});
 	});
-	hotkeys('r', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture('r', (event) => {
 		loadURL(window.location.pathname, true, true);
 	});
-	hotkeys('alt + /', (event) => {
-		event.preventDefault();
+	defineKeyAndGesture('alt + /', (event) => {
 		cycleDetails();
 	});
+};
+
+let touch;
+const defineKeyAndGesture = (key = false, handler, gestureOptions = false) => {
+	if (key) {
+		hotkeys(key, (event) => {
+			event.preventDefault();
+			handler(event);
+		});
+	}
+	if (gestureOptions) {
+		if (!touch) {
+			touch = new Hammer.Manager(document.body);
+		}
+		touch.add(new Hammer[gestureOptions.gesture](gestureOptions.options));
+		touch.on(gestureOptions.options.event, handler);
+	}
 };
 
 const attachOnlicks = () => {
