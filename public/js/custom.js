@@ -230,7 +230,9 @@ const showLoadingIndicator = (start) => {
 };
 
 const onListingPage = () =>
-	listingURLs.includes(window.location.pathname.replace(/\//gi, ''));
+	listingURLs
+		.concat(['/404'])
+		.includes(window.location.pathname.replace(/\//gi, ''));
 
 const defineKeyboardShortcuts = () => {
 	const FULL_SCREEN = 'full-screen';
@@ -344,7 +346,12 @@ const attachOnlicks = () => {
 	document.querySelectorAll('a').forEach((link) => {
 		if (link.getAttribute('href').startsWith('/')) {
 			link.onclick = function () {
-				loadURL(link.getAttribute('href'));
+				const href = link.getAttribute('href');
+				if (href === '/') {
+					window.location.href = '/';
+				} else {
+					loadURL(href);
+				}
 				return false;
 			};
 		} else {
@@ -366,7 +373,8 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 			highlightBlock();
 			attachOnlicks();
 			if (!fromPop) {
-				document.head.querySelector('title').innerHTML = CONTENT_DOCS[url].title
+				document.head.querySelector('title').innerHTML =
+					CONTENT_DOCS[url].title;
 				window.history.pushState('', '', url);
 			}
 			restoreState();
@@ -401,11 +409,15 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 			fetch(url)
 				.then((data) => data.text())
 				.then((html) => {
-					var fetchedHTMLDom = new DOMParser()
-						.parseFromString(html, 'text/html');
+					var fetchedHTMLDom = new DOMParser().parseFromString(
+						html,
+						'text/html'
+					);
 					CONTENT_DOCS[url] = {
 						title: fetchedHTMLDom.querySelector('title').innerHTML,
-						fetchedContentDoc: fetchedHTMLDom.querySelector('.content')
+						fetchedContentDoc: fetchedHTMLDom.querySelector(
+							'.content'
+						),
 					};
 					handleContentDoc();
 				});
