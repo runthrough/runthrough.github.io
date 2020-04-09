@@ -289,7 +289,7 @@ const defineKeyboardShortcutsAndSwipeGestures = () => {
 			gesture: 'Swipe',
 			options: {
 				event: 'swipeleft',
-				direction: Hammer.DIRECTION_LEFT,
+				direction: Hammer.DIRECTION_RIGHT,
 			},
 		}
 	);
@@ -302,7 +302,7 @@ const defineKeyboardShortcutsAndSwipeGestures = () => {
 			gesture: 'Swipe',
 			options: {
 				event: 'swiperight',
-				direction: Hammer.DIRECTION_RIGHT,
+				direction: Hammer.DIRECTION_LEFT,
 			},
 		}
 	);
