@@ -8,7 +8,7 @@ const PIXELS_PER_LINE_HEIGHT = 20;
 const LINE_HEIGHT = 1.9;
 const SCROLL_BEHAVIOR = 'smooth';
 const CONTENT_DOCS = {};
-const DATE_UPDATE_INTERVAL = 60000;
+const DATE_UPDATE_INTERVAL = 1000;
 
 const attachZero = (number) => {
 	return number < 0 ? '00' : number <= 9 ? `0${number}` : number;
