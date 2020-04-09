@@ -361,26 +361,36 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 	if (!changingScript) {
 		changingScript = true;
 		showLoadingIndicator(true);
+		const whenDone = () => {
+			gistAdjust();
+			highlightBlock();
+			attachOnlicks();
+			if (!fromPop) window.history.pushState('', '', url);
+			restoreState();
+			showLoadingIndicator(false);
+			changingScript = false;
+		};
 		const handleContentDoc = () => {
-			var contentDoc = CONTENT_DOCS[url];
 			var innerContent = document.querySelector('.content');
 			if (innerContent) innerContent.innerHTML = '';
-			postscribe(
-				document.querySelector('.content'),
-				contentDoc.innerHTML,
-				{
-					autoFix: false,
-					done: () => {
-						gistAdjust();
-						highlightBlock();
-						attachOnlicks();
-						if (!fromPop) window.history.pushState('', '', url);
-						restoreState();
-						showLoadingIndicator(false);
-						changingScript = false;
-					},
-				}
-			);
+			if (CONTENT_DOCS[url].fetchedScribedDoc) {
+				innerContent.innerHTML = CONTENT_DOCS[url].fetchedScribedDoc;
+				whenDone();
+			} else {
+				var contentDoc = CONTENT_DOCS[url].fetchedContentDoc;
+				postscribe(
+					document.querySelector('.content'),
+					contentDoc.innerHTML,
+					{
+						autoFix: false,
+						done: () => {
+							CONTENT_DOCS[url].fetchedScribedDoc =
+								innerContent.innerHTML;
+							whenDone();
+						},
+					}
+				);
+			}
 		};
 		if (Object.keys(CONTENT_DOCS).includes(url) && !isRefresh) {
 			handleContentDoc();
@@ -391,7 +401,9 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 					var fetchedContentDoc = new DOMParser()
 						.parseFromString(html, 'text/html')
 						.querySelector('.content');
-					CONTENT_DOCS[url] = fetchedContentDoc;
+					CONTENT_DOCS[url] = {
+						fetchedContentDoc: fetchedContentDoc,
+					};
 					handleContentDoc();
 				});
 		}
