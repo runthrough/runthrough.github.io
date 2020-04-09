@@ -302,7 +302,7 @@ const defineKeyboardShortcuts = () => {
 		event.preventDefault();
 		setDefaultTheme(true);
 	});
-	hotkeys('j, d', (event) => {
+	hotkeys('j, d, down', (event) => {
 		event.preventDefault();
 		window.scrollBy({
 			left: 0,
@@ -310,7 +310,7 @@ const defineKeyboardShortcuts = () => {
 			behavior: SCROLL_BEHAVIOR,
 		});
 	});
-	hotkeys('k, s', (event) => {
+	hotkeys('k, s, up', (event) => {
 		event.preventDefault();
 		window.scrollBy({
 			left: 0,
@@ -365,7 +365,10 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 			gistAdjust();
 			highlightBlock();
 			attachOnlicks();
-			if (!fromPop) window.history.pushState('', '', url);
+			if (!fromPop) {
+				document.head.querySelector('title').innerHTML = CONTENT_DOCS[url].title
+				window.history.pushState('', '', url);
+			}
 			restoreState();
 			showLoadingIndicator(false);
 			changingScript = false;
@@ -398,11 +401,11 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 			fetch(url)
 				.then((data) => data.text())
 				.then((html) => {
-					var fetchedContentDoc = new DOMParser()
-						.parseFromString(html, 'text/html')
-						.querySelector('.content');
+					var fetchedHTMLDom = new DOMParser()
+						.parseFromString(html, 'text/html');
 					CONTENT_DOCS[url] = {
-						fetchedContentDoc: fetchedContentDoc,
+						title: fetchedHTMLDom.querySelector('title').innerHTML,
+						fetchedContentDoc: fetchedHTMLDom.querySelector('.content')
 					};
 					handleContentDoc();
 				});

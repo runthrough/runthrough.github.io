@@ -191,7 +191,7 @@ code {
 .progress-view {
 	position: fixed;
 	top: 0;
-	height: 1.9rem;
+	height: 1rem;
 	width: 100%;
 	z-index: 2;
 }

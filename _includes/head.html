@@ -22,6 +22,9 @@
 		{{ page.title }} &middot; {{ site.title }}
 	</title>
 
+	<!-- Mainfest -->
+	<link rel="manifest" href="manifest.json" />
+
 	<!-- CSS -->
 	<link rel="stylesheet" href="/public/css/poole.css" />
 	<link rel="stylesheet" href="/public/css/syntax.css" />
@@ -57,8 +60,26 @@
 	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
 	<script type="text/javascript" src="/public/js/custom.js"></script>
 	<script>
+		if ('serviceWorker' in navigator) {
+			if (navigator.serviceWorker.controller) {
+				console.log(
+					'An active service worker found, no need to register'
+				);
+			} else {
+				navigator.serviceWorker
+					.register('/serviceworker.js', {
+						scope: './',
+					})
+					.then(function (reg) {
+						console.log(
+							'Service worker has been registered for scope: ' +
+								reg.scope
+						);
+					});
+			}
+		}
 		window.onload = function () {
-			loadThemes('{{ site.conf.theme }}')
+			loadThemes('{{ site.conf.theme }}');
 			restoreState("{{ site.runs | map: 'url' }}");
 			setScrollIndicator();
 			defineKeyboardShortcuts();
