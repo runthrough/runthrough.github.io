@@ -175,6 +175,7 @@ const restoreState = (runURLs) => {
 			}
 		};
 	}
+	cycleDetails(true);
 	setDefaultTheme();
 };
 
@@ -457,7 +458,7 @@ const refreshBottomGutterDetails = (stop = false) => {
 	}
 };
 
-const cycleDetails = () => {
+const cycleDetails = (restoreSaved) => {
 	const detailers = [
 		() => {
 			return `${new Date().toString().slice(15, 21)}`;
@@ -479,10 +480,21 @@ const cycleDetails = () => {
 			return `${new Date().toString().slice(0, 11)}`;
 		},
 	];
-	if (detailGenerators.length != detailers.length) {
-		detailGenerators.push(detailers[detailGenerators.length]);
+	if (restoreSaved) {
+		const savedDetailers = getLocalStorage('detailers');
+		if (savedDetailers) {
+			detailGenerators = [];
+			for (let i = 0; i < savedDetailers; i++) {
+				detailGenerators.push(detailers[i]);
+			}
+		}
 	} else {
-		detailGenerators = [];
+		if (detailGenerators.length != detailers.length) {
+			detailGenerators.push(detailers[detailGenerators.length]);
+		} else {
+			detailGenerators = [];
+		}
+		setLocalStorage('detailers', detailGenerators.length);
 	}
 	refreshBottomGutterDetails();
 };
