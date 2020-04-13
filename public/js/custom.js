@@ -417,6 +417,7 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 			gistAdjust();
 			highlightBlock();
 			attachOnlicks();
+			MathJax.typesetPromise().catch((error) => {});
 			if (!fromPop) {
 				document.head.querySelector('title').innerHTML =
 					CONTENT_DOCS[url].title;

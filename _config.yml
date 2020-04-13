@@ -49,6 +49,7 @@ conf:
     highlight_style: # railscasts, agate, github-gist
         light: 'github-gist'
         dark: 'agate'
+    mathjax_type: 'mml-chtml' # svg
 
 github:
     repo: https://github.com/runthrough/runthrough.github.io
