@@ -8,4 +8,9 @@ window.MathJax = {
 	svg: {
 		fontCache: 'global',
 	},
+	options: {
+		renderActions: {
+			addMenu: [],
+		},
+	},
 };
