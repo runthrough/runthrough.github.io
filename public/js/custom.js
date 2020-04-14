@@ -417,7 +417,7 @@ const loadURL = (url, fromPop = false, isRefresh = false) => {
 			gistAdjust();
 			highlightBlock();
 			attachOnlicks();
-			MathJax.typesetPromise().catch((error) => {});
+			MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
 			if (!fromPop) {
 				document.head.querySelector('title').innerHTML =
 					CONTENT_DOCS[url].title;
