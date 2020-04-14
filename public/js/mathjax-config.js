@@ -23,11 +23,7 @@ window.MathJax = {
 		useGlobalCache: true,
 		blacker: 15,
 	},
-	options: {
-		renderActions: {
-			addMenu: [],
-		},
-	},
+	showMathMenu: false,
 	'fast-preview': {
 		disabled: true,
 	},
