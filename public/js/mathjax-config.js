@@ -1,5 +1,6 @@
 window.MathJax = {
 	showProcessingMessages: false,
+	messageStyle: 'none',
 	extensions: ['tex2jax.js'],
 	jax: ['input/TeX', 'output/SVG'],
 	tex2jax: {
