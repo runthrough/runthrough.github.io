@@ -50,9 +50,8 @@ pre {
 
 code,
 tt {
-	font-size: 0.8rem;
-	background-color: #f6f8fa;
-	padding: 0;
+	font-size: 0.89rem;
+	padding: 0 0.05rem 0 0.2rem;
 }
 
 .highlight pre,

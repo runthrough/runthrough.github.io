@@ -14,7 +14,7 @@
 	--text-color: #e7e8eb;
 	--heading-color: #cfd2d6;
 	--light-text-color: #6a737d;
-	--code-bg-color: #3d3d3d;
+	--code-bg-color: #202020; /* #3d3d3d */
 	--button-highlight-color: #eeeeee;
 }
 
@@ -110,9 +110,9 @@ a.pagination-item:hover {
 
 code {
 	color: var(--text-color);
+	background-color: var(--bg-color);
 }
 
-code,
 tt,
 pre,
 .highlight pre {
