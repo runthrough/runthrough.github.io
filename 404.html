@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	
+	<link href="http://gmpg.org/xfn/11" rel="profile" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<!-- Enable responsiveness on mobile devices-->
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1"
+	/>
+	<title>
+		404: Page not found &middot; Run Through
+	</title>
+
+	<!-- Mainfest -->
+	<link rel="manifest" href="manifest.json" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/public/css/poole.css" />
+	<link rel="stylesheet" href="/public/css/syntax.css" />
+	<link rel="stylesheet" href="/public/css/hyde.css" />
+	<link rel="stylesheet" href="/public/css/gist_post.css" />
+	<link rel="stylesheet" href="/public/css/custom.css" />
+	<link rel="stylesheet" href="/public/css/theme.css" />
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"
+	/>
+
+	<!-- Icons -->
+	<link
+		rel="apple-touch-icon-precomposed"
+		sizes="180x180"
+		href="/public/apple-touch-icon-180-precomposed.png"
+	/>
+	<link rel="shortcut icon" href="/favicon.ico" />
+
+	<!-- RSS -->
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="RSS"
+		href="/atom.xml"
+	/>
+
+	<!-- Open post links in new tab -->
+	<script src="/public/js/mathjax-config.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_SVG"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"></script>
+	<script type="text/javascript" src="/public/js/hotkeys.min.js"></script>
+	<script type="text/javascript" src="/public/js/custom.js"></script>
+	<script>
+		if ('serviceWorker' in navigator) {
+			if (navigator.serviceWorker.controller) {
+				// console.log('An active service worker found, no need to register');
+			} else {
+				navigator.serviceWorker
+					.register('/serviceworker.js', {
+						scope: './',
+					})
+					.then(function (reg) {
+						// console.log('Service worker has been registered for scope: ' + reg.scope);
+					});
+			}
+		}
+		window.onload = function () {
+			loadThemes('{"light"=>"theme-base-0d", "dark"=>"theme-base-09"}');
+			restoreState("/concepts/de/devops/languages/practice/statistics");
+			setScrollIndicator();
+			defineKeyboardShortcutsAndSwipeGestures();
+		};
+		document.addEventListener('DOMContentLoaded', (event) => {
+			gistAdjust();
+			loadHighlightTheme('{"light"=>"github-gist", "dark"=>"agate"}');
+			attachOnlicks();
+		});
+	</script>
+
+	
+</head>
+
+	<body class="no-scrollbar">
+		<div class="progress-view">
+	<div class="progress-container">
+		<div class="progress-bar"></div>
+	</div>
+</div>
+<div class="bottom-gutter">
+	<div class="gutter-details"></div>
+</div>
+
+		<div class="content container">
+			<script>
+	if (window.location.pathname !== '/404') window.location.href = '/404'
+</script>
+<div class="page">
+	<h1 class="page-title">404: Page not found</h1>
+	<p class="lead">
+		Sorry, we've misplaced that URL or it's pointing to something that
+		doesn't exist. <a href="/">Head back home</a> to try
+		finding it again.
+	</p>
+</div>
+
+		</div>
+	</body>
+</html>
